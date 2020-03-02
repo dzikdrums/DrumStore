@@ -1,19 +1,28 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getProducts, loadProductsByCategoryRequest } from 'redux/productsRedux';
+import { getProducts, loadProductsByCategoryRequest, getRequest } from 'redux/productsRedux';
 import PropTypes from 'prop-types';
+import ProductsList from 'components/features/ProductsList/ProductsList';
+import Spinner from 'components/common/Spinner/Spinner';
 
-const Products = ({ products, loadProductsRequest }) => {
+const Products = ({ products, request, loadProductsRequest }) => {
   useEffect(() => {
     loadProductsRequest();
   }, []);
   console.log(products);
 
-  return <h1>heheszki</h1>;
+  if (request.pending === false && request.success === true && products.length > 0)
+    return (
+      <div>
+        <ProductsList products={products} />
+      </div>
+    );
+  if (request.pending === true || request.success === null) return <Spinner />;
 };
 
 const mapStateToProps = state => ({
   products: getProducts(state),
+  request: getRequest(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -31,6 +40,11 @@ Products.propTypes = {
     }),
   ),
   loadProductsRequest: PropTypes.func.isRequired,
+  request: PropTypes.shape({
+    pending: PropTypes.bool.isRequired,
+    error: PropTypes.bool,
+    success: PropTypes.bool,
+  }),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
