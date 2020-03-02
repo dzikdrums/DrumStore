@@ -4,7 +4,10 @@ import ProductCard from 'components/features/ProductCard/ProductCard';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
-  color: black;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const ProductsList = ({ products }) => (
@@ -12,7 +15,6 @@ const ProductsList = ({ products }) => (
     {products.map(product => (
       <ProductCard key={product.id} {...product} />
     ))}
-    ;
   </StyledWrapper>
 );
 

@@ -4,12 +4,18 @@ import { getProducts, loadProductsByCategoryRequest, getRequest } from 'redux/pr
 import PropTypes from 'prop-types';
 import ProductsList from 'components/features/ProductsList/ProductsList';
 import Spinner from 'components/common/Spinner/Spinner';
+import styled from 'styled-components';
+
+const StyledSpinnerWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
 
 const Products = ({ products, request, loadProductsRequest }) => {
   useEffect(() => {
     loadProductsRequest();
   }, []);
-  console.log(products);
 
   if (request.pending === false && request.success === true && products.length > 0)
     return (
@@ -17,7 +23,12 @@ const Products = ({ products, request, loadProductsRequest }) => {
         <ProductsList products={products} />
       </div>
     );
-  if (request.pending === true || request.success === null) return <Spinner />;
+  if (request.pending === true || request.success === null)
+    return (
+      <StyledSpinnerWrapper>
+        <Spinner />
+      </StyledSpinnerWrapper>
+    );
 };
 
 const mapStateToProps = state => ({
