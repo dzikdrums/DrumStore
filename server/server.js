@@ -30,7 +30,8 @@ app.use((req, res) => {
 
 /* MONGOOSE */
 mongoose.connect(
-  `mongodb+srv://dzikdrums:${process.env.MONGO_PASS}@drumstore-d6v8f.mongodb.net/test?retryWrites=true&w=majority`,
+  `mongodb+srv://dzikdrums:${process.env.MONGO_PASS}@drumstore-d6v8f.mongodb.net/test?retryWrites=true&w=majority
+  `,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true

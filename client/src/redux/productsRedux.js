@@ -1,5 +1,5 @@
-import Axios from 'axios';
-import { API_URL } from 'config';
+import axios from 'axios';
+import { API_URL, BASE_URL } from 'config';
 
 /* action name creator */
 const reducerName = 'products';
@@ -19,6 +19,7 @@ export const CHANGE_LOGED = createActionName('CHANGE_LOGED');
 export const START_REQUEST = createActionName('START_REQUEST');
 export const END_REQUEST = createActionName('END_REQUEST');
 export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
+export const RESET_REQUEST = createActionName('RESET_REQUEST');
 
 /* ACTION CREATORS */
 
@@ -28,18 +29,29 @@ export const changeLoged = () => ({ type: CHANGE_LOGED });
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
 export const errorRequest = error => ({ error, type: ERROR_REQUEST });
+export const resetRequest = () => ({ type: RESET_REQUEST });
 
 /* INITIAL STATE */
 
 const initialState = {
   data: [],
   request: {
-    pending: true,
+    pending: false,
     error: null,
     success: null,
   },
-  singlePost: {},
-  loged: true,
+  singleProduct: [],
+  key: '',
+  direction: '',
+  amount: 0,
+  productsPerPage: 6,
+  productsPage: 1,
+  showMenu: false,
+  cart: [],
+  discount: 1,
+  discountCode: 'SDFV86F',
+  discountActive: false,
+  totalPrice: 0,
 };
 
 /* REDUCER */
@@ -55,13 +67,7 @@ export default function reducer(statePart = initialState, action = {}) {
     case LOAD_SINGLE_PRODUCT: {
       return {
         ...statePart,
-        singlePost: action.payload,
-      };
-    }
-    case CHANGE_LOGED: {
-      return {
-        ...statePart,
-        loged: !statePart.loged,
+        singleProduct: action.payload,
       };
     }
     case START_REQUEST: {
@@ -94,6 +100,11 @@ export default function reducer(statePart = initialState, action = {}) {
         },
       };
     }
+    case RESET_REQUEST:
+      return {
+        ...statePart,
+        request: { pending: false, error: null, success: null },
+      };
     default:
       return statePart;
   }
@@ -101,11 +112,37 @@ export default function reducer(statePart = initialState, action = {}) {
 
 /* THUNKS */
 
+export const loadProductsRequest = () => {
+  return async dispatch => {
+    dispatch(startRequest());
+    try {
+      const res = await axios.get(`${BASE_URL}${API_URL}/products`);
+      dispatch(loadProducts(res.data));
+      dispatch(endRequest());
+    } catch (e) {
+      dispatch(errorRequest(e.message));
+    }
+  };
+};
+
+export const loadSingleProductRequest = id => {
+  return async dispatch => {
+    dispatch(startRequest());
+    try {
+      const res = await axios.get(`${BASE_URL}${API_URL}/product/${id}`);
+      dispatch(loadSingleProduct(res.data));
+      dispatch(endRequest());
+    } catch (e) {
+      dispatch(errorRequest(e.message));
+    }
+  };
+};
+
 export const loadProductsByCategoryRequest = () => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      const res = await Axios.get(`${API_URL}/products`);
+      const res = await axios.get(`${BASE_URL}${API_URL}/products`);
       dispatch(loadProducts(res.data));
       dispatch(endRequest());
     } catch (e) {
