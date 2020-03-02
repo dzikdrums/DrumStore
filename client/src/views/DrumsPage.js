@@ -1,8 +1,9 @@
 import React from 'react';
+import Products from 'components/features/Products/Products';
 
 const DrumsPage = () => (
   <>
-    <h1>DrumsPage</h1>
+    <Products />
   </>
 );
 

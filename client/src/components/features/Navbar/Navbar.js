@@ -59,7 +59,7 @@ const Navbar = () => (
   <StyledWrapper>
     <IconsInnerWrapper>
       <div>
-        <Link logo exact to="/">
+        <Link logo="true" exact to="/">
           DrumStore
         </Link>
       </div>

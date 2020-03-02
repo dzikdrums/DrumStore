@@ -17,7 +17,7 @@ const StyledButtonLinkWrapper = styled.div`
 
 const IntroSection = () => (
   <StyledWrapper>
-    <Heading>Hey, we`&apos;`re drumstore</Heading>
+    <Heading>Hey, we&apos;re drumstore</Heading>
     <Paragraph big>
       We started this shop in 2011 as a way to give back to the drummers community. Now we are based
       in Buffalo, New York and make everyday efforts to help deliver the best products and service

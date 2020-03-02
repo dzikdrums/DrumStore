@@ -3,8 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { media } from 'utils';
 
 const ButtonLink = styled(NavLink)`
-  display: inline-block;
-  width: 150px;
   border: 2px solid black;
   text-decoration: none;
   text-transform: uppercase;
@@ -13,8 +11,7 @@ const ButtonLink = styled(NavLink)`
   color: black;
   font-size: 1rem;
   text-align: center;
-  pading: auto;
-  padding: 10px 0;
+  padding: 10px 30px;
 
   :hover {
     background-color: black;
@@ -22,11 +19,11 @@ const ButtonLink = styled(NavLink)`
   }
 
   ${media.tablet`
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   `};
 
   ${media.desktop`
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   `};
 `;
 
