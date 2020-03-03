@@ -12,11 +12,11 @@ const ParallaxImage = styled.div`
   filter: grayscale(100%) brightness(40%);
 
   ${media.tablet`
-      height: 500px;
+      height: 450px;
     `}
 
   ${media.desktop`
-    height: 600px;
+    height: 500px;
   `}
 `;
 

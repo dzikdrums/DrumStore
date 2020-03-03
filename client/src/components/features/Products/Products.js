@@ -23,12 +23,11 @@ const Products = ({ category, products, request, loadProductsByCategoryRequest }
         <ProductsList products={products} />
       </div>
     );
-  if (request.pending === true || request.success === null)
-    return (
-      <StyledSpinnerWrapper>
-        <Spinner />
-      </StyledSpinnerWrapper>
-    );
+  return (
+    <StyledSpinnerWrapper>
+      <Spinner />
+    </StyledSpinnerWrapper>
+  );
 };
 
 const mapStateToProps = state => ({

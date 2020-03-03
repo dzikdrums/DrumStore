@@ -4,7 +4,6 @@ const Product = require("../models/product.model");
 
 exports.getProduct = async (req, res) => {
   try {
-    console.log(req.params.id);
     res.status(200).json(await Product.find({ category: req.params.id }));
   } catch (err) {
     res.status(500).json(err);

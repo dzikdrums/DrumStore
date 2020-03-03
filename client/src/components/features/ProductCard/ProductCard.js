@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { history as historyPropTypes } from 'history-prop-types';
 import { media } from 'utils';
+import Price from 'components/common/Price/Price';
+import CartButton from 'components/common/CartButton/CartButton';
 
 const StyledWrapper = styled.div`
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
@@ -11,7 +13,7 @@ const StyledWrapper = styled.div`
   margin: 0.5%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   cursor: pointer;
 
   ${media.tablet`
@@ -26,7 +28,13 @@ const StyledWrapper = styled.div`
 const StyledImage = styled.img`
   width: 60%;
   padding-top: 30px;
-  margin: 6px auto;
+  margin: 0px auto;
+`;
+
+const StyledImageWrapper = styled.div`
+  height: 40%;
+  display: flex;
+  justify-content: center;
 `;
 
 const StyledTitle = styled.h4`
@@ -34,37 +42,49 @@ const StyledTitle = styled.h4`
   text-align: center;
   min-height: 30px;
   font-size: 1.4rem;
-  padding: 0 5px;
+  padding: 5px 5px 0;
 `;
 
 const StyledDescription = styled.p`
-  font-size: 8px;
+  font-size: 0.8rem;
   font-weight: 300;
   text-align: center;
   font-size: 1rem;
   padding: 0 10px;
+
+  ${media.tablet`
+    font-size: 1.2rem;
+  `};
+
+  ${media.desktop`
+    font-size: 1.4rem;
+  `};
 `;
 
-const StyledPrice = styled.h5`
-  font-weight: 300;
-  color: #e2231a;
-  text-transform: uppercase;
-  text-align: center;
+const StyledInnerWrapper = styled.div`
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const setRedirect = (id, history) => {
   history.push(`/product/${id}`);
 };
 
-const ProductCard = ({ id, img, name, price, history }) => {
+const ProductCard = ({ id, img, name, desc, price, history }) => {
   return (
     <StyledWrapper onClick={() => setRedirect(id, history)}>
-      <StyledImage src={img} />
-      <StyledTitle>{name}</StyledTitle>
-      <StyledDescription>
-        I`&apos`m using a flex box to display 8 items that will dynamically
-      </StyledDescription>
-      <StyledPrice>from ${price}</StyledPrice>
+      <StyledImageWrapper>
+        <StyledImage src={img} />
+      </StyledImageWrapper>
+      <StyledInnerWrapper>
+        <StyledTitle>{name}</StyledTitle>
+        <StyledDescription>{desc}</StyledDescription>
+        <CartButton card="true">add to cart</CartButton>
+        <Price>${price}</Price>
+      </StyledInnerWrapper>
     </StyledWrapper>
   );
 };
