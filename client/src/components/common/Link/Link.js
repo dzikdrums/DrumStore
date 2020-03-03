@@ -17,6 +17,10 @@ const Link = styled(NavLink)`
     css`
       font-size: 20px;
       font-weight: 600;
+
+      &.active {
+        color: black;
+      }
     `}
 `;
 

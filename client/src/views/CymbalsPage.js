@@ -1,8 +1,9 @@
 import React from 'react';
+import Products from 'components/features/Products/Products';
 
 const CymbalsPage = () => (
   <>
-    <h1>CymbalsPage</h1>
+    <Products category="cymbals" />
   </>
 );
 

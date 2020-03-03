@@ -13,6 +13,7 @@ import SingleProduct from 'views/SingleProductPage';
 import Drums from 'views/DrumsPage';
 import NotFound from 'views/NotFoundPage';
 import Login from 'views/LoginPage';
+import Cymbals from 'views/CymbalsPage';
 
 const Root = () => (
   <Provider store={store}>
@@ -24,6 +25,7 @@ const Root = () => (
           <Route exact path={routes.cart} component={Cart} />
           <Route exact path={routes.contact} component={Contact} />
           <Route exact path={routes.drums} component={Drums} />
+          <Route exact path={routes.cymbals} component={Cymbals} />
           <Route exact path={routes.about} component={About} />
           <Route exact path={routes.login} component={Login} />
           <Route component={NotFound} />

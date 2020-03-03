@@ -12,6 +12,7 @@ const ButtonLink = styled(NavLink)`
   font-size: 1rem;
   text-align: center;
   padding: 10px 30px;
+  max-width: 200px;
 
   :hover {
     background-color: black;

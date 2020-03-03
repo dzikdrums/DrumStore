@@ -12,9 +12,9 @@ const StyledSpinnerWrapper = styled.div`
   justify-content: center;
 `;
 
-const Products = ({ products, request, loadProductsRequest }) => {
+const Products = ({ category, products, request, loadProductsByCategoryRequest }) => {
   useEffect(() => {
-    loadProductsRequest();
+    loadProductsByCategoryRequest(category);
   }, []);
 
   if (request.pending === false && request.success === true && products.length > 0)
@@ -37,20 +37,20 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadProductsRequest: () => dispatch(loadProductsByCategoryRequest()),
+  loadProductsByCategoryRequest: category => dispatch(loadProductsByCategoryRequest(category)),
 });
 
 Products.propTypes = {
   products: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      img: PropTypes.object.isRequired,
+      img: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       desc: PropTypes.string.isRequired,
     }),
   ),
-  loadProductsRequest: PropTypes.func.isRequired,
+  loadProductsByCategoryRequest: PropTypes.func.isRequired,
   request: PropTypes.shape({
     pending: PropTypes.bool.isRequired,
     error: PropTypes.bool,

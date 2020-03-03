@@ -1,9 +1,15 @@
 import React from 'react';
+import SingleProduct from 'components/features/SingleProduct/SingleProduct';
+import PropTypes from 'prop-types';
 
-const SingleProductPage = () => (
+const SingleProductPage = ({ productID }) => (
   <>
-    <h1>SingleProductPage</h1>
+    <SingleProduct ID={productID} />
   </>
 );
+
+SingleProductPage.propTypes = {
+  productID: PropTypes.string,
+};
 
 export default SingleProductPage;

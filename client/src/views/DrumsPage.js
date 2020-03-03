@@ -3,7 +3,7 @@ import Products from 'components/features/Products/Products';
 
 const DrumsPage = () => (
   <>
-    <Products />
+    <Products category="drums" />
   </>
 );
 

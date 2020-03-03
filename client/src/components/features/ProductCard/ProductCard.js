@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Redirect } from 'react-router-dom';
 import { media } from 'utils';
 
 const StyledWrapper = styled.div`
@@ -10,31 +11,37 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  cursor: pointer;
 
   ${media.tablet`
-    width: 32%
+    width: 32%;
   `};
 
   ${media.desktop`
-    width: 24%
+    width: 24%;
   `};
 `;
 
 const StyledImage = styled.img`
   width: 60%;
-  margin: 2px auto;
+  padding-top: 30px;
+  margin: 6px auto;
 `;
 
 const StyledTitle = styled.h4`
   text-transform: uppercase;
   text-align: center;
   min-height: 30px;
+  font-size: 1.4rem;
+  padding: 0 5px;
 `;
 
 const StyledDescription = styled.p`
   font-size: 8px;
   font-weight: 300;
   text-align: center;
+  font-size: 1rem;
+  padding: 0 10px;
 `;
 
 const StyledPrice = styled.h5`
@@ -44,14 +51,18 @@ const StyledPrice = styled.h5`
   text-align: center;
 `;
 
-const ProductCard = ({ id, tag, img, name, price }) => {
-  console.log(img);
+const setRedirect = id => {
+  console.log('dupa');
+  return <Redirect to={`/product/${id}`} />;
+};
+
+const ProductCard = ({ id, img, name, price }) => {
   return (
-    <StyledWrapper>
-      <StyledImage src={img.src} />
+    <StyledWrapper id={id} onClick={id => setRedirect(id)}>
+      <StyledImage src={img} />
       <StyledTitle>{name}</StyledTitle>
       <StyledDescription>
-        I'm using a flex box to display 8 items that will dynamically
+        I`&apos`m using a flex box to display 8 items that will dynamically
       </StyledDescription>
       <StyledPrice>from ${price}</StyledPrice>
     </StyledWrapper>
@@ -60,10 +71,7 @@ const ProductCard = ({ id, tag, img, name, price }) => {
 
 ProductCard.propTypes = {
   id: PropTypes.string,
-  tag: PropTypes.string,
-  img: PropTypes.shape({
-    src: PropTypes.string,
-  }),
+  img: PropTypes.string,
   name: PropTypes.string,
   price: PropTypes.number,
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/core';
 import { PulseLoader } from 'react-spinners';
-import PropTypes from 'prop-types';
 
 const override = css`
   display: block;
@@ -9,14 +8,10 @@ const override = css`
   border-color: red;
 `;
 
-const Spinner = ({ loading }) => (
+const Spinner = () => (
   <div className="sweet-loading">
-    <PulseLoader css={override} size={15} color="#333" loading={loading} />
+    <PulseLoader css={override} size={15} color="#333" />
   </div>
 );
-
-Spinner.propTypes = {
-  loading: PropTypes.bool.isRequired,
-};
 
 export default Spinner;

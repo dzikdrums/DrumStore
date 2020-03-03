@@ -138,11 +138,11 @@ export const loadSingleProductRequest = id => {
   };
 };
 
-export const loadProductsByCategoryRequest = () => {
+export const loadProductsByCategoryRequest = category => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      const res = await axios.get(`${BASE_URL}${API_URL}/products`);
+      const res = await axios.get(`${BASE_URL}${API_URL}/products/category/${category}`);
       dispatch(loadProducts(res.data));
       dispatch(endRequest());
     } catch (e) {

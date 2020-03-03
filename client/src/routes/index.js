@@ -5,5 +5,6 @@ export const routes = {
   contact: '/contact',
   about: '/about',
   drums: '/drums',
+  cymbals: '/cymbals',
   login: '/login',
 };

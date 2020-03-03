@@ -59,7 +59,7 @@ const Navbar = () => (
   <StyledWrapper>
     <IconsInnerWrapper>
       <div>
-        <Link logo="true" exact to="/">
+        <Link logo="true" to="/">
           DrumStore
         </Link>
       </div>
@@ -77,7 +77,7 @@ const Navbar = () => (
       <Link exact to="/drums" activeclass="active">
         drums
       </Link>
-      <Link exact to="/" activeclass="active">
+      <Link exact to="/cymbals" activeclass="active">
         cymbals
       </Link>
       <Link exact to="/contact" activeclass="active">
