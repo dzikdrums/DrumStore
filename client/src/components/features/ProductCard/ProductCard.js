@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { history as historyPropTypes } from 'history-prop-types';
 import { media } from 'utils';
 
 const StyledWrapper = styled.div`
@@ -51,14 +52,13 @@ const StyledPrice = styled.h5`
   text-align: center;
 `;
 
-const setRedirect = id => {
-  console.log('dupa');
-  return <Redirect to={`/product/${id}`} />;
+const setRedirect = (id, history) => {
+  history.push(`/product/${id}`);
 };
 
-const ProductCard = ({ id, img, name, price }) => {
+const ProductCard = ({ id, img, name, price, history }) => {
   return (
-    <StyledWrapper id={id} onClick={id => setRedirect(id)}>
+    <StyledWrapper onClick={() => setRedirect(id, history)}>
       <StyledImage src={img} />
       <StyledTitle>{name}</StyledTitle>
       <StyledDescription>
@@ -74,6 +74,7 @@ ProductCard.propTypes = {
   img: PropTypes.string,
   name: PropTypes.string,
   price: PropTypes.number,
+  history: PropTypes.shape(historyPropTypes),
 };
 
-export default ProductCard;
+export default withRouter(ProductCard);

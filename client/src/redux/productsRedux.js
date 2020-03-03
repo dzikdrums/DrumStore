@@ -8,7 +8,7 @@ const createActionName = name => `app/${reducerName}/${name}`;
 /* SELECTORS */
 
 export const getProducts = ({ products }) => products.data;
-export const getSingleProduct = ({ products }) => products.singlePost;
+export const getSingleProduct = ({ products }) => products.singleProduct;
 export const getRequest = ({ products }) => products.request;
 
 /* ACTIONS */
@@ -112,18 +112,18 @@ export default function reducer(statePart = initialState, action = {}) {
 
 /* THUNKS */
 
-export const loadProductsRequest = () => {
-  return async dispatch => {
-    dispatch(startRequest());
-    try {
-      const res = await axios.get(`${BASE_URL}${API_URL}/products`);
-      dispatch(loadProducts(res.data));
-      dispatch(endRequest());
-    } catch (e) {
-      dispatch(errorRequest(e.message));
-    }
-  };
-};
+// export const loadProductsRequest = () => {
+//   return async dispatch => {
+//     dispatch(startRequest());
+//     try {
+//       const res = await axios.get(`${BASE_URL}${API_URL}/products`);
+//       dispatch(loadProducts(res.data));
+//       dispatch(endRequest());
+//     } catch (e) {
+//       dispatch(errorRequest(e.message));
+//     }
+//   };
+// };
 
 export const loadSingleProductRequest = id => {
   return async dispatch => {
