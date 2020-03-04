@@ -1,11 +1,14 @@
 import React from 'react';
-import Cart from 'assets/cart.svg';
 import Login from 'assets/login.svg';
 import USDflag from 'assets/USDflag.png';
 import Link from 'components/common/Link/Link';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { media } from 'utils';
+import { connect } from 'react-redux';
+import { getCart } from 'redux/productsRedux';
+import CartIcon from 'components/common/CartIcon/CartIcon';
+import PropTypes from 'prop-types';
 
 const StyledWrapper = styled.nav`
   height: 100px;
@@ -41,6 +44,8 @@ const IconsInnerWrapper = styled.div`
 
 const LinksInnerWrapper = styled.div`
   display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
   align-items: center;
   height: 100%;
   justify-content: space-between;
@@ -52,10 +57,9 @@ const StyledIcon = styled.img`
   width: 20px;
   margin: 0 10px;
   background-color: transparent;
-  transition: color 170ms ease-in-out;
 `;
 
-const Navbar = () => (
+const Navbar = ({ cart }) => (
   <StyledWrapper>
     <IconsInnerWrapper>
       <div>
@@ -69,7 +73,7 @@ const Navbar = () => (
           <StyledIcon src={Login} />
         </NavLink>
         <NavLink to="/cart">
-          <StyledIcon src={Cart} />
+          <CartIcon itemsQty={cart.length} />
         </NavLink>
       </div>
     </IconsInnerWrapper>
@@ -90,4 +94,21 @@ const Navbar = () => (
   </StyledWrapper>
 );
 
-export default Navbar;
+const mapStateToProps = state => ({
+  cart: getCart(state),
+});
+
+Navbar.propTypes = {
+  cart: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      tag: PropTypes.string.isRequired,
+      img: PropTypes.object.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      desc: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
+
+export default connect(mapStateToProps)(Navbar);

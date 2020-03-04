@@ -10,7 +10,8 @@ const loadTestData = async () => {
       price: 2362.99,
       category: "drums",
       desc:
-        "Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!"
+        "Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!",
+      qty: 0
     },
     {
       id: "2234a",
@@ -20,7 +21,8 @@ const loadTestData = async () => {
       price: 589.99,
       category: "drums",
       desc:
-        "True beauty in this price range. With great history, made firstly in early 80s in Japan, designed to fit most genres, from jazz, folk music, to metal and really extreme sounds. Great in tuning, and pretty lightweight so really easy to travel with!"
+        "True beauty in this price range. With great history, made firstly in early 80s in Japan, designed to fit most genres, from jazz, folk music, to metal and really extreme sounds. Great in tuning, and pretty lightweight so really easy to travel with!",
+      qty: 0
     },
     {
       id: "3234a",
@@ -30,7 +32,8 @@ const loadTestData = async () => {
       price: 498.99,
       category: "drums",
       desc:
-        "The classic. The Legend. One and only Starclassic with a modern addition of exotic tree which adds a different flavour to well known sound! Love at first sight to every customer we had in our shop !"
+        "The classic. The Legend. One and only Starclassic with a modern addition of exotic tree which adds a different flavour to well known sound! Love at first sight to every customer we had in our shop !",
+      qty: 0
     },
     {
       id: "4234a",
@@ -40,7 +43,8 @@ const loadTestData = async () => {
       price: 1689.99,
       category: "drums",
       desc:
-        "Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!"
+        "Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!",
+      qty: 0
     },
     {
       id: "5234a",
@@ -50,7 +54,8 @@ const loadTestData = async () => {
       price: 1729.99,
       category: "drums",
       desc:
-        "True beauty in this price range. With great history, made firstly in early 80s in Japan, designed to fit most genres, from jazz, folk music, to metal and really extreme sounds. Great in tuning, and pretty lightweight so really easy to travel with!"
+        "True beauty in this price range. With great history, made firstly in early 80s in Japan, designed to fit most genres, from jazz, folk music, to metal and really extreme sounds. Great in tuning, and pretty lightweight so really easy to travel with!",
+      qty: 0
     },
     {
       id: "6234a",
@@ -60,7 +65,8 @@ const loadTestData = async () => {
       price: 1729.99,
       category: "drums",
       desc:
-        "Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!"
+        "Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!",
+      qty: 0
     },
     {
       id: "8234a",
@@ -70,7 +76,8 @@ const loadTestData = async () => {
       price: 1765.99,
       category: "drums",
       desc:
-        "The classic. The Legend. One and only Starclassic with a modern addition of exotic tree which adds a different flavour to well known sound! Love at first sight to every customer we had in our shop !"
+        "The classic. The Legend. One and only Starclassic with a modern addition of exotic tree which adds a different flavour to well known sound! Love at first sight to every customer we had in our shop !",
+      qty: 0
     },
     {
       id: "9234a",
@@ -80,7 +87,8 @@ const loadTestData = async () => {
       price: 1364.99,
       category: "drums",
       desc:
-        "True beauty in this price range. With great history, made firstly in early 80s in Japan, designed to fit most genres, from jazz, folk music, to metal and really extreme sounds. Great in tuning, and pretty lightweight so really easy to travel with!"
+        "True beauty in this price range. With great history, made firstly in early 80s in Japan, designed to fit most genres, from jazz, folk music, to metal and really extreme sounds. Great in tuning, and pretty lightweight so really easy to travel with!",
+      qty: 0
     },
     {
       id: "10234a",
@@ -90,7 +98,8 @@ const loadTestData = async () => {
       price: 392.99,
       category: "drums",
       desc:
-        "The classic. The Legend. One and only Starclassic with a modern addition of exotic tree which adds a different flavour to well known sound! Love at first sight to every customer we had in our shop !"
+        "The classic. The Legend. One and only Starclassic with a modern addition of exotic tree which adds a different flavour to well known sound! Love at first sight to every customer we had in our shop !",
+      qty: 0
     },
     {
       id: "11234a",
@@ -100,7 +109,8 @@ const loadTestData = async () => {
       price: 389.99,
       category: "drums",
       desc:
-        "Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!"
+        "Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!",
+      qty: 0
     },
     {
       id: "7234a",
@@ -110,7 +120,8 @@ const loadTestData = async () => {
       price: 359.99,
       category: "drums",
       desc:
-        "The classic. The Legend. One and only Starclassic with a modern addition of exotic tree which adds a different flavour to well known sound! Love at first sight to every customer we had in our shop !"
+        "The classic. The Legend. One and only Starclassic with a modern addition of exotic tree which adds a different flavour to well known sound! Love at first sight to every customer we had in our shop !",
+      qty: 0
     },
     {
       id: "12234a",
@@ -120,7 +131,8 @@ const loadTestData = async () => {
       price: 629.99,
       category: "drums",
       desc:
-        "Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!"
+        "Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!",
+      qty: 0
     },
     {
       id: "1234b",
@@ -129,7 +141,8 @@ const loadTestData = async () => {
       name: "Meinl HCS Crash",
       price: 320,
       category: "cymbals",
-      desc: ""
+      desc: "",
+      qty: 0
     },
     {
       id: "2234b",
@@ -138,7 +151,8 @@ const loadTestData = async () => {
       name: "Turkish Zephyros Crash",
       price: 757,
       category: "cymbals",
-      desc: ""
+      desc: "",
+      qty: 0
     },
     {
       id: "3234b",
@@ -147,7 +161,8 @@ const loadTestData = async () => {
       name: "Zildjian A EFX 16",
       price: 999,
       category: "cymbals",
-      desc: ""
+      desc: "",
+      qty: 0
     },
     {
       id: "4234b",
@@ -156,7 +171,8 @@ const loadTestData = async () => {
       name: "Turkich Sirius crash 16",
       price: 662,
       category: "cymbals",
-      desc: ""
+      desc: "",
+      qty: 0
     },
     {
       id: "5234b",
@@ -165,7 +181,8 @@ const loadTestData = async () => {
       name: "Meinl Byzance Jazz Thin Crash",
       price: 1177,
       category: "cymbals",
-      desc: ""
+      desc: "",
+      qty: 0
     },
     {
       id: "6234b",
@@ -174,7 +191,8 @@ const loadTestData = async () => {
       name: "Paiste 101 Crash 16",
       price: 1199,
       category: "cymbals",
-      desc: ""
+      desc: "",
+      qty: 0
     }
   ];
 

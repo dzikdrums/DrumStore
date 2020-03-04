@@ -8,6 +8,7 @@ const StyledWrapper = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  padding-top: 30px;
 `;
 
 const ProductsList = ({ products }) => (
