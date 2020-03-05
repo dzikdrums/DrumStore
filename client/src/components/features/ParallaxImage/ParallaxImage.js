@@ -19,17 +19,14 @@ const ParallaxImage = styled.div`
       background-image: url(${jontheodore});
       filter: grayscale(100%) brightness(40%);
     `}
-
-  ${media.phone`
-  background-attachment: fixed;
-  height:200px;
-  `}
     
   ${media.tablet`
+      background-attachment: fixed;
       height: 450px;
     `}
 
   ${media.desktop`
+    background-attachment: fixed;
     height: 500px;
   `}
 `;

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import CartButton from 'components/common/CartButton/CartButton';
-import { resetCart } from 'redux/productsRedux';
+import { resetCart, calculatePrice } from 'redux/productsRedux';
 
 const StyledModal = Modal.styled`
   z-index: 9999;
@@ -16,6 +16,7 @@ const StyledModal = Modal.styled`
   background-color: white;
   border-radius: 5px;
   transition: 1s ease-in-out;
+  padding: 20px;
 
 `;
 
@@ -23,11 +24,13 @@ const StyledWrapper = styled.div`
   margin-left: auto;
 `;
 
-const FancyModalButton = () => {
-  const [isOpen, setIsOpen] = useState(true);
+const OrderModal = ({ resetCart, calculatePrice }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   function toggleModal(e) {
     setIsOpen(!isOpen);
+    resetCart();
+    calculatePrice();
   }
 
   return (
@@ -43,6 +46,7 @@ const FancyModalButton = () => {
 
 const mapDispatchToProps = dispatch => ({
   resetCart: () => dispatch(resetCart()),
+  calculatePrice: () => dispatch(calculatePrice()),
 });
 
-export default connect(null, mapDispatchToProps)(FancyModalButton);
+export default connect(null, mapDispatchToProps)(OrderModal);

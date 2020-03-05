@@ -162,6 +162,11 @@ export default function reducer(statePart = initialState, action = {}) {
         ...statePart,
         cart: minusCartUpdate,
       };
+    case RESET_CART:
+      return {
+        ...statePart,
+        cart: [],
+      };
     case CALCULATE_PRICE:
       let roundPrice;
       if (statePart.cart.length !== 0) {

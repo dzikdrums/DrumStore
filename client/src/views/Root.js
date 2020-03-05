@@ -15,27 +15,27 @@ import Drums from 'views/DrumsPage';
 import NotFound from 'views/NotFoundPage';
 import Login from 'views/LoginPage';
 import Cymbals from 'views/CymbalsPage';
+import { ScrollToTop } from 'utils';
 
 const Root = () => (
   <Provider store={store}>
     <BrowserRouter>
-      `{' '}
       <ModalProvider>
-        `{' '}
-        <MainLayout>
-          <Switch>
-            <Route exact path={routes.home} component={Home} />
-            <Route exact path={routes.product} component={SingleProduct} />
-            <Route exact path={routes.cart} component={Cart} />
-            <Route exact path={routes.contact} component={Contact} />
-            <Route exact path={routes.drums} component={Drums} />
-            <Route exact path={routes.cymbals} component={Cymbals} />
-            <Route exact path={routes.about} component={About} />
-            <Route exact path={routes.login} component={Login} />
-            <Route component={NotFound} />
-          </Switch>
-        </MainLayout>
-        ``
+        <ScrollToTop>
+          <MainLayout>
+            <Switch>
+              <Route exact path={routes.home} component={Home} />
+              <Route exact path={routes.product} component={SingleProduct} />
+              <Route exact path={routes.cart} component={Cart} />
+              <Route exact path={routes.contact} component={Contact} />
+              <Route exact path={routes.drums} component={Drums} />
+              <Route exact path={routes.cymbals} component={Cymbals} />
+              <Route exact path={routes.about} component={About} />
+              <Route exact path={routes.login} component={Login} />
+              <Route component={NotFound} />
+            </Switch>
+          </MainLayout>
+        </ScrollToTop>
       </ModalProvider>
     </BrowserRouter>
   </Provider>
