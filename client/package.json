@@ -60,7 +60,9 @@
   "lint-staged": {
     "src/**/*.js": [
       "prettier --config .prettierrc --write",
-      "eslint --fix"
+      "stylelint --fix",
+      "eslint --fix",
+      "git add"
     ]
   },
   "browserslist": {
