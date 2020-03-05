@@ -27,9 +27,7 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.0.1",
     "styled-react-modal": "^2.0.0",
-    "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-processor-styled-components": "^1.10.0",
-    "stylelint-webpack-plugin": "^1.2.3"
+    "yup": "^0.28.1"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -50,6 +48,11 @@
     "prettier": "^1.19.1",
     "prettier-eslint": "^9.0.1",
     "redux-devtools-extension": "^2.13.8",
+    "stylelint": "^13.2.0",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0",
+    "stylelint-webpack-plugin": "^1.2.3",
     "thunk": "0.0.1"
   },
   "husky": {
@@ -60,7 +63,6 @@
   "lint-staged": {
     "src/**/*.js": [
       "prettier --config .prettierrc --write",
-      "stylelint --fix",
       "eslint --fix",
       "git add"
     ]

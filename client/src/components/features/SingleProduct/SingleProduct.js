@@ -1,22 +1,23 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import {
-  loadSingleProductRequest,
-  getSingleProduct,
-  getRequest,
-  getCart,
   addToCart,
-  plusQty,
   calculatePrice,
+  getCart,
+  getRequest,
+  getSingleProduct,
+  loadSingleProductRequest,
+  plusQty,
 } from 'redux/productsRedux';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import Spinner from 'components/common/Spinner/Spinner';
+
+import CartButton from 'components/common/CartButton/CartButton';
 import Heading from 'components/common/Heading/Heading';
 import Price from 'components/common/Price/Price';
-import CartButton from 'components/common/CartButton/CartButton';
+import PropTypes from 'prop-types';
+import Spinner from 'components/common/Spinner/Spinner';
+import { connect } from 'react-redux';
 import { media } from 'utils';
+import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
   padding: 20px;
@@ -44,8 +45,8 @@ const StyledImage = styled.img`
 const StyledDescription = styled.p`
   font-weight: 300;
   text-align: center;
+  margin: 0 auto;
   width: 60%;
-  margin 20px auto;
 `;
 
 const SingleProduct = ({

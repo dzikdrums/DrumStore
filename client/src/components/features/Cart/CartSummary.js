@@ -1,8 +1,8 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
+
 import PropTypes from 'prop-types';
+import React from 'react';
 import { media } from 'utils';
-import OrderModal from 'components/features/Cart/OrderModal';
 
 const StyledWrapper = styled.div`
   margin: 10px auto;
@@ -22,7 +22,7 @@ const StyledInnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 10px 30px;
+  padding: 10px 10px;
   margin-left: auto;
 
   ${media.tablet`
@@ -70,7 +70,6 @@ const CartSummary = ({ price }) => {
           <StyledPrice>${price + 15}</StyledPrice>
         </StyledPriceGroup>
       </StyledInnerWrapper>
-      <OrderModal />
     </StyledWrapper>
   );
 };

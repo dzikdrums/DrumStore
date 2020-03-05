@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
-import Login from 'assets/login.svg';
-import USDflag from 'assets/USDflag.png';
-import Link from 'components/common/Link/Link';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
-import { media } from 'utils';
-import { connect } from 'react-redux';
 import { getCart, setCart } from 'redux/productsRedux';
+
 import CartIcon from 'components/common/CartIcon/CartIcon';
+import Link from 'components/common/Link/Link';
+import Login from 'assets/login.svg';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import USDflag from 'assets/USDflag.png';
+import { connect } from 'react-redux';
+import { media } from 'utils';
+import styled from 'styled-components';
 
 const StyledWrapper = styled.nav`
   height: 100px;
@@ -68,6 +69,7 @@ const Navbar = ({ cart, setCart }) => {
       setCart(storage);
     }
   }, []);
+
   localStorage.setItem('cart', JSON.stringify(cart));
 
   return (

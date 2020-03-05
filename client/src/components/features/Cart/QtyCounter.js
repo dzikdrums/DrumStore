@@ -1,6 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+
+import PropTypes from 'prop-types';
+import React from 'react';
 import { media } from 'utils';
 
 const StyledWrapper = styled.div`
@@ -86,7 +87,7 @@ QtyCounter.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.string.isRequired,
     tag: PropTypes.string.isRequired,
-    img: PropTypes.object.isRequired,
+    img: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     desc: PropTypes.string.isRequired,

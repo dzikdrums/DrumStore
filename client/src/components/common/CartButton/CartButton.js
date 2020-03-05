@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { media } from 'utils';
+import styled from 'styled-components';
 
 const CartButton = styled.button`
   border: 2px solid black;
@@ -12,7 +12,7 @@ const CartButton = styled.button`
   text-align: center;
   padding: 10px 30px;
   max-width: 200px;
-  margin: 20px auto 5px;
+  margin: 20px auto 15px;
 
   :hover {
     background-color: black;

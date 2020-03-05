@@ -1,23 +1,28 @@
-import React from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
 import {
+  calculatePrice,
+  deleteFromCart,
   getCart,
   getTotalPrice,
-  plusQty,
   minusQty,
-  deleteFromCart,
-  calculatePrice,
+  plusQty,
+  resetCart,
 } from 'redux/productsRedux';
-import Heading from 'components/common/Heading/Heading';
-import Price from 'components/common/Price/Price';
-import { media } from 'utils';
-import QtyCounter from 'components/features/Cart/QtyCounter';
+
+import CartButton from 'components/common/CartButton/CartButton';
 import CartSummary from 'components/features/Cart/CartSummary';
+import Heading from 'components/common/Heading/Heading';
+import OrderModal from 'components/features/Cart/OrderModal';
+import Price from 'components/common/Price/Price';
+import PropTypes from 'prop-types';
+import QtyCounter from 'components/features/Cart/QtyCounter';
+import { connect } from 'react-redux';
+import { media } from 'utils';
+import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
   margin: 0 auto;
+  min-height: 500px;
   width: 100%;
   align-items: center;
 `;
@@ -28,7 +33,7 @@ const StyledInnerWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   margin: 0 auto;
-  width: 70%;
+  width: 80%;
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
 
   :hover {
@@ -62,7 +67,27 @@ const StyledProductTitle = styled.h3`
   `};
 `;
 
-const Cart = ({ cart, price, addToCounter, minusFromCounter, deleteFromCart, calculatePrice }) => {
+const StyledCartButtonWrapper = styled.div`
+  width: 85%;
+  position: relative;
+  height: 140px;
+`;
+
+const StyledCartButton = styled(CartButton)`
+  position: absolute;
+  margin: 0;
+  right: 0;
+`;
+
+const Cart = ({
+  resetCart,
+  cart,
+  price,
+  addToCounter,
+  minusFromCounter,
+  deleteFromCart,
+  calculatePrice,
+}) => {
   const handleDeleteProduct = id => {
     deleteFromCart(id);
     calculatePrice();
@@ -78,9 +103,18 @@ const Cart = ({ cart, price, addToCounter, minusFromCounter, deleteFromCart, cal
     calculatePrice();
   };
 
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = () => {
+    setModal(!modal);
+    resetCart();
+    localStorage.clear();
+    calculatePrice();
+  };
+
   return (
     <StyledWrapper>
-      <Heading>your cart</Heading>
+      {cart.length !== 0 && <Heading>your cart</Heading>}
       {cart.length !== 0 ? (
         cart.map(item => (
           <StyledInnerWrapper key={item.id}>
@@ -98,9 +132,17 @@ const Cart = ({ cart, price, addToCounter, minusFromCounter, deleteFromCart, cal
           </StyledInnerWrapper>
         ))
       ) : (
-        <h1>Cart is empty</h1>
+        <Heading>Cart is empty</Heading>
       )}
-      <CartSummary price={price} />
+      {cart.length !== 0 && (
+        <>
+          <CartSummary price={price} />
+          <StyledCartButtonWrapper>
+            <StyledCartButton onClick={() => toggleModal()}>order</StyledCartButton>
+          </StyledCartButtonWrapper>
+        </>
+      )}
+      {modal && <OrderModal />}
     </StyledWrapper>
   );
 };
@@ -113,7 +155,7 @@ Cart.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       tag: PropTypes.string.isRequired,
-      img: PropTypes.object.isRequired,
+      img: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       desc: PropTypes.string.isRequired,
@@ -121,6 +163,7 @@ Cart.propTypes = {
   ).isRequired,
   price: PropTypes.number.isRequired,
   calculatePrice: PropTypes.func.isRequired,
+  resetCart: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -133,6 +176,7 @@ const mapDispatchToProps = dispatch => ({
   minusFromCounter: id => dispatch(minusQty(id)),
   deleteFromCart: id => dispatch(deleteFromCart(id)),
   calculatePrice: () => dispatch(calculatePrice()),
+  resetCart: () => dispatch(resetCart()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
