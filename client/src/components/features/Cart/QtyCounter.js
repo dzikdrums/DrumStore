@@ -10,6 +10,7 @@ const StyledWrapper = styled.div`
 const StyledInnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 `;
 
 const StyledButton = styled.button`
@@ -89,6 +90,7 @@ QtyCounter.propTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     desc: PropTypes.string.isRequired,
+    qty: PropTypes.number.isRequired,
   }).isRequired,
   increaseCounter: PropTypes.func.isRequired,
   decreaseCounter: PropTypes.func.isRequired,

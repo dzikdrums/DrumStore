@@ -6,7 +6,7 @@ const loadTestData = async () => {
       id: "1234a",
       tag: "new",
       img: "../../../images/prod07.jpg",
-      name: "Gretsch Tamburina maple custom ",
+      name: "Gretsch Tamburina maple",
       price: 2362.99,
       category: "drums",
       desc:

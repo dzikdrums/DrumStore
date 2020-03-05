@@ -28,7 +28,7 @@ const StyledInnerWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   margin: 0 auto;
-  width: 80%;
+  width: 70%;
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
 
   :hover {

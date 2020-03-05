@@ -49,6 +49,7 @@ Products.propTypes = {
       desc: PropTypes.string.isRequired,
     }),
   ),
+  category: PropTypes.string.isRequired,
   loadProductsByCategoryRequest: PropTypes.func.isRequired,
   request: PropTypes.shape({
     pending: PropTypes.bool.isRequired,

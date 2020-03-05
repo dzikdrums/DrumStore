@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import CartButton from 'components/common/CartButton/CartButton';
 import { resetCart, calculatePrice } from 'redux/productsRedux';
+import PropTypes from 'prop-types';
 
 const StyledModal = Modal.styled`
   z-index: 9999;
@@ -27,9 +28,10 @@ const StyledWrapper = styled.div`
 const OrderModal = ({ resetCart, calculatePrice }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  function toggleModal(e) {
+  function toggleModal() {
     setIsOpen(!isOpen);
     resetCart();
+    localStorage.clear();
     calculatePrice();
   }
 
@@ -42,6 +44,11 @@ const OrderModal = ({ resetCart, calculatePrice }) => {
       </StyledModal>
     </StyledWrapper>
   );
+};
+
+OrderModal.propTypes = {
+  resetCart: PropTypes.func.isRequired,
+  calculatePrice: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

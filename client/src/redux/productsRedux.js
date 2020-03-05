@@ -27,6 +27,7 @@ export const DELETE_FROM_CART = createActionName('DELETE_FROM_CART');
 export const PLUS_QTY = createActionName('PLUS_QTY');
 export const MINUS_QTY = createActionName('MINUS_QTY');
 export const RESET_CART = createActionName('RESET_CART');
+export const SET_CART = createActionName('SET_CART');
 export const CALCULATE_PRICE = createActionName('CALCULATE_PRICE');
 
 /* ACTION CREATORS */
@@ -42,6 +43,7 @@ export const deleteFromCart = payload => ({ payload, type: DELETE_FROM_CART });
 export const plusQty = id => ({ id, type: PLUS_QTY });
 export const minusQty = id => ({ id, type: MINUS_QTY });
 export const resetCart = () => ({ type: RESET_CART });
+export const setCart = payload => ({ payload, type: SET_CART });
 export const calculatePrice = () => ({ type: CALCULATE_PRICE });
 
 /* INITIAL STATE */
@@ -58,27 +60,27 @@ const initialState = {
   direction: '',
   amount: 0,
   cart: [
-    {
-      id: '1234a',
-      tag: 'new',
-      img: '../../../images/prod07.jpg',
-      name: 'Gretsch Tamburina maple custom ',
-      price: 2362.99,
-      category: 'drums',
-      desc:
-        'Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!',
-      qty: 0,
-    },
-    {
-      id: '6234b',
-      tag: '',
-      img: '../../../images/cymb5.jpg',
-      name: 'Paiste 101 Crash 16',
-      price: 1199,
-      category: 'cymbals',
-      desc: '',
-      qty: 0,
-    },
+    // {
+    //   id: '1234a',
+    //   tag: 'new',
+    //   img: '../../../images/prod07.jpg',
+    //   name: 'Gretsch Tamburina maple custom ',
+    //   price: 2362.99,
+    //   category: 'drums',
+    //   desc:
+    //     'Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!',
+    //   qty: 0,
+    // },
+    // {
+    //   id: '6234b',
+    //   tag: '',
+    //   img: '../../../images/cymb5.jpg',
+    //   name: 'Paiste 101 Crash 16',
+    //   price: 1199,
+    //   category: 'cymbals',
+    //   desc: '',
+    //   qty: 0,
+    // },
   ],
   discount: 1,
   discountCode: 'SDFV86F',
@@ -166,6 +168,11 @@ export default function reducer(statePart = initialState, action = {}) {
       return {
         ...statePart,
         cart: [],
+      };
+    case SET_CART:
+      return {
+        ...statePart,
+        cart: action.payload,
       };
     case CALCULATE_PRICE:
       let roundPrice;

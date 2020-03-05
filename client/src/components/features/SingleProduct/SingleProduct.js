@@ -113,7 +113,7 @@ SingleProduct.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       tag: PropTypes.string.isRequired,
-      img: PropTypes.object.isRequired,
+      img: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       desc: PropTypes.string.isRequired,

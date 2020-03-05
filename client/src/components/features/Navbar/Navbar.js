@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Login from 'assets/login.svg';
 import USDflag from 'assets/USDflag.png';
 import Link from 'components/common/Link/Link';
@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { media } from 'utils';
 import { connect } from 'react-redux';
-import { getCart } from 'redux/productsRedux';
+import { getCart, setCart } from 'redux/productsRedux';
 import CartIcon from 'components/common/CartIcon/CartIcon';
 import PropTypes from 'prop-types';
 
@@ -60,43 +60,58 @@ const StyledIcon = styled.img`
   background-color: transparent;
 `;
 
-const Navbar = ({ cart }) => (
-  <StyledWrapper>
-    <IconsInnerWrapper>
-      <div>
-        <Link logo="true" to="/">
-          DrumStore
+const Navbar = ({ cart, setCart }) => {
+  const storage = JSON.parse(localStorage.getItem('cart')) || [];
+
+  useEffect(() => {
+    if (storage) {
+      setCart(storage);
+    }
+  }, []);
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  return (
+    <StyledWrapper>
+      <IconsInnerWrapper>
+        <div>
+          <Link logo="true" to="/">
+            DrumStore
+          </Link>
+        </div>
+        <div>
+          <StyledIcon src={USDflag} />
+          <NavLink to="/login">
+            <StyledIcon src={Login} />
+          </NavLink>
+          <NavLink to="/cart">
+            <CartIcon itemsQty={cart.length} />
+          </NavLink>
+        </div>
+      </IconsInnerWrapper>
+      <LinksInnerWrapper>
+        <Link exact to="/drums" activeclass="active">
+          drums
         </Link>
-      </div>
-      <div>
-        <StyledIcon src={USDflag} />
-        <NavLink to="/login">
-          <StyledIcon src={Login} />
-        </NavLink>
-        <NavLink to="/cart">
-          <CartIcon itemsQty={cart.length} />
-        </NavLink>
-      </div>
-    </IconsInnerWrapper>
-    <LinksInnerWrapper>
-      <Link exact to="/drums" activeclass="active">
-        drums
-      </Link>
-      <Link exact to="/cymbals" activeclass="active">
-        cymbals
-      </Link>
-      <Link exact to="/contact" activeclass="active">
-        contact
-      </Link>
-      <Link exact to="/about" activeclass="active">
-        about us
-      </Link>
-    </LinksInnerWrapper>
-  </StyledWrapper>
-);
+        <Link exact to="/cymbals" activeclass="active">
+          cymbals
+        </Link>
+        <Link exact to="/contact" activeclass="active">
+          contact
+        </Link>
+        <Link exact to="/about" activeclass="active">
+          about us
+        </Link>
+      </LinksInnerWrapper>
+    </StyledWrapper>
+  );
+};
 
 const mapStateToProps = state => ({
   cart: getCart(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  setCart: storage => dispatch(setCart(storage)),
 });
 
 Navbar.propTypes = {
@@ -104,12 +119,13 @@ Navbar.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       tag: PropTypes.string.isRequired,
-      img: PropTypes.object.isRequired,
+      img: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       desc: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  setCart: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

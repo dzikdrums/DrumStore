@@ -6,7 +6,8 @@
   },
   "globals": {
     "window": true,
-    "document": true
+    "document": true,
+    "localStorage": true
   },
   "rules": {
     "no-unused-expressions": 0,
@@ -26,6 +27,14 @@
       }
     ]
   },
+  "overrides": [
+    {
+      "files": ["src/utils/**/*.js"],
+      "rules": {
+        "no-unused-vars": 0
+      }
+    }
+  ],
   "settings": {
     "import/resolver": {
       "node": {
