@@ -26,6 +26,7 @@ export const ADD_TO_CART = createActionName('ADD_TO_CART');
 export const DELETE_FROM_CART = createActionName('DELETE_FROM_CART');
 export const PLUS_QTY = createActionName('PLUS_QTY');
 export const MINUS_QTY = createActionName('MINUS_QTY');
+export const RESET_CART = createActionName('RESET_CART');
 export const CALCULATE_PRICE = createActionName('CALCULATE_PRICE');
 
 /* ACTION CREATORS */
@@ -40,6 +41,7 @@ export const addToCart = payload => ({ payload, type: ADD_TO_CART });
 export const deleteFromCart = payload => ({ payload, type: DELETE_FROM_CART });
 export const plusQty = id => ({ id, type: PLUS_QTY });
 export const minusQty = id => ({ id, type: MINUS_QTY });
+export const resetCart = () => ({ type: RESET_CART });
 export const calculatePrice = () => ({ type: CALCULATE_PRICE });
 
 /* INITIAL STATE */

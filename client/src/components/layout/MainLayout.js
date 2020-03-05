@@ -9,6 +9,7 @@ import { media } from 'utils';
 const StyledWrapper = styled.div`
   width: 100%;
   max-width: 900px;
+  min-width: 330px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

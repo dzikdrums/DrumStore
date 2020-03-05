@@ -1,20 +1,33 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import { media } from 'utils';
+import OrderModal from 'components/features/Cart/OrderModal';
 
 const StyledWrapper = styled.div`
-  width: 100%;
-  margin: 10px 0;
+  margin: 10px auto;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+
+  ${media.desktop`
+    width: 60%;
+    display: flex;
+    justify-content: flex-end;
+  `}
 `;
 
 const StyledInnerWrapper = styled.div`
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
-  margin: 0 auto;
-  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 10px 30px;
+  margin-left: auto;
+
+  ${media.tablet`
+    width: 40%;
+  `}
 `;
 
 const StyledPriceGroup = styled.div`
@@ -38,9 +51,7 @@ const StyledPrice = styled.span`
   font-weight: 300;
 `;
 
-const StyledPriceName = styled.span`
-  color: black;
-`;
+const StyledPriceName = styled.span``;
 
 const CartSummary = ({ price }) => {
   return (
@@ -59,6 +70,7 @@ const CartSummary = ({ price }) => {
           <StyledPrice>${price + 15}</StyledPrice>
         </StyledPriceGroup>
       </StyledInnerWrapper>
+      <OrderModal />
     </StyledWrapper>
   );
 };

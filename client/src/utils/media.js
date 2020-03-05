@@ -3,7 +3,7 @@ import { css } from 'styled-components';
 export const sizes = {
   desktop: 1150,
   tablet: 768,
-  phone: 576,
+  phone: 375,
 };
 
 export default Object.keys(sizes).reduce((acc, label) => {
@@ -13,5 +13,5 @@ export default Object.keys(sizes).reduce((acc, label) => {
     }
   `;
 
-  return acc
+  return acc;
 }, {});

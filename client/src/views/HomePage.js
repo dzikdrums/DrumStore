@@ -5,7 +5,7 @@ import YoutubeSection from 'components/features/YoutubeSection/YoutubeSection';
 
 const HomePage = () => (
   <>
-    <ParallaxImage />
+    <ParallaxImage jon="true" />
     <IntroSection />
     <YoutubeSection />
   </>

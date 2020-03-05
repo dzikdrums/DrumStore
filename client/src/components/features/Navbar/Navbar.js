@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 
 const StyledWrapper = styled.nav`
   height: 100px;
+  min-width: 330px;
   display: flex;
   background-color: white;
   flex-direction: column;
@@ -21,7 +22,7 @@ const StyledWrapper = styled.nav`
   max-width: 900px;
   width: 100%;
   top: 0;
-  z-index: 9999;
+  z-index: 1;
 
   ${media.tablet`
     max-width: 850px;
