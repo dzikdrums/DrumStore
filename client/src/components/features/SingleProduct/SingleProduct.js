@@ -72,22 +72,22 @@ const SingleProduct = ({
     const cartCheck = cart.filter(item => item.id === itemID);
     setModal(!modal);
 
-    const IsItemInCart = id => {
-      const isItem = cart.filter(function(item) {
-        return item.id === id;
-      });
-
-      return !isItem.length ? (
-        <Button onClick={() => handleAddToCart()}>add to cart</Button>
-      ) : (
-        <Button disable reverse="true">
-          added to cart
-        </Button>
-      );
-    };
-
     cartCheck.length === 0 ? addToCart(product[0]) : plusQty(itemID);
     calculatePrice();
+  };
+
+  const IsItemInCart = id => {
+    const isItem = cart.filter(function(item) {
+      return item.id === id;
+    });
+
+    return !isItem.length ? (
+      <Button onClick={() => handleAddToCart()}>add to cart</Button>
+    ) : (
+      <Button disable reverse="true">
+        added to cart
+      </Button>
+    );
   };
 
   if (request.pending === false && request.success === true && product.length > 0)

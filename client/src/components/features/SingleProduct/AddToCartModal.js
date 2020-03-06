@@ -28,19 +28,6 @@ const StyledModal = Modal.styled`
 `}
 `;
 
-const StyledInnerWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-justify-content;
-  height: 80px;
-  width: 100%;
-  margin: 0 0 15px;
-
-  ${media.tablet`
-    height:100px;
-  `}
-`;
-
 const AddToCartModal = () => {
   const [isOpen, setIsOpen] = useState(true);
 
@@ -52,9 +39,7 @@ const AddToCartModal = () => {
     <div>
       <StyledModal isOpen={isOpen} onBackgroundClick={toggleModal} onEscapeKeydown={toggleModal}>
         <Heading small="true">Added to cart!</Heading>
-        <StyledInnerWrapper>
-          <Button onClick={toggleModal}>continue shopping</Button>
-        </StyledInnerWrapper>
+        <Button onClick={toggleModal}>continue shopping</Button>
       </StyledModal>
     </div>
   );
