@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+
 import { media } from 'utils';
 
 const Price = styled.h5`
@@ -6,13 +7,15 @@ const Price = styled.h5`
   color: #e2231a;
   text-transform: uppercase;
   text-align: center;
-  margin: 0 0 5px;
-  font-size: 1rem ${media.tablet`
-    font-size: 1.4rem;
+  margin: 0 0 10px;
+  font-size: 1.4rem;
+
+  ${media.tablet`
+    font-size: 1.8rem;
   `};
 
   ${media.desktop`
-    font-size: 1.8rem;
+    font-size: 2rem;
   `};
 
   ${({ big }) =>

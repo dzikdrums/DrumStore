@@ -1,5 +1,6 @@
-import axios from 'axios';
 import { API_URL, BASE_URL } from 'config';
+
+import axios from 'axios';
 
 /* action name creator */
 const reducerName = 'products';
@@ -60,27 +61,17 @@ const initialState = {
   direction: '',
   amount: 0,
   cart: [
-    // {
-    //   id: '1234a',
-    //   tag: 'new',
-    //   img: '../../../images/prod07.jpg',
-    //   name: 'Gretsch Tamburina maple custom ',
-    //   price: 2362.99,
-    //   category: 'drums',
-    //   desc:
-    //     'Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!',
-    //   qty: 0,
-    // },
-    // {
-    //   id: '6234b',
-    //   tag: '',
-    //   img: '../../../images/cymb5.jpg',
-    //   name: 'Paiste 101 Crash 16',
-    //   price: 1199,
-    //   category: 'cymbals',
-    //   desc: '',
-    //   qty: 0,
-    // },
+    {
+      id: '1234a',
+      tag: 'new',
+      img: '../../../images/prod07.jpg',
+      name: 'Gretsch Tamburina maple',
+      price: 2362.99,
+      category: 'drums',
+      desc:
+        'Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!',
+      qty: 0,
+    },
   ],
   discount: 1,
   discountCode: 'SDFV86F',

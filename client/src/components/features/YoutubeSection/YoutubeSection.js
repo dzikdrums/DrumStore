@@ -1,24 +1,25 @@
-import React from 'react';
-import styled from 'styled-components';
-import Heading from 'components/common/Heading/Heading';
-import YoutubeVideo from 'components/common/YoutubeVideo/YoutubeVideo';
 import Button from 'components/common/ButtonLink/ButtonLink';
+import Heading from 'components/common/Heading/Heading';
+import React from 'react';
+import YoutubeVideo from 'components/common/YoutubeVideo/YoutubeVideo';
+import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
   justify-content: center;
-  padding: 4vw 0;
+  padding: 4vw 0 25vw;
 `;
 
 const YoutubeVideoWrapper = styled.div`
-  width: 70%;
+  width: 90%;
   height: 100%;
-  margin: 30px auto;
+  margin: 0 auto 30px;
 `;
 
 const StyledButtonLinkWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 5vw;
 `;
 
 const YoutubeSection = () => (

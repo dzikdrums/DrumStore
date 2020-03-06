@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+
 import { media } from 'utils';
 
 const Heading = styled.h2`
@@ -22,10 +23,10 @@ const Heading = styled.h2`
   ${({ small }) =>
     small &&
     css`
-      font-size: 0.7em;
+      font-size: 1em;
 
       ${media.tablet`
-        font-size: 1.8rem;
+        font-size: 1.6rem;
       `};
 
       ${media.desktop`

@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import ProductCard from 'components/features/ProductCard/ProductCard';
+import PropTypes from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
@@ -9,6 +9,7 @@ const StyledWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   padding-top: 30px;
+  margin-bottom: 50px;
 `;
 
 const ProductsList = ({ products }) => (

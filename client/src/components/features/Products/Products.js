@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { getProducts, loadProductsByCategoryRequest, getRequest } from 'redux/productsRedux';
-import PropTypes from 'prop-types';
+import { getProducts, getRequest, loadProductsByCategoryRequest } from 'redux/productsRedux';
+
 import ProductsList from 'components/features/ProductsList/ProductsList';
+import PropTypes from 'prop-types';
 import Spinner from 'components/common/Spinner/Spinner';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 const StyledSpinnerWrapper = styled.div`

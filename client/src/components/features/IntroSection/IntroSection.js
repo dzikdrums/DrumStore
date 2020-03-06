@@ -1,18 +1,18 @@
-import React from 'react';
-import styled from 'styled-components';
 import ButtonLink from 'components/common/ButtonLink/ButtonLink';
 import Heading from 'components/common/Heading/Heading';
 import Paragraph from 'components/common/Paragraph/Paragraph';
+import React from 'react';
+import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
-  padding: 4vw 15px 70px;
+  padding: 8vw 15px 40px;
 `;
 
 const StyledButtonLinkWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  padding-top: 5vw;
+  margin-top: 5vw;
 `;
 
 const IntroSection = () => (

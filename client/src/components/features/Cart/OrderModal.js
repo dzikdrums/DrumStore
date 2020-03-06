@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 
 import CartButton from 'components/common/CartButton/CartButton';
 import Modal from 'styled-react-modal';
+/* eslint-disable no-unused-vars */
 import styled from 'styled-components';
 
-const StyledModal = styled(Modal)`
+/* eslint-enable */
+
+const StyledModal = Modal.styled`
   z-index: 9999;
   width: 60%;
   height: 20%;
@@ -19,7 +22,7 @@ const StyledModal = styled(Modal)`
 `;
 
 const OrderModal = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   function toggleModal() {
     setIsOpen(!isOpen);

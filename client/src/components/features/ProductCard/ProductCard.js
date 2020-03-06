@@ -1,10 +1,10 @@
-import React from 'react';
+import Price from 'components/common/Price/Price';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import React from 'react';
 import { history as historyPropTypes } from 'history-prop-types';
 import { media } from 'utils';
-import Price from 'components/common/Price/Price';
+import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
@@ -14,6 +14,7 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   cursor: pointer;
   transition: 0.1s ease-in-out;
+  padding: 0 3px;
 
   :hover {
     transform: scale(1.01);

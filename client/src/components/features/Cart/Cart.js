@@ -46,12 +46,12 @@ const StyledInnerWrapper = styled.div`
 `;
 
 const StyledImage = styled.img`
-  width: 70%;
+  width: 59%;
   object-fit: contain;
 `;
 
 const StyledDescWrapper = styled.div`
-  width: 40%;
+  width: 39%;
 `;
 
 const StyledProductTitle = styled.h3`
@@ -59,11 +59,11 @@ const StyledProductTitle = styled.h3`
   padding: 20px 0 10px;
 
   ${media.tablet`
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   `};
 
   ${media.desktop`
-    font-size: 1.8rem;
+    font-size: 2.2rem;
   `};
 `;
 
@@ -71,6 +71,10 @@ const StyledCartButtonWrapper = styled.div`
   width: 85%;
   position: relative;
   height: 140px;
+
+  ${media.desktop`
+    width: 75%;
+  `};
 `;
 
 const StyledCartButton = styled(CartButton)`
@@ -103,7 +107,7 @@ const Cart = ({
     calculatePrice();
   };
 
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(true);
 
   const toggleModal = () => {
     setModal(!modal);
