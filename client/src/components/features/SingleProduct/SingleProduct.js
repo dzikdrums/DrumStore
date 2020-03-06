@@ -10,7 +10,7 @@ import {
 } from 'redux/productsRedux';
 
 import AddToCartModal from 'components/features/SingleProduct/AddToCartModal';
-import CartButton from 'components/common/CartButton/CartButton';
+import Button from 'components/common/Button/Button';
 import Heading from 'components/common/Heading/Heading';
 import Price from 'components/common/Price/Price';
 import PropTypes from 'prop-types';
@@ -22,6 +22,7 @@ import { withRouter } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
   padding: 20px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -81,7 +82,7 @@ const SingleProduct = ({
         <Heading>{product[0].name}</Heading>
         <StyledImage src={product[0].img} />
         <Price big="true">${product[0].price}</Price>
-        <CartButton onClick={() => handleAddToCart()}>add to cart</CartButton>
+        <Button onClick={() => handleAddToCart()}>add to cart</Button>
         {modal && <AddToCartModal />}
         <StyledDescription>{product[0].desc}</StyledDescription>
       </StyledWrapper>

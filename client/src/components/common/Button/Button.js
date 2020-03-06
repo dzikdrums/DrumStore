@@ -1,9 +1,8 @@
 import styled, { css } from 'styled-components';
 
-import { NavLink } from 'react-router-dom';
 import { media } from 'utils';
 
-const ButtonLink = styled(NavLink)`
+const Button = styled.button`
   border: 2px solid black;
   text-decoration: none;
   text-transform: uppercase;
@@ -38,4 +37,4 @@ const ButtonLink = styled(NavLink)`
   `};
 `;
 
-export default ButtonLink;
+export default Button;

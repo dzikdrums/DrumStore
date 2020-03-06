@@ -15,7 +15,7 @@ const StyledIcon = styled.img`
   width: 20px;
   background-color: transparent;
   position: absolute;
-  top: 6px;
+  top: 7px;
 `;
 
 const StyledSpan = styled.span`

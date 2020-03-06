@@ -1,4 +1,4 @@
-import Button from 'components/common/ButtonLink/ButtonLink';
+import Button from 'components/common/Button/Button';
 import Heading from 'components/common/Heading/Heading';
 import React from 'react';
 import YoutubeVideo from 'components/common/YoutubeVideo/YoutubeVideo';
@@ -15,10 +15,9 @@ const YoutubeVideoWrapper = styled.div`
   margin: 0 auto 30px;
 `;
 
-const StyledButtonLinkWrapper = styled.div`
+const StyledButtonWrapper = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
   margin-top: 5vw;
 `;
 
@@ -28,7 +27,7 @@ const YoutubeSection = () => (
     <YoutubeVideoWrapper>
       <YoutubeVideo youtubeId="sV6yoDOXYSg" />
     </YoutubeVideoWrapper>
-    <StyledButtonLinkWrapper>
+    <StyledButtonWrapper>
       <Button
         as="a"
         rel="noopener noreferrer"
@@ -37,7 +36,7 @@ const YoutubeSection = () => (
       >
         subscribe
       </Button>
-    </StyledButtonLinkWrapper>
+    </StyledButtonWrapper>
   </StyledWrapper>
 );
 

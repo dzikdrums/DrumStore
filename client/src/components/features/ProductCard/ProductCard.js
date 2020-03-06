@@ -66,6 +66,7 @@ const StyledInnerWrapper = styled.div`
   padding-bottom: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `;
 
 const StyledDescriptionWrapper = styled.div`

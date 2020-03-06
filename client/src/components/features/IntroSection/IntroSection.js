@@ -1,5 +1,6 @@
-import ButtonLink from 'components/common/ButtonLink/ButtonLink';
+import Button from 'components/common/Button/Button';
 import Heading from 'components/common/Heading/Heading';
+import { NavLink } from 'react-router-dom';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import React from 'react';
 import styled from 'styled-components';
@@ -8,10 +9,9 @@ const StyledWrapper = styled.div`
   padding: 8vw 15px 40px;
 `;
 
-const StyledButtonLinkWrapper = styled.div`
+const StyledButtonWrapper = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
   margin-top: 5vw;
 `;
 
@@ -23,9 +23,11 @@ const IntroSection = () => (
       in Buffalo, New York and make everyday efforts to help deliver the best products and service
       to peers just like us, drummers.
     </Paragraph>
-    <StyledButtonLinkWrapper>
-      <ButtonLink to="/about">more about us</ButtonLink>
-    </StyledButtonLinkWrapper>
+    <StyledButtonWrapper>
+      <Button as={NavLink} to="/about">
+        more about us
+      </Button>
+    </StyledButtonWrapper>
   </StyledWrapper>
 );
 

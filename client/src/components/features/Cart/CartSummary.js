@@ -5,40 +5,33 @@ import React from 'react';
 import { media } from 'utils';
 
 const StyledWrapper = styled.div`
-  margin: 10px auto;
-  width: 95%;
+  margin: 10px 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
 
-  ${media.tablet`
+  /* ${media.tablet`
     width:100%;
     display: flex;
     justify-content: flex-end;
-  `}
+  `} */
 
   ${media.desktop`
-    width:60%;
-    display: flex;
-    justify-content: flex-end;
+    width:80%;
   `}
 `;
 
 const StyledInnerWrapper = styled.div`
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
   display: flex;
+  min-width: 200px;
   flex-direction: column;
   justify-content: center;
-  padding: 10px 10px;
+  padding: 10px 3vw;
   margin-left: auto;
 
   ${media.tablet`
     width: 40%;
-    display: flex;
-    justify-content: flex-end;
-  `}
-
-  ${media.desktop`
-    width: 60%;
   `}
 `;
 

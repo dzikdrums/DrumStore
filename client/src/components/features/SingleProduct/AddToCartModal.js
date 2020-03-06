@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import ButtonLink from 'components/common/ButtonLink/ButtonLink';
+import Button from 'components/common/Button/Button';
 import CartButton from 'components/common/CartButton/CartButton';
 import Heading from 'components/common/Heading/Heading';
 import Modal from 'styled-react-modal';
@@ -53,12 +53,10 @@ const AddToCartModal = () => {
       <StyledModal isOpen={isOpen} onBackgroundClick={toggleModal} onEscapeKeydown={toggleModal}>
         <Heading>Added to cart!</Heading>
         <StyledInnerWrapper>
-          <ButtonLink to="/cart" onClick={toggleModal}>
+          <Button to="/cart" onClick={toggleModal}>
             cart
-          </ButtonLink>
-          <CartButton to="/cart" onClick={toggleModal}>
-            continue shopping
-          </CartButton>
+          </Button>
+          <CartButton onClick={toggleModal}>continue shopping</CartButton>
         </StyledInnerWrapper>
       </StyledModal>
     </div>

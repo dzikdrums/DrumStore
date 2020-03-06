@@ -9,7 +9,7 @@ import {
   resetCart,
 } from 'redux/productsRedux';
 
-import CartButton from 'components/common/CartButton/CartButton';
+import Button from 'components/common/Button/Button';
 import CartSummary from 'components/features/Cart/CartSummary';
 import Heading from 'components/common/Heading/Heading';
 import Modal from 'components/features/Cart/OrderModal';
@@ -67,20 +67,17 @@ const StyledProductTitle = styled.h3`
   `};
 `;
 
-const StyledCartButtonWrapper = styled.div`
-  width: 85%;
-  position: relative;
-  height: 140px;
+const StyledButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
 
   ${media.desktop`
-    width: 75%;
+    width: 80%;
   `};
 `;
 
-const StyledCartButton = styled(CartButton)`
-  position: absolute;
-  margin: 0;
-  right: 0;
+const StyledButton = styled(Button)`
+  margin: 15px 0 20px auto;
 `;
 
 const Cart = ({
@@ -143,9 +140,9 @@ const Cart = ({
       {cart.length !== 0 && (
         <>
           <CartSummary price={price} />
-          <StyledCartButtonWrapper>
-            <StyledCartButton onClick={() => toggleModal()}>order</StyledCartButton>
-          </StyledCartButtonWrapper>
+          <StyledButtonWrapper>
+            <StyledButton onClick={() => toggleModal()}>order</StyledButton>
+          </StyledButtonWrapper>
         </>
       )}
       {modal && <Modal />}

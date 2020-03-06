@@ -18,9 +18,9 @@ const StyledButton = styled.button`
   background-color: transparent;
   outline: none;
   border-radius: 5px;
-  font-size: 1.6rem;
-  width: 30px;
-  height: 30px;
+  font-size: 1.4rem;
+  width: 25px;
+  height: 25px;
   margin-top: 3px;
   cursor: pointer;
   border: 1px solid black;
@@ -33,7 +33,7 @@ const StyledButton = styled.button`
   ${({ remove }) =>
     remove &&
     css`
-      width: 75px;
+      width: 62px;
 
       ${media.tablet`
       width: 95px;
@@ -45,7 +45,7 @@ const StyledButton = styled.button`
 const StyledSpan = styled.span`
   font-weight: 300;
   font-size: 1.2rem;
-  margin: 0 5px;
+  margin: 0 3px;
 `;
 
 const StyledQtyWrapper = styled.div``;

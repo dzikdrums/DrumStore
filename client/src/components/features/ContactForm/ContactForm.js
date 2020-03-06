@@ -5,7 +5,7 @@ import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import Button from 'components/common/ButtonLink/ButtonLink';
+import Button from 'components/common/Button/Button';
 import Heading from 'components/common/Heading/Heading';
 
 const StyledWrapper = styled.div`
@@ -67,7 +67,7 @@ const StyledError = styled.span`
 
 const StyledInputWrapper = styled.div`
   width: 100%;
-  height: 65px;
+  height: 72px;
 
   ${({ textarea }) =>
     textarea &&
@@ -168,11 +168,9 @@ const ContactForm = () => {
             </StyledInputWrapper>
             <StyledButtonLinkWrapper>
               {isSent === false ? (
-                <Button as="button" type="submit">
-                  send email
-                </Button>
+                <Button type="submit">send email</Button>
               ) : (
-                <Button disabled as="button" reverse="true">
+                <Button disabled reverse="true">
                   email has been sent !
                 </Button>
               )}
