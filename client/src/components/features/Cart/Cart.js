@@ -29,6 +29,7 @@ const StyledWrapper = styled.div`
 
 const StyledInnerWrapper = styled.div`
   padding-top: 30px;
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -55,8 +56,9 @@ const StyledDescWrapper = styled.div`
 `;
 
 const StyledProductTitle = styled.h3`
-  font-size: 1rem;
-  padding: 20px 0 5px;
+  font-size: 1.6rem;
+  padding: 0 0 5px;
+  margin: 0 0 10px;
 
   ${media.tablet`
     font-size: 1.8rem;
@@ -78,6 +80,26 @@ const StyledButtonWrapper = styled.div`
 
 const StyledButton = styled(Button)`
   margin: 15px 0 20px auto;
+`;
+
+const RemoveButton = styled.button`
+  font-size: 2.4rem;
+  position: absolute;
+  padding: none;
+  margin: none;
+  top: 0;
+  font-weight: 400;
+  right: 0;
+  color: #e2231a;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  transition: all 300ms ease-in;
+
+  :hover {
+    background-color: black;
+    color: white;
+  }
 `;
 
 const Cart = ({
@@ -113,12 +135,20 @@ const Cart = ({
     calculatePrice();
   };
 
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
+  if (cart.length === 0) topFunction();
+
   return (
     <StyledWrapper>
       {cart.length !== 0 && <Heading>your cart</Heading>}
       {cart.length !== 0 ? (
         cart.map(item => (
           <StyledInnerWrapper key={item.id}>
+            <RemoveButton onClick={() => handleDeleteProduct(item.id)}>x</RemoveButton>
             <StyledImageWrapper>
               <StyledImage src={item.img} />
             </StyledImageWrapper>
@@ -129,7 +159,6 @@ const Cart = ({
                 product={item}
                 decreaseCounter={minusCounter}
                 increaseCounter={plusCounter}
-                deleteProduct={handleDeleteProduct}
               />
             </StyledDescWrapper>
           </StyledInnerWrapper>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import CartButton from 'components/common/CartButton/CartButton';
+import Button from 'components/common/Button/Button';
 import Modal from 'styled-react-modal';
 /* eslint-disable no-unused-vars */
 import styled from 'styled-components';
@@ -32,7 +32,7 @@ const OrderModal = () => {
     <div>
       <StyledModal isOpen={isOpen} onBackgroundClick={toggleModal} onEscapeKeydown={toggleModal}>
         <span>Your order has been placed!</span>
-        <CartButton onClick={toggleModal}>close</CartButton>
+        <Button onClick={toggleModal}>close</Button>
       </StyledModal>
     </div>
   );

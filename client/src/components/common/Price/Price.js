@@ -8,14 +8,14 @@ const Price = styled.h5`
   text-transform: uppercase;
   text-align: center;
   margin: 0 0 10px;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 
   ${media.tablet`
-    font-size: 1.8rem;
+    font-size: 2rem;
   `};
 
   ${media.desktop`
-    font-size: 2rem;
+    font-size: 2.2rem;
   `};
 
   ${({ big }) =>

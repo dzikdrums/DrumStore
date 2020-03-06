@@ -72,6 +72,20 @@ const SingleProduct = ({
     const cartCheck = cart.filter(item => item.id === itemID);
     setModal(!modal);
 
+    const IsItemInCart = id => {
+      const isItem = cart.filter(function(item) {
+        return item.id === id;
+      });
+
+      return !isItem.length ? (
+        <Button onClick={() => handleAddToCart()}>add to cart</Button>
+      ) : (
+        <Button disable reverse="true">
+          added to cart
+        </Button>
+      );
+    };
+
     cartCheck.length === 0 ? addToCart(product[0]) : plusQty(itemID);
     calculatePrice();
   };
@@ -82,7 +96,7 @@ const SingleProduct = ({
         <Heading>{product[0].name}</Heading>
         <StyledImage src={product[0].img} />
         <Price big="true">${product[0].price}</Price>
-        <Button onClick={() => handleAddToCart()}>add to cart</Button>
+        {IsItemInCart(product[0].id)}
         {modal && <AddToCartModal />}
         <StyledDescription>{product[0].desc}</StyledDescription>
       </StyledWrapper>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import Button from 'components/common/Button/Button';
-import CartButton from 'components/common/CartButton/CartButton';
 import Heading from 'components/common/Heading/Heading';
 import Modal from 'styled-react-modal';
 import { media } from 'utils';
@@ -31,6 +30,7 @@ const StyledModal = Modal.styled`
 
 const StyledInnerWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-justify-content;
   height: 80px;
   width: 100%;
@@ -51,12 +51,9 @@ const AddToCartModal = () => {
   return (
     <div>
       <StyledModal isOpen={isOpen} onBackgroundClick={toggleModal} onEscapeKeydown={toggleModal}>
-        <Heading>Added to cart!</Heading>
+        <Heading small="true">Added to cart!</Heading>
         <StyledInnerWrapper>
-          <Button to="/cart" onClick={toggleModal}>
-            cart
-          </Button>
-          <CartButton onClick={toggleModal}>continue shopping</CartButton>
+          <Button onClick={toggleModal}>continue shopping</Button>
         </StyledInnerWrapper>
       </StyledModal>
     </div>

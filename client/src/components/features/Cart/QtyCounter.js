@@ -1,16 +1,14 @@
-import styled, { css } from 'styled-components';
-
 import PropTypes from 'prop-types';
 import React from 'react';
 import { media } from 'utils';
+import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
-  width: 50%;
+  width: 100%;
 `;
 
 const StyledInnerWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  width: 140px;
   margin-bottom: 10px;
 `;
 
@@ -18,43 +16,33 @@ const StyledButton = styled.button`
   background-color: transparent;
   outline: none;
   border-radius: 5px;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   width: 25px;
   height: 25px;
-  margin-top: 3px;
+  margin: 3px 0;
   cursor: pointer;
   border: 1px solid black;
 
   ${media.tablet`
-      width: 40px;
-      height: 40px;
-    `}
-
-  ${({ remove }) =>
-    remove &&
-    css`
-      width: 62px;
-
-      ${media.tablet`
-      width: 95px;
-      height: 35px;
-    `}
+      width: 30px;
+      height: 30px;
     `}
 `;
 
 const StyledSpan = styled.span`
-  font-weight: 300;
-  font-size: 1.2rem;
+  font-weight: 400;
+  font-size: 1.6rem;
   margin: 0 3px;
+  color: #e2231a;
+
+  ${media.tablet`
+    font-size: 2rem;
+  `}
 `;
 
 const StyledQtyWrapper = styled.div``;
 
-const QtyCounter = ({ deleteProduct, product, increaseCounter, decreaseCounter }) => {
-  const remove = () => {
-    deleteProduct(product.id);
-  };
-
+const QtyCounter = ({ product, increaseCounter, decreaseCounter }) => {
   const minus = () => {
     decreaseCounter(product.id);
   };
@@ -77,9 +65,6 @@ const QtyCounter = ({ deleteProduct, product, increaseCounter, decreaseCounter }
           <StyledSpan>{product.qty}</StyledSpan>
           <StyledButton onClick={() => plus()}>+</StyledButton>
         </StyledQtyWrapper>
-        <StyledButton remove="true" onClick={() => remove()}>
-          delete
-        </StyledButton>
       </StyledInnerWrapper>
     </StyledWrapper>
   );
@@ -97,7 +82,6 @@ QtyCounter.propTypes = {
   }).isRequired,
   increaseCounter: PropTypes.func.isRequired,
   decreaseCounter: PropTypes.func.isRequired,
-  deleteProduct: PropTypes.func.isRequired,
 };
 
 export default QtyCounter;

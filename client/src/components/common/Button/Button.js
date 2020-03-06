@@ -10,9 +10,11 @@ const Button = styled.button`
   transition: all 400ms ease-in-out;
   color: black;
   font-size: 1rem;
+  outline: none;
   text-align: center;
   padding: 15px 20px;
   max-width: 200px;
+  cursor: pointer;
   margin: 20px auto 15px;
 
   :hover {
@@ -25,6 +27,7 @@ const Button = styled.button`
     css`
       background-color: black;
       color: white;
+      cursor: auto;
     `};
 
   ${media.tablet`
