@@ -22,7 +22,7 @@ const StyledModal = Modal.styled`
 `;
 
 const OrderModal = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   function toggleModal() {
     setIsOpen(!isOpen);

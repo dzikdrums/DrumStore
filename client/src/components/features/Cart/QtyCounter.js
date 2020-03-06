@@ -5,7 +5,7 @@ import React from 'react';
 import { media } from 'utils';
 
 const StyledWrapper = styled.div`
-  color: black;
+  width: 50%;
 `;
 
 const StyledInnerWrapper = styled.div`
@@ -19,24 +19,24 @@ const StyledButton = styled.button`
   outline: none;
   border-radius: 5px;
   font-size: 1rem;
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   margin-top: 3px;
   cursor: pointer;
 
   ${media.tablet`
-      width: 35px;
-      height: 35px;
+      width: 40px;
+      height: 40px;
     `}
 
   ${({ remove }) =>
     remove &&
     css`
-      width: 64px;
+      width: 75px;
 
       ${media.tablet`
-      width: 84px;
-      height: 30px;
+      width: 95px;
+      height: 35px;
     `}
     `}
 `;

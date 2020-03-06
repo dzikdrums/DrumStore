@@ -1,8 +1,9 @@
-import { NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
+import { NavLink } from 'react-router-dom';
+
 const Link = styled(NavLink)`
-  font-size: 14px;
+  font-size: 1.6rem;
   text-decoration: none;
   color: black;
   transition: color 170ms ease-in-out;
@@ -15,7 +16,7 @@ const Link = styled(NavLink)`
   ${({ logo }) =>
     logo &&
     css`
-      font-size: 20px;
+      font-size: 2rem;
       font-weight: 600;
 
       &.active {

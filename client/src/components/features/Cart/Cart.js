@@ -33,7 +33,7 @@ const StyledInnerWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   margin: 0 auto;
-  width: 80%;
+  width: 100%;
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
 
   :hover {
@@ -45,18 +45,22 @@ const StyledInnerWrapper = styled.div`
   `};
 `;
 
+const StyledImageWrapper = styled.div`
+  width: 58%;
+`;
+
 const StyledImage = styled.img`
-  width: 59%;
   object-fit: contain;
+  width: 100%;
 `;
 
 const StyledDescWrapper = styled.div`
-  width: 39%;
+  width: 40%;
 `;
 
 const StyledProductTitle = styled.h3`
   font-size: 1rem;
-  padding: 20px 0 10px;
+  padding: 20px 0 5px;
 
   ${media.tablet`
     font-size: 1.8rem;
@@ -107,7 +111,7 @@ const Cart = ({
     calculatePrice();
   };
 
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -122,7 +126,9 @@ const Cart = ({
       {cart.length !== 0 ? (
         cart.map(item => (
           <StyledInnerWrapper key={item.id}>
-            <StyledImage src={item.img} />
+            <StyledImageWrapper>
+              <StyledImage src={item.img} />
+            </StyledImageWrapper>
             <StyledDescWrapper>
               <StyledProductTitle>{item.name}</StyledProductTitle>
               <Price noalign="true">${item.price}</Price>

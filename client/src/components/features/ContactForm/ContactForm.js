@@ -10,7 +10,7 @@ import React from 'react';
 
 const StyledWrapper = styled.div`
   display: flex;
-  padding: 50px 40px;
+  padding: 40px 40px 50px;
   flex-direction: column;
   width: 100%;
   max-width: 600px;
@@ -26,7 +26,7 @@ const StyledInput = styled.input`
   margin-top: 25px;
   padding: 15px 20px;
   width: 100%;
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-weight: 300;
   background-color: rgba(34, 34, 34, 0.1);
   border: none;
@@ -37,6 +37,7 @@ const StyledInput = styled.input`
   ::placeholder {
     text-transform: uppercase;
     letter-spacing: 2px;
+    font-size: 1rem;
     color: rgba(34, 34, 34, 1);
   }
 `;

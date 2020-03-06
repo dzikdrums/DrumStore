@@ -6,7 +6,7 @@ import { media } from 'utils';
 
 const StyledWrapper = styled.div`
   margin: 10px auto;
-  width: 80%;
+  width: 90%;
   display: flex;
   flex-direction: column;
 
