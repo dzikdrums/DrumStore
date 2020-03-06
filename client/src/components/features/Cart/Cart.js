@@ -12,7 +12,7 @@ import {
 import CartButton from 'components/common/CartButton/CartButton';
 import CartSummary from 'components/features/Cart/CartSummary';
 import Heading from 'components/common/Heading/Heading';
-import OrderModal from 'components/features/Cart/OrderModal';
+import Modal from 'components/features/Cart/OrderModal';
 import Price from 'components/common/Price/Price';
 import PropTypes from 'prop-types';
 import QtyCounter from 'components/features/Cart/QtyCounter';
@@ -35,10 +35,6 @@ const StyledInnerWrapper = styled.div`
   margin: 0 auto;
   width: 100%;
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
-
-  :hover {
-    transform: scale(1.01);
-  }
 
   ${media.desktop`
     width: 60%;
@@ -152,7 +148,7 @@ const Cart = ({
           </StyledCartButtonWrapper>
         </>
       )}
-      {modal && <OrderModal />}
+      {modal && <Modal />}
     </StyledWrapper>
   );
 };

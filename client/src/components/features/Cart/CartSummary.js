@@ -6,12 +6,18 @@ import { media } from 'utils';
 
 const StyledWrapper = styled.div`
   margin: 10px auto;
-  width: 90%;
+  width: 95%;
   display: flex;
   flex-direction: column;
 
+  ${media.tablet`
+    width:100%;
+    display: flex;
+    justify-content: flex-end;
+  `}
+
   ${media.desktop`
-    width: 60%;
+    width:60%;
     display: flex;
     justify-content: flex-end;
   `}
@@ -27,6 +33,12 @@ const StyledInnerWrapper = styled.div`
 
   ${media.tablet`
     width: 40%;
+    display: flex;
+    justify-content: flex-end;
+  `}
+
+  ${media.desktop`
+    width: 60%;
   `}
 `;
 
@@ -37,6 +49,7 @@ const StyledPriceGroup = styled.div`
   font-weight: 300;
   margin-top: 2px;
   font-size: 1.8rem;
+  padding-top: 3px;
 
   ${({ total }) =>
     total &&

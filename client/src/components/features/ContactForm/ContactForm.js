@@ -2,11 +2,11 @@ import * as Yup from 'yup';
 import * as emailjs from 'emailjs-com';
 
 import { Form, Formik } from 'formik';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import Button from 'components/common/ButtonLink/ButtonLink';
 import Heading from 'components/common/Heading/Heading';
-import React from 'react';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -77,27 +77,29 @@ const StyledInputWrapper = styled.div`
 `;
 
 const ContactForm = () => {
+  const [isSent, setIsSent] = useState(false);
+
   const ContactSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
+      .max(80, 'Too Long!')
       .required('Required'),
     email: Yup.string()
       .email('Invalid email')
       .required('Required'),
     title: Yup.string()
       .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
+      .max(100, 'Too Long, only 100 characters are allowed!')
       .required('Required'),
     text: Yup.string()
       .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
+      .max(1000, 'Too Long, only 1000 characters are allowed!')
       .required('Required'),
   });
 
-  const sendEmail = ({ name, title, text }) => {
+  const sendEmail = ({ email, title, text }) => {
     const templateParams = {
-      name,
+      name: email,
       email: 'dzikdrums@gmail.com',
       title,
       text,
@@ -114,6 +116,7 @@ const ContactForm = () => {
         onSubmit={(values, { resetForm }) => {
           sendEmail(values);
           resetForm();
+          setIsSent(!isSent);
         }}
         validationSchema={ContactSchema}
       >
@@ -164,9 +167,15 @@ const ContactForm = () => {
               {errors.text && touched.text ? <StyledError>{errors.text}</StyledError> : null}
             </StyledInputWrapper>
             <StyledButtonLinkWrapper>
-              <Button as="button" type="submit">
-                send email
-              </Button>
+              {isSent === false ? (
+                <Button as="button" type="submit">
+                  send email
+                </Button>
+              ) : (
+                <Button disabled as="button" reverse="true">
+                  email has been sent !
+                </Button>
+              )}
             </StyledButtonLinkWrapper>
           </StyledForm>
         )}

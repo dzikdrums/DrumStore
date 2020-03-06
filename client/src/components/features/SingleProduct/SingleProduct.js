@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   addToCart,
   calculatePrice,
@@ -9,6 +9,7 @@ import {
   plusQty,
 } from 'redux/productsRedux';
 
+import AddToCartModal from 'components/features/SingleProduct/AddToCartModal';
 import CartButton from 'components/common/CartButton/CartButton';
 import Heading from 'components/common/Heading/Heading';
 import Price from 'components/common/Price/Price';
@@ -59,6 +60,8 @@ const SingleProduct = ({
   product,
   loadSingleProductRequest,
 }) => {
+  const [modal, setModal] = useState(false);
+
   useEffect(() => {
     loadSingleProductRequest(match.params.id);
   }, []);
@@ -66,6 +69,7 @@ const SingleProduct = ({
   const handleAddToCart = () => {
     const itemID = match.params.id;
     const cartCheck = cart.filter(item => item.id === itemID);
+    setModal(!modal);
 
     cartCheck.length === 0 ? addToCart(product[0]) : plusQty(itemID);
     calculatePrice();
@@ -78,6 +82,7 @@ const SingleProduct = ({
         <StyledImage src={product[0].img} />
         <Price big="true">${product[0].price}</Price>
         <CartButton onClick={() => handleAddToCart()}>add to cart</CartButton>
+        {modal && <AddToCartModal />}
         <StyledDescription>{product[0].desc}</StyledDescription>
       </StyledWrapper>
     );

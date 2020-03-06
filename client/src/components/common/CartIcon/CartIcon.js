@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import Cart from 'assets/cart.svg';
+import PropTypes from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.span`
@@ -14,12 +14,14 @@ const StyledWrapper = styled.span`
 const StyledIcon = styled.img`
   width: 20px;
   background-color: transparent;
+  position: absolute;
+  top: 6px;
 `;
 
 const StyledSpan = styled.span`
   position: absolute;
   color: black;
-  bottom: 0;
+  bottom: -5px;
   right: 0;
   font-size: 1.2rem;
 `;

@@ -57,8 +57,15 @@ const LinksInnerWrapper = styled.div`
 
 const StyledIcon = styled.img`
   width: 20px;
-  margin: 0 10px;
+  margin: 0 25px;
   background-color: transparent;
+`;
+
+const StyledFlagIcon = styled.img`
+  width: 20px;
+  margin: 0 2px;
+  background-color: transparent;
+  margin-bottom: 3px;
 `;
 
 const Navbar = ({ cart, setCart }) => {
@@ -81,7 +88,7 @@ const Navbar = ({ cart, setCart }) => {
           </Link>
         </div>
         <div>
-          <StyledIcon src={USDflag} />
+          <StyledFlagIcon src={USDflag} />
           <NavLink to="/login">
             <StyledIcon src={Login} />
           </NavLink>

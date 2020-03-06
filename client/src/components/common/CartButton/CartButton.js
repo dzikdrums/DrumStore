@@ -10,7 +10,7 @@ const CartButton = styled.button`
   color: black;
   font-size: 1rem;
   text-align: center;
-  padding: 10px 30px;
+  padding: 13px 20px;
   max-width: 200px;
   margin: 20px auto 15px;
 

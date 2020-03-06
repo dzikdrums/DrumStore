@@ -1,21 +1,24 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { routes } from 'routes';
 import 'normalize.css';
-import { store } from 'redux/store';
+
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import About from 'views/AboutPage';
+import Cart from 'views/CartPage';
+import Contact from 'views/ContactPage';
+import Cymbals from 'views/CymbalsPage';
+import Drums from 'views/DrumsPage';
+import Home from 'views/HomePage';
+import Login from 'views/LoginPage';
 import MainLayout from 'components/layout/MainLayout';
 import { ModalProvider } from 'styled-react-modal';
-import Home from 'views/HomePage';
-import About from 'views/AboutPage';
-import Contact from 'views/ContactPage';
-import Cart from 'views/CartPage';
-import SingleProduct from 'views/SingleProductPage';
-import Drums from 'views/DrumsPage';
 import NotFound from 'views/NotFoundPage';
-import Login from 'views/LoginPage';
-import Cymbals from 'views/CymbalsPage';
+import Policy from 'views/PrivacyPolicyPage';
+import { Provider } from 'react-redux';
+import React from 'react';
 import { ScrollToTop } from 'utils';
+import SingleProduct from 'views/SingleProductPage';
+import { routes } from 'routes';
+import { store } from 'redux/store';
 
 const Root = () => (
   <Provider store={store}>
@@ -32,6 +35,7 @@ const Root = () => (
               <Route exact path={routes.cymbals} component={Cymbals} />
               <Route exact path={routes.about} component={About} />
               <Route exact path={routes.login} component={Login} />
+              <Route exact path={routes.policy} component={Policy} />
               <Route component={NotFound} />
             </Switch>
           </MainLayout>

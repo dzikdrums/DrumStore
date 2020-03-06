@@ -7,4 +7,5 @@ export const routes = {
   drums: '/drums',
   cymbals: '/cymbals',
   login: '/login',
+  policy: '/privacy-policy',
 };

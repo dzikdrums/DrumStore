@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+
 import { media } from 'utils';
 
 const Paragraph = styled.p`
@@ -8,6 +9,7 @@ const Paragraph = styled.p`
   padding-top: 3px;
   text-align: center;
   margin: 0;
+  text-decoration: none;
   color: black ${media.tablet`
     font-size: 1.2rem;
   `};

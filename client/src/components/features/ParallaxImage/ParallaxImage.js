@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components';
-import { media } from 'utils';
+
 import jontheodore from 'assets/jontheodore.jpg';
 import maciejdzik from 'assets/maciejdzik.JPG';
+import { media } from 'utils';
+import policecar from 'assets/police.jpg';
 
 const ParallaxImage = styled.div`
   background-image: url(${maciejdzik});
@@ -12,6 +14,13 @@ const ParallaxImage = styled.div`
   background-size: 100%;
   backface-visibility: hidden;
   position: static;
+
+  ${({ police }) =>
+    police &&
+    css`
+      background-image: url(${policecar});
+      filter: grayscale(100%) brightness(40%);
+    `}
 
   ${({ jon }) =>
     jon &&

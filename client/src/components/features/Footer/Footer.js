@@ -1,9 +1,10 @@
+import { NavLink } from 'react-router-dom';
+import Paragraph from 'components/common/Paragraph/Paragraph';
 import React from 'react';
-import styled from 'styled-components';
-import youtube from 'assets/youtube.svg';
 import facebook from 'assets/facebook.svg';
 import instagram from 'assets/instagram.svg';
-import Paragraph from 'components/common/Paragraph/Paragraph';
+import styled from 'styled-components';
+import youtube from 'assets/youtube.svg';
 
 const StyledWrapper = styled.div`
   padding: 5vw 0;
@@ -43,8 +44,10 @@ const Footer = () => (
       </a>
     </StyledIconWrapper>
     <StyledCopyrights>
-      <Paragraph grey>Polityka prywatnosci</Paragraph>
-      <Paragraph grey>© 2020 Drumstore. All right reserved</Paragraph>
+      <Paragraph as={NavLink} to="/privacy-policy" grey="true">
+        Polityka prywatnosci
+      </Paragraph>
+      <Paragraph grey="true">© 2020 Drumstore. All right reserved</Paragraph>
     </StyledCopyrights>
   </StyledWrapper>
 );

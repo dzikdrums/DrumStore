@@ -18,11 +18,12 @@ const StyledButton = styled.button`
   background-color: transparent;
   outline: none;
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: 1.6rem;
   width: 30px;
   height: 30px;
   margin-top: 3px;
   cursor: pointer;
+  border: 1px solid black;
 
   ${media.tablet`
       width: 40px;
