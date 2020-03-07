@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import Button from 'components/common/Button/Button';
+import Fade from 'react-reveal/Fade';
 import Heading from 'components/common/Heading/Heading';
 
 const StyledWrapper = styled.div`
@@ -110,74 +111,76 @@ const ContactForm = () => {
 
   return (
     <StyledWrapper>
-      <Heading>contact us</Heading>
-      <Formik
-        initialValues={{ name: '', email: '', title: '', text: '' }}
-        onSubmit={(values, { resetForm }) => {
-          sendEmail(values);
-          resetForm();
-          setIsSent(!isSent);
-        }}
-        validationSchema={ContactSchema}
-      >
-        {({ errors, touched, values, handleChange, handleBlur }) => (
-          <StyledForm>
-            <StyledInputWrapper>
-              <StyledInput
-                placeholder="name"
-                type="text"
-                name="name"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.name}
-              />
-              {errors.name && touched.name ? <StyledError>{errors.name}</StyledError> : null}
-            </StyledInputWrapper>
-            <StyledInputWrapper>
-              <StyledInput
-                type="text"
-                name="email"
-                placeholder="email"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-              />
-              {errors.email && touched.email ? <StyledError>{errors.email}</StyledError> : null}
-            </StyledInputWrapper>
-            <StyledInputWrapper>
-              <StyledInput
-                placeholder="title"
-                type="text"
-                name="title"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.title}
-              />
-              {errors.title && touched.title ? <StyledError>{errors.title}</StyledError> : null}
-            </StyledInputWrapper>
-            <StyledInputWrapper textarea="true">
-              <StyledTextArea
-                placeholder="text"
-                name="text"
-                as="textarea"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.text}
-              />
-              {errors.text && touched.text ? <StyledError>{errors.text}</StyledError> : null}
-            </StyledInputWrapper>
-            <StyledButtonLinkWrapper>
-              {isSent === false ? (
-                <Button type="submit">send email</Button>
-              ) : (
-                <Button disabled reverse="true">
-                  email has been sent !
-                </Button>
-              )}
-            </StyledButtonLinkWrapper>
-          </StyledForm>
-        )}
-      </Formik>
+      <Fade>
+        <Heading>contact us</Heading>
+        <Formik
+          initialValues={{ name: '', email: '', title: '', text: '' }}
+          onSubmit={(values, { resetForm }) => {
+            sendEmail(values);
+            resetForm();
+            setIsSent(!isSent);
+          }}
+          validationSchema={ContactSchema}
+        >
+          {({ errors, touched, values, handleChange, handleBlur }) => (
+            <StyledForm>
+              <StyledInputWrapper>
+                <StyledInput
+                  placeholder="name"
+                  type="text"
+                  name="name"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
+                />
+                {errors.name && touched.name ? <StyledError>{errors.name}</StyledError> : null}
+              </StyledInputWrapper>
+              <StyledInputWrapper>
+                <StyledInput
+                  type="text"
+                  name="email"
+                  placeholder="email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                />
+                {errors.email && touched.email ? <StyledError>{errors.email}</StyledError> : null}
+              </StyledInputWrapper>
+              <StyledInputWrapper>
+                <StyledInput
+                  placeholder="title"
+                  type="text"
+                  name="title"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.title}
+                />
+                {errors.title && touched.title ? <StyledError>{errors.title}</StyledError> : null}
+              </StyledInputWrapper>
+              <StyledInputWrapper textarea="true">
+                <StyledTextArea
+                  placeholder="text"
+                  name="text"
+                  as="textarea"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.text}
+                />
+                {errors.text && touched.text ? <StyledError>{errors.text}</StyledError> : null}
+              </StyledInputWrapper>
+              <StyledButtonLinkWrapper>
+                {isSent === false ? (
+                  <Button type="submit">send email</Button>
+                ) : (
+                  <Button disabled reverse="true">
+                    email has been sent !
+                  </Button>
+                )}
+              </StyledButtonLinkWrapper>
+            </StyledForm>
+          )}
+        </Formik>
+      </Fade>
     </StyledWrapper>
   );
 };

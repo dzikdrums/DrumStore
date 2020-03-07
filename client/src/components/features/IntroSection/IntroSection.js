@@ -1,4 +1,5 @@
 import Button from 'components/common/Button/Button';
+import Fade from 'react-reveal/Fade';
 import Heading from 'components/common/Heading/Heading';
 import { NavLink } from 'react-router-dom';
 import Paragraph from 'components/common/Paragraph/Paragraph';
@@ -17,17 +18,19 @@ const StyledButtonWrapper = styled.div`
 
 const IntroSection = () => (
   <StyledWrapper>
-    <Heading>Hey, we&apos;re drumstore</Heading>
-    <Paragraph big>
-      We started this shop in 2011 as a way to give back to the drummers community. Now we are based
-      in Buffalo, New York and make everyday efforts to help deliver the best products and service
-      to peers just like us, drummers.
-    </Paragraph>
-    <StyledButtonWrapper>
-      <Button as={NavLink} to="/about">
-        more about us
-      </Button>
-    </StyledButtonWrapper>
+    <Fade bottom>
+      <Heading>Hey, we&apos;re drumstore</Heading>
+      <Paragraph big>
+        We started this shop in 2011 as a way to give back to the drummers community. Now we are
+        based in Buffalo, New York and make everyday efforts to help deliver the best products and
+        service to peers just like us, drummers.
+      </Paragraph>
+      <StyledButtonWrapper>
+        <Button as={NavLink} to="/about">
+          more about us
+        </Button>
+      </StyledButtonWrapper>
+    </Fade>
   </StyledWrapper>
 );
 

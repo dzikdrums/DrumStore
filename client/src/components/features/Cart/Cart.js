@@ -11,6 +11,7 @@ import {
 
 import Button from 'components/common/Button/Button';
 import CartSummary from 'components/features/Cart/CartSummary';
+import Fade from 'react-reveal/Fade';
 import Heading from 'components/common/Heading/Heading';
 import Modal from 'components/features/Cart/OrderModal';
 import Price from 'components/common/Price/Price';
@@ -143,39 +144,41 @@ const Cart = ({
   if (cart.length === 0) topFunction();
 
   return (
-    <StyledWrapper>
-      {cart.length !== 0 && <Heading>your cart</Heading>}
-      {cart.length !== 0 ? (
-        cart.map(item => (
-          <StyledInnerWrapper key={item.id}>
-            <RemoveButton onClick={() => handleDeleteProduct(item.id)}>x</RemoveButton>
-            <StyledImageWrapper>
-              <StyledImage src={item.img} />
-            </StyledImageWrapper>
-            <StyledDescWrapper>
-              <StyledProductTitle>{item.name}</StyledProductTitle>
-              <Price noalign="true">${item.price}</Price>
-              <QtyCounter
-                product={item}
-                decreaseCounter={minusCounter}
-                increaseCounter={plusCounter}
-              />
-            </StyledDescWrapper>
-          </StyledInnerWrapper>
-        ))
-      ) : (
-        <Heading>Cart is empty</Heading>
-      )}
-      {cart.length !== 0 && (
-        <>
-          <CartSummary price={price} />
-          <StyledButtonWrapper>
-            <StyledButton onClick={() => toggleModal()}>order</StyledButton>
-          </StyledButtonWrapper>
-        </>
-      )}
-      {modal && <Modal />}
-    </StyledWrapper>
+    <Fade>
+      <StyledWrapper>
+        {cart.length !== 0 && <Heading>your cart</Heading>}
+        {cart.length !== 0 ? (
+          cart.map(item => (
+            <StyledInnerWrapper key={item.id}>
+              <RemoveButton onClick={() => handleDeleteProduct(item.id)}>x</RemoveButton>
+              <StyledImageWrapper>
+                <StyledImage src={item.img} />
+              </StyledImageWrapper>
+              <StyledDescWrapper>
+                <StyledProductTitle>{item.name}</StyledProductTitle>
+                <Price noalign="true">${item.price}</Price>
+                <QtyCounter
+                  product={item}
+                  decreaseCounter={minusCounter}
+                  increaseCounter={plusCounter}
+                />
+              </StyledDescWrapper>
+            </StyledInnerWrapper>
+          ))
+        ) : (
+          <Heading>Cart is empty</Heading>
+        )}
+        {cart.length !== 0 && (
+          <>
+            <CartSummary price={price} />
+            <StyledButtonWrapper>
+              <StyledButton onClick={() => toggleModal()}>order</StyledButton>
+            </StyledButtonWrapper>
+          </>
+        )}
+        {modal && <Modal />}
+      </StyledWrapper>{' '}
+    </Fade>
   );
 };
 

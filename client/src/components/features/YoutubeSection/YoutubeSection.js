@@ -1,4 +1,5 @@
 import Button from 'components/common/Button/Button';
+import Fade from 'react-reveal/Fade';
 import Heading from 'components/common/Heading/Heading';
 import React from 'react';
 import YoutubeVideo from 'components/common/YoutubeVideo/YoutubeVideo';
@@ -23,20 +24,23 @@ const StyledButtonWrapper = styled.div`
 
 const YoutubeSection = () => (
   <StyledWrapper>
-    <Heading small>our youtube channel</Heading>
-    <YoutubeVideoWrapper>
-      <YoutubeVideo youtubeId="sV6yoDOXYSg" />
-    </YoutubeVideoWrapper>
-    <StyledButtonWrapper>
-      <Button
-        as="a"
-        rel="noopener noreferrer"
-        target="_blank"
-        href="https://www.youtube.com/channel/UCjRHUphHndh-jU1kUgh_nJQ?sub_confirmation=1"
-      >
-        subscribe
-      </Button>
-    </StyledButtonWrapper>
+    <Fade bottom>
+      <Heading small>our youtube channel</Heading>
+      <YoutubeVideoWrapper>
+        <YoutubeVideo youtubeId="sV6yoDOXYSg" />
+      </YoutubeVideoWrapper>
+
+      <StyledButtonWrapper>
+        <Button
+          as="a"
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://www.youtube.com/channel/UCjRHUphHndh-jU1kUgh_nJQ?sub_confirmation=1"
+        >
+          subscribe
+        </Button>
+      </StyledButtonWrapper>
+    </Fade>
   </StyledWrapper>
 );
 

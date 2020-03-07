@@ -11,6 +11,7 @@ import {
 
 import AddToCartModal from 'components/features/SingleProduct/AddToCartModal';
 import Button from 'components/common/Button/Button';
+import Fade from 'react-reveal/Fade';
 import Heading from 'components/common/Heading/Heading';
 import Price from 'components/common/Price/Price';
 import PropTypes from 'prop-types';
@@ -92,14 +93,16 @@ const SingleProduct = ({
 
   if (request.pending === false && request.success === true && product.length > 0)
     return (
-      <StyledWrapper>
-        <Heading>{product[0].name}</Heading>
-        <StyledImage src={product[0].img} />
-        <Price big="true">${product[0].price}</Price>
-        {IsItemInCart(product[0].id)}
-        {modal && <AddToCartModal />}
-        <StyledDescription>{product[0].desc}</StyledDescription>
-      </StyledWrapper>
+      <Fade>
+        <StyledWrapper>
+          <Heading>{product[0].name}</Heading>
+          <StyledImage src={product[0].img} />
+          <Price big="true">${product[0].price}</Price>
+          {IsItemInCart(product[0].id)}
+          {modal && <AddToCartModal />}
+          <StyledDescription>{product[0].desc}</StyledDescription>
+        </StyledWrapper>
+      </Fade>
     );
   return (
     <StyledSpinnerWrapper>

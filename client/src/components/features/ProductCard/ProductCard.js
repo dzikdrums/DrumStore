@@ -1,3 +1,4 @@
+import Fade from 'react-reveal/Fade';
 import Price from 'components/common/Price/Price';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -84,14 +85,16 @@ const setRedirect = (id, history) => {
 const ProductCard = ({ id, img, name, desc, price, history }) => {
   return (
     <StyledWrapper onClick={() => setRedirect(id, history)}>
-      <StyledImage src={img} />
-      <StyledInnerWrapper>
-        <StyledTitle>{name}</StyledTitle>
-        <StyledDescriptionWrapper>
-          <StyledDescription>{desc}</StyledDescription>
-        </StyledDescriptionWrapper>
-        <Price>${price}</Price>
-      </StyledInnerWrapper>
+      <Fade>
+        <StyledImage src={img} />
+        <StyledInnerWrapper>
+          <StyledTitle>{name}</StyledTitle>
+          <StyledDescriptionWrapper>
+            <StyledDescription>{desc}</StyledDescription>
+          </StyledDescriptionWrapper>
+          <Price>${price}</Price>
+        </StyledInnerWrapper>
+      </Fade>
     </StyledWrapper>
   );
 };
