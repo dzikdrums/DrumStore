@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import Button from 'components/common/Button/Button';
-import Heading from 'components/common/Heading/Heading';
 import Modal from 'styled-react-modal';
 import { media } from 'utils';
 /* eslint-disable no-unused-vars */
@@ -38,7 +37,7 @@ const AddToCartModal = () => {
   return (
     <div>
       <StyledModal isOpen={isOpen} onBackgroundClick={toggleModal} onEscapeKeydown={toggleModal}>
-        <Heading small="true">Added to cart!</Heading>
+        <span>Added to cart!</span>
         <Button onClick={toggleModal}>continue shopping</Button>
       </StyledModal>
     </div>

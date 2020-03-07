@@ -10,12 +10,6 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  /* ${media.tablet`
-    width:100%;
-    display: flex;
-    justify-content: flex-end;
-  `} */
-
   ${media.desktop`
     width:80%;
   `}
@@ -55,6 +49,7 @@ const StyledPriceGroup = styled.div`
 
 const StyledPrice = styled.span`
   font-weight: 300;
+  padding: 0 10px;
 `;
 
 const StyledPriceName = styled.span``;

@@ -32,8 +32,9 @@ const StyledButton = styled.button`
 const StyledSpan = styled.span`
   font-weight: 400;
   font-size: 1.6rem;
-  margin: 0 3px;
-  color: #e2231a;
+  display: inline-block;
+  text-align: center;
+  width: 20px;
 
   ${media.tablet`
     font-size: 2rem;

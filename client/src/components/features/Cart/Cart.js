@@ -70,7 +70,7 @@ const StyledProductTitle = styled.h3`
 `;
 
 const StyledButtonWrapper = styled.div`
-  width: 100%;
+  width: 95%;
   display: flex;
 
   ${media.desktop`

@@ -47,7 +47,7 @@ const StyledImage = styled.img`
 const StyledDescription = styled.p`
   font-weight: 300;
   text-align: center;
-  margin: 0 auto;
+  margin: 20px auto;
   width: 60%;
 `;
 
