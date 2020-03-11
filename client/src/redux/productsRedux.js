@@ -60,19 +60,7 @@ const initialState = {
   key: '',
   direction: '',
   amount: 0,
-  cart: [
-    {
-      id: '1234a',
-      tag: 'new',
-      img: '../../../images/prod07.jpg',
-      name: 'Gretsch Tamburina maple',
-      price: 2362.99,
-      category: 'drums',
-      desc:
-        'Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!',
-      qty: 0,
-    },
-  ],
+  cart: [],
   discount: 1,
   discountCode: 'SDFV86F',
   discountActive: false,
