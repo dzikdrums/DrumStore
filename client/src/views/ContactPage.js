@@ -4,7 +4,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledMap = styled.iframe`
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   height: 500px;
   margin: 30px auto;
   border: none;

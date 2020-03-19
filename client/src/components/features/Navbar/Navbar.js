@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { getCart, setCart } from 'redux/productsRedux';
 
+import { AUTH_URL } from 'config';
 import CartIcon from 'components/common/CartIcon/CartIcon';
 import Link from 'components/common/Link/Link';
 import Login from 'assets/login.svg';
@@ -89,9 +90,9 @@ const Navbar = ({ cart, setCart }) => {
         </div>
         <div>
           <StyledFlagIcon src={USDflag} />
-          <NavLink to="/login">
+          <a href={`http://localhost:8000${AUTH_URL}/google`}>
             <StyledIcon src={Login} />
-          </NavLink>
+          </a>
           <NavLink to="/cart">
             <CartIcon itemsQty={cart.length} />
           </NavLink>

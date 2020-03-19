@@ -1,5 +1,6 @@
+import { BrowserRouter, NavLink } from 'react-router-dom';
+
 import Fade from 'react-reveal/Fade';
-import { NavLink } from 'react-router-dom';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import React from 'react';
 import facebook from 'assets/facebook.svg';
@@ -32,26 +33,28 @@ const StyledCopyrights = styled.div`
 `;
 
 const Footer = () => (
-  <StyledWrapper>
-    <Fade>
-      <StyledIconWrapper>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/">
-          <StyledIcon src={facebook} />
-        </a>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/">
-          <StyledIcon src={instagram} />
-        </a>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/">
-          <StyledIcon src={youtube} />
-        </a>
-      </StyledIconWrapper>
-      <StyledCopyrights>
-        <Paragraph as={NavLink} to="/privacy-policy" grey="true">
-          Polityka prywatnosci
-        </Paragraph>
-        <Paragraph grey="true">© 2020 Drumstore. All right reserved</Paragraph>
-      </StyledCopyrights>
-    </Fade>
+  <StyledWrapper data-testid="footer">
+    <BrowserRouter>
+      <Fade>
+        <StyledIconWrapper>
+          <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/">
+            <StyledIcon src={facebook} />
+          </a>
+          <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/">
+            <StyledIcon src={instagram} />
+          </a>
+          <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/">
+            <StyledIcon src={youtube} />
+          </a>
+        </StyledIconWrapper>
+        <StyledCopyrights>
+          <Paragraph as={NavLink} to="/privacy-policy" grey="true">
+            Polityka prywatnosci
+          </Paragraph>
+          <Paragraph grey="true">© 2020 Drumstore. All right reserved</Paragraph>
+        </StyledCopyrights>
+      </Fade>
+    </BrowserRouter>
   </StyledWrapper>
 );
 
