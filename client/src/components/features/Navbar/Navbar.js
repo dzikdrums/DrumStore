@@ -90,7 +90,7 @@ const Navbar = ({ cart, setCart }) => {
         </div>
         <div>
           <StyledFlagIcon src={USDflag} />
-          <a href={`http://localhost:8000${AUTH_URL}/google`}>
+          <a href={`https://drumstores2.herokuapp.com${AUTH_URL}/google`}>
             <StyledIcon src={Login} />
           </a>
           <NavLink to="/cart">
