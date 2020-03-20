@@ -110,7 +110,7 @@ const ContactForm = () => {
   };
 
   return (
-    <StyledWrapper>
+    <StyledWrapper data-testid="ContactForm">
       <Fade>
         <Heading>contact us</Heading>
         <Formik

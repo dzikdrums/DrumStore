@@ -30,6 +30,7 @@ export const MINUS_QTY = createActionName('MINUS_QTY');
 export const RESET_CART = createActionName('RESET_CART');
 export const SET_CART = createActionName('SET_CART');
 export const CALCULATE_PRICE = createActionName('CALCULATE_PRICE');
+export const SORT_OPTIONS = createActionName('SORT_OPTIONS');
 
 /* ACTION CREATORS */
 
@@ -46,6 +47,15 @@ export const minusQty = id => ({ id, type: MINUS_QTY });
 export const resetCart = () => ({ type: RESET_CART });
 export const setCart = payload => ({ payload, type: SET_CART });
 export const calculatePrice = () => ({ type: CALCULATE_PRICE });
+export const sortOptions = payload => ({ payload, type: SORT_OPTIONS });
+export const getProductsSort = ({ products }) => {
+  const sortProducts = [...products.data].sort((a, b) => {
+    if (a[products.key] > b[products.key]) return products.direction === 'asc' ? 1 : -1;
+    if (a[products.key] < b[products.key]) return products.direction === 'asc' ? -1 : 1;
+    return 0;
+  });
+  return sortProducts;
+};
 
 /* INITIAL STATE */
 
@@ -167,6 +177,12 @@ export default function reducer(statePart = initialState, action = {}) {
       return {
         ...statePart,
         totalPrice: roundPrice,
+      };
+    case SORT_OPTIONS:
+      return {
+        ...statePart,
+        key: action.payload.key,
+        direction: action.payload.direction,
       };
     case RESET_REQUEST:
       return {
