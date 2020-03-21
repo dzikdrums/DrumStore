@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   calculatePrice,
   deleteFromCart,
   getCart,
   getTotalPrice,
+  loadCurrencyRates,
   minusQty,
   plusQty,
   resetCart,
@@ -15,6 +16,7 @@ import Fade from 'react-reveal/Fade';
 import Heading from 'components/common/Heading/Heading';
 import Modal from 'components/features/Cart/OrderModal';
 import Price from 'components/common/Price/Price';
+import PriceOption from 'utils/PriceOption';
 import PropTypes from 'prop-types';
 import QtyCounter from 'components/features/Cart/QtyCounter';
 import { connect } from 'react-redux';
@@ -111,7 +113,12 @@ const Cart = ({
   minusFromCounter,
   deleteFromCart,
   calculatePrice,
+  loadCurrencyRates,
 }) => {
+  useEffect(() => {
+    loadCurrencyRates();
+  });
+
   const handleDeleteProduct = id => {
     deleteFromCart(id);
     calculatePrice();
@@ -156,7 +163,9 @@ const Cart = ({
               </StyledImageWrapper>
               <StyledDescWrapper>
                 <StyledProductTitle>{item.name}</StyledProductTitle>
-                <Price noalign="true">${item.price}</Price>
+                <Price noalign="true">
+                  <PriceOption price={item.price} />
+                </Price>
                 <QtyCounter
                   product={item}
                   decreaseCounter={minusCounter}
@@ -199,6 +208,7 @@ Cart.propTypes = {
   price: PropTypes.number.isRequired,
   calculatePrice: PropTypes.func.isRequired,
   resetCart: PropTypes.func.isRequired,
+  loadCurrencyRates: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -212,6 +222,7 @@ const mapDispatchToProps = dispatch => ({
   deleteFromCart: id => dispatch(deleteFromCart(id)),
   calculatePrice: () => dispatch(calculatePrice()),
   resetCart: () => dispatch(resetCart()),
+  loadCurrencyRates: () => dispatch(loadCurrencyRates()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

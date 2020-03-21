@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
-import { getCart, setCart } from 'redux/productsRedux';
+import React, { useEffect, useState } from 'react';
+import { currencyChange, getCart, setCart } from 'redux/productsRedux';
 
-import { AUTH_URL } from 'config';
 import CartIcon from 'components/common/CartIcon/CartIcon';
 import Link from 'components/common/Link/Link';
 import Login from 'assets/login.svg';
 import { NavLink } from 'react-router-dom';
+import PLNflag from 'assets/PLNflag.png';
 import PropTypes from 'prop-types';
+import Select from 'react-select';
 import USDflag from 'assets/USDflag.png';
 import { connect } from 'react-redux';
 import { media } from 'utils';
@@ -58,7 +59,8 @@ const LinksInnerWrapper = styled.div`
 
 const StyledIcon = styled.img`
   width: 20px;
-  margin: 0 25px;
+  padding-top: 5px;
+  margin: 0 25px 0 5px;
   background-color: transparent;
 `;
 
@@ -69,7 +71,34 @@ const StyledFlagIcon = styled.img`
   margin-bottom: 3px;
 `;
 
-const Navbar = ({ cart, setCart }) => {
+const StyledIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledSelect = styled(Select)`
+  padding: 5px 5px 0;
+  width: 115px;
+  outline: none;
+  margin: 0 auto;
+
+  ${media.tablet`
+    margin: 0;
+  `}
+`;
+
+const StyledLabel = styled.div`
+  color: black;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+
+  span {
+    margin-left: 10px;
+  }
+`;
+
+const Navbar = ({ cart, setCart, currencyChange }) => {
   const storage = JSON.parse(localStorage.getItem('cart')) || [];
 
   useEffect(() => {
@@ -78,7 +107,53 @@ const Navbar = ({ cart, setCart }) => {
     }
   }, []);
 
+  const options = [
+    {
+      value: 'USD',
+      label: (
+        <StyledLabel>
+          <StyledFlagIcon src={USDflag} />
+          <span>USD</span>
+        </StyledLabel>
+      ),
+    },
+    {
+      value: 'PLN',
+      label: (
+        <StyledLabel>
+          <StyledFlagIcon src={PLNflag} />
+          <span>PLN</span>
+        </StyledLabel>
+      ),
+    },
+  ];
+
+  const [selectedOption, setSelectedOption] = useState(options[0]);
+
+  const handleChange = selectedOption => {
+    setSelectedOption(selectedOption);
+    currencyChange(selectedOption.value);
+  };
+
   localStorage.setItem('cart', JSON.stringify(cart));
+
+  const customStyles = {
+    option: provided => ({
+      ...provided,
+      color: 'blue',
+      padding: 5,
+      border: 'none',
+    }),
+    control: (base, state) => ({
+      ...base,
+      border: state.isFocused ? 0 : 0,
+      // This line disable the blue border
+      boxShadow: state.isFocused ? 0 : 0,
+      '&:hover': {
+        border: state.isFocused ? 0 : 0,
+      },
+    }),
+  };
 
   return (
     <StyledWrapper>
@@ -88,15 +163,21 @@ const Navbar = ({ cart, setCart }) => {
             DrumStore
           </Link>
         </div>
-        <div>
-          <StyledFlagIcon src={USDflag} />
-          <a href={`https://drumstores2.herokuapp.com${AUTH_URL}/google`}>
+        <StyledIconWrapper>
+          <StyledSelect
+            styles={customStyles}
+            value={{ label: selectedOption.label }}
+            onChange={handleChange}
+            options={options}
+            isSearchable={false}
+          />
+          <Link to="/login">
             <StyledIcon src={Login} />
-          </a>
+          </Link>
           <NavLink to="/cart">
             <CartIcon itemsQty={cart.length} />
           </NavLink>
-        </div>
+        </StyledIconWrapper>
       </IconsInnerWrapper>
       <LinksInnerWrapper>
         <Link exact to="/drums" activeclass="active">
@@ -122,6 +203,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setCart: storage => dispatch(setCart(storage)),
+  currencyChange: currency => dispatch(currencyChange(currency)),
 });
 
 Navbar.propTypes = {
@@ -136,6 +218,7 @@ Navbar.propTypes = {
     }),
   ).isRequired,
   setCart: PropTypes.func.isRequired,
+  currencyChange: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

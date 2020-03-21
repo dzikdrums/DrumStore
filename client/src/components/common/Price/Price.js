@@ -3,9 +3,7 @@ import styled, { css } from 'styled-components';
 import { media } from 'utils';
 
 const Price = styled.h5`
-  font-weight: 400;
-  color: #e2231a;
-  text-transform: uppercase;
+  font-weight: 500;
   text-align: center;
   margin: 0 0 10px;
   font-size: 1.6rem;
@@ -15,7 +13,7 @@ const Price = styled.h5`
   `};
 
   ${media.desktop`
-    font-size: 2.2rem;
+    font-size: 2rem;
   `};
 
   ${({ big }) =>

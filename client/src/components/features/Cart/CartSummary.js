@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 
+import PriceOption from 'utils/PriceOption';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { media } from 'utils';
@@ -60,15 +61,21 @@ const CartSummary = ({ price }) => {
       <StyledInnerWrapper>
         <StyledPriceGroup>
           <StyledPriceName>Subtotal</StyledPriceName>
-          <StyledPrice>${price}</StyledPrice>
+          <StyledPrice>
+            <PriceOption price={price} />
+          </StyledPrice>
         </StyledPriceGroup>
         <StyledPriceGroup>
           <StyledPriceName>Delivery</StyledPriceName>
-          <StyledPrice>$15</StyledPrice>
+          <StyledPrice>
+            <PriceOption price={15} />
+          </StyledPrice>
         </StyledPriceGroup>
         <StyledPriceGroup total="true">
           <StyledPriceName>Order total</StyledPriceName>
-          <StyledPrice>${price + 15}</StyledPrice>
+          <StyledPrice>
+            <PriceOption price={price + 15} />
+          </StyledPrice>
         </StyledPriceGroup>
       </StyledInnerWrapper>
     </StyledWrapper>

@@ -13,6 +13,8 @@ export const getSingleProduct = ({ products }) => products.singleProduct;
 export const getRequest = ({ products }) => products.request;
 export const getCart = ({ products }) => products.cart;
 export const getTotalPrice = ({ products }) => products.totalPrice;
+export const getCurrency = ({ products }) => products.currency;
+export const getExchangeRate = ({ products }) => products.exchangeRate;
 
 /* ACTIONS */
 
@@ -31,6 +33,8 @@ export const RESET_CART = createActionName('RESET_CART');
 export const SET_CART = createActionName('SET_CART');
 export const CALCULATE_PRICE = createActionName('CALCULATE_PRICE');
 export const SORT_OPTIONS = createActionName('SORT_OPTIONS');
+export const CURRENCY_CHANGE = createActionName('CURRENCY_CHANGE');
+export const CURRENCY_RATE_SET = createActionName('CURRENCY_RATE_SET');
 
 /* ACTION CREATORS */
 
@@ -48,6 +52,8 @@ export const resetCart = () => ({ type: RESET_CART });
 export const setCart = payload => ({ payload, type: SET_CART });
 export const calculatePrice = () => ({ type: CALCULATE_PRICE });
 export const sortOptions = payload => ({ payload, type: SORT_OPTIONS });
+export const currencyChange = payload => ({ payload, type: CURRENCY_CHANGE });
+export const currencyRateSet = payload => ({ payload, type: CURRENCY_RATE_SET });
 export const getProductsSort = ({ products }) => {
   const sortProducts = [...products.data].sort((a, b) => {
     if (a[products.key] > b[products.key]) return products.direction === 'asc' ? 1 : -1;
@@ -68,6 +74,8 @@ const initialState = {
   },
   singleProduct: [],
   key: '',
+  currency: 'USD',
+  exchangeRate: '',
   direction: '',
   amount: 0,
   cart: [],
@@ -184,6 +192,16 @@ export default function reducer(statePart = initialState, action = {}) {
         key: action.payload.key,
         direction: action.payload.direction,
       };
+    case CURRENCY_CHANGE:
+      return {
+        ...statePart,
+        currency: action.payload,
+      };
+    case CURRENCY_RATE_SET:
+      return {
+        ...statePart,
+        exchangeRate: action.payload,
+      };
     case RESET_REQUEST:
       return {
         ...statePart,
@@ -215,6 +233,19 @@ export const loadProductsByCategoryRequest = category => {
     try {
       const res = await axios.get(`${BASE_URL}${API_URL}/products/category/${category}`);
       dispatch(loadProducts(res.data));
+      dispatch(endRequest());
+    } catch (e) {
+      dispatch(errorRequest(e.message));
+    }
+  };
+};
+
+export const loadCurrencyRates = () => {
+  return async dispatch => {
+    dispatch(startRequest());
+    try {
+      const res = await axios.get(`https://api.exchangeratesapi.io/latest?base=USD`);
+      dispatch(currencyRateSet(res.data.rates.PLN));
       dispatch(endRequest());
     } catch (e) {
       dispatch(errorRequest(e.message));

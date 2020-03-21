@@ -14,6 +14,7 @@ import Button from 'components/common/Button/Button';
 import Fade from 'react-reveal/Fade';
 import Heading from 'components/common/Heading/Heading';
 import Price from 'components/common/Price/Price';
+import PriceOption from 'utils/PriceOption';
 import PropTypes from 'prop-types';
 import Spinner from 'components/common/Spinner/Spinner';
 import { connect } from 'react-redux';
@@ -97,7 +98,9 @@ const SingleProduct = ({
         <StyledWrapper>
           <Heading>{product[0].name}</Heading>
           <StyledImage src={product[0].img} />
-          <Price big="true">${product[0].price}</Price>
+          <Price big="true">
+            <PriceOption price={product[0].price} />
+          </Price>
           {IsItemInCart(product[0].id)}
           {modal && <AddToCartModal />}
           <StyledDescription>{product[0].desc}</StyledDescription>
