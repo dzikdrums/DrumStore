@@ -14,22 +14,19 @@ import { media } from 'utils';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.nav`
-  height: 100px;
+  height: 120px;
   min-width: 330px;
   display: flex;
   background-color: white;
   flex-direction: column;
   justify-content: center;
-  padding: 10px 30px 2px;
+  padding: 0px 30px;
   position: fixed;
-  max-width: 900px;
   width: 100%;
-  top: 0;
+  top: 40px;
   z-index: 1;
-
-  ${media.tablet`
-    max-width: 850px;
-  `};
+  border-bottom: solid 1px #d1d1d1;
+  max-width: 850px;
 
   ${media.desktop`
     max-width: 900px;
@@ -42,7 +39,7 @@ const IconsInnerWrapper = styled.div`
   align-items: center;
   height: 100%;
   justify-content: space-between;
-  padding-top: 10px;
+  padding: 10px 0;
   max-width: 1000px;
 `;
 
@@ -100,10 +97,14 @@ const StyledLabel = styled.div`
 
 const Navbar = ({ cart, setCart, currencyChange }) => {
   const storage = JSON.parse(localStorage.getItem('cart')) || [];
+  const currency = localStorage.getItem('currency');
 
   useEffect(() => {
     if (storage) {
       setCart(storage);
+    }
+    if (currency) {
+      currencyChange(currency);
     }
   }, []);
 
@@ -128,11 +129,14 @@ const Navbar = ({ cart, setCart, currencyChange }) => {
     },
   ];
 
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [selectedOption, setSelectedOption] = useState(
+    currency === 'USD' ? options[0] : options[1],
+  );
 
   const handleChange = selectedOption => {
     setSelectedOption(selectedOption);
     currencyChange(selectedOption.value);
+    window.localStorage.setItem('currency', selectedOption.value);
   };
 
   localStorage.setItem('cart', JSON.stringify(cart));
