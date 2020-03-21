@@ -1,5 +1,6 @@
 import Fade from 'react-reveal/Fade';
 import Price from 'components/common/Price/Price';
+import PriceOption from 'utils/PriceOption';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { history as historyPropTypes } from 'history-prop-types';
@@ -92,7 +93,9 @@ const ProductCard = ({ id, img, name, desc, price, history }) => {
           <StyledDescriptionWrapper>
             <StyledDescription>{desc}</StyledDescription>
           </StyledDescriptionWrapper>
-          <Price>${price}</Price>
+          <Price>
+            <PriceOption price={price} />
+          </Price>
         </StyledInnerWrapper>
       </Fade>
     </StyledWrapper>

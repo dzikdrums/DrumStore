@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {
+  getCurrency,
+  getExchangeRate,
   getProductsSort,
   getRequest,
+  loadCurrencyRates,
   loadProductsByCategoryRequest,
   sortOptions,
 } from 'redux/productsRedux';
@@ -31,19 +34,30 @@ const StyledSelect = styled(Select)`
   `}
 `;
 
-const Products = ({ category, products, request, loadProductsByCategoryRequest, sortOptions }) => {
+const Products = ({
+  category,
+  products,
+  request,
+  loadProductsByCategoryRequest,
+  sortOptions,
+  currency,
+  loadCurrencyRates,
+  exchangeRate,
+}) => {
   useEffect(() => {
     loadProductsByCategoryRequest(category);
+    loadCurrencyRates();
   }, []);
 
   const options = [
+    { value: { key: '', direction: '' }, label: 'Newest' },
     { value: { key: 'price', direction: 'desc' }, label: 'Highest price' },
     { value: { key: 'price', direction: 'asc' }, label: 'Lowest price' },
     { value: { key: 'name', direction: 'desc' }, label: 'Name desc' },
     { value: { key: 'name', direction: 'asc' }, label: 'Name asc' },
   ];
 
-  const [selectedOption, setSelectedOption] = useState('sort');
+  const [selectedOption, setSelectedOption] = useState({ label: 'Newest' });
 
   const sortHandler = ({ value: { key, direction } }) => {
     sortOptions({ key, direction });
@@ -54,16 +68,24 @@ const Products = ({ category, products, request, loadProductsByCategoryRequest, 
     sortHandler(selectedOption);
   };
 
+  const customStyles = {
+    option: provided => ({
+      ...provided,
+    }),
+  };
+
   if (request.pending === false && request.success === true && products.length > 0)
     return (
       <div>
         <StyledSelect
           placeholder="Sort"
-          value={selectedOption}
+          value={{ label: selectedOption.label }}
           onChange={handleChange}
+          styles={customStyles}
           options={options}
+          isSearchable={false}
         />
-        <ProductsList products={products} />
+        <ProductsList rate={exchangeRate} currency={currency} products={products} />
       </div>
     );
   return (
@@ -76,11 +98,14 @@ const Products = ({ category, products, request, loadProductsByCategoryRequest, 
 const mapStateToProps = state => ({
   products: getProductsSort(state),
   request: getRequest(state),
+  currency: getCurrency(state),
+  exchangeRate: getExchangeRate(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   loadProductsByCategoryRequest: category => dispatch(loadProductsByCategoryRequest(category)),
   sortOptions: ({ key, direction }) => dispatch(sortOptions({ key, direction })),
+  loadCurrencyRates: () => dispatch(loadCurrencyRates()),
 });
 
 Products.propTypes = {
@@ -95,12 +120,15 @@ Products.propTypes = {
   ),
   category: PropTypes.string.isRequired,
   loadProductsByCategoryRequest: PropTypes.func.isRequired,
+  loadCurrencyRates: PropTypes.func.isRequired,
   request: PropTypes.shape({
     pending: PropTypes.bool.isRequired,
     error: PropTypes.bool,
     success: PropTypes.bool,
   }),
+  currency: PropTypes.string.isRequired,
   sortOptions: PropTypes.func.isRequired,
+  exchangeRate: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
