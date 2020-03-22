@@ -9,6 +9,7 @@ const Heading = styled.h2`
   text-align: center;
   margin: 0 auto;
   padding: 20px 0;
+  color: #403636;
 
   ${media.tablet`
     font-size: 2.2rem;

@@ -22,6 +22,7 @@ import QtyCounter from 'components/features/Cart/QtyCounter';
 import { connect } from 'react-redux';
 import { media } from 'utils';
 import styled from 'styled-components';
+import trash from 'assets/trash.svg';
 
 const StyledWrapper = styled.div`
   margin: 0 auto;
@@ -41,7 +42,7 @@ const StyledInnerWrapper = styled.div`
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
 
   ${media.desktop`
-    width: 60%;
+    width: 70%;
   `};
 `;
 
@@ -62,6 +63,7 @@ const StyledProductTitle = styled.h3`
   font-size: 1.6rem;
   padding: 0 0 5px;
   margin: 0 0 10px;
+  font-weight: 400;
 
   ${media.tablet`
     font-size: 1.8rem;
@@ -85,24 +87,19 @@ const StyledButton = styled(Button)`
   margin: 15px 0 20px auto;
 `;
 
-const RemoveButton = styled.button`
-  font-size: 2.4rem;
+const RemoveButton = styled.img`
   position: absolute;
-  padding: none;
-  margin: none;
-  top: 0;
-  font-weight: 400;
-  right: 0;
-  color: #e2231a;
-  border: none;
-  outline: none;
-  background-color: transparent;
-  transition: all 300ms ease-in;
+  top: 3px;
+  right: 3px;
+  width: 20px;
+  height: 20px;
 
-  :hover {
-    background-color: black;
-    color: white;
-  }
+  ${media.tablet`
+  top: 10px;
+  right: 10px;
+    width: 25px;
+    height: 25px;
+  `};
 `;
 
 const Cart = ({
@@ -157,13 +154,13 @@ const Cart = ({
         {cart.length !== 0 ? (
           cart.map(item => (
             <StyledInnerWrapper key={item.id}>
-              <RemoveButton onClick={() => handleDeleteProduct(item.id)}>x</RemoveButton>
+              <RemoveButton src={trash} onClick={() => handleDeleteProduct(item.id)} />
               <StyledImageWrapper>
                 <StyledImage src={item.img} />
               </StyledImageWrapper>
               <StyledDescWrapper>
                 <StyledProductTitle>{item.name}</StyledProductTitle>
-                <Price noalign="true">
+                <Price noalign="true" big="true">
                   <PriceOption price={item.price} />
                 </Price>
                 <QtyCounter
