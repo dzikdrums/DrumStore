@@ -2,6 +2,7 @@ import Fade from 'react-reveal/Fade';
 import Price from 'components/common/Price/Price';
 import PriceOption from 'utils/PriceOption';
 import PropTypes from 'prop-types';
+import Rating from 'components/common/Rating/Rating';
 import React from 'react';
 import { history as historyPropTypes } from 'history-prop-types';
 import { media } from 'utils';
@@ -17,6 +18,8 @@ const StyledWrapper = styled.div`
   cursor: pointer;
   transition: 0.1s ease-in-out;
   padding: 0 3px;
+  position: relative;
+  border: 1px #eff0f0 solid;
 
   :hover {
     transform: scale(1.01);
@@ -40,10 +43,11 @@ const StyledImage = styled.img`
 const StyledTitle = styled.h4`
   text-transform: uppercase;
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   padding: 5px 5px 0;
   height: 43px;
   margin: 10px 0 0;
+  line-height: 20px;
 `;
 
 const StyledDescription = styled.p`
@@ -79,13 +83,35 @@ const StyledDescriptionWrapper = styled.div`
   `};
 `;
 
+const StyledNewSpan = styled.span`
+  color: white;
+  background-color: #e2231a;
+  text-transform: uppercase;
+  position: absolute;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  top: 5px;
+  right: 10px;
+  padding: 0 8px;
+  z-index: 2;
+  line-height: 20px;
+  letter-spacing: 1px;
+  font-weight: 300;
+
+  ${media.tablet`
+  top: 10px;
+  right: 20px;
+  `}
+`;
+
 const setRedirect = (id, history) => {
   history.push(`/product/${id}`);
 };
 
-const ProductCard = ({ id, img, name, desc, price, history }) => {
+const ProductCard = ({ id, img, name, desc, price, history, rating }) => {
   return (
     <StyledWrapper onClick={() => setRedirect(id, history)}>
+      <StyledNewSpan>new</StyledNewSpan>
       <Fade>
         <StyledImage src={img} />
         <StyledInnerWrapper>
@@ -93,6 +119,7 @@ const ProductCard = ({ id, img, name, desc, price, history }) => {
           <StyledDescriptionWrapper>
             <StyledDescription>{desc}</StyledDescription>
           </StyledDescriptionWrapper>
+          <Rating rating={rating} />
           <Price>
             <PriceOption price={price} />
           </Price>
@@ -109,6 +136,7 @@ ProductCard.propTypes = {
   price: PropTypes.number,
   desc: PropTypes.string,
   history: PropTypes.shape(historyPropTypes),
+  rating: PropTypes.number,
 };
 
 export default withRouter(ProductCard);

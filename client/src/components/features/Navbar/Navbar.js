@@ -42,7 +42,7 @@ const StyledWrapper = styled.nav`
   ${({ hidden }) =>
     hidden &&
     css`
-      transform: translateY(-50px);
+      transform: translateY(-40px);
     `}
 `;
 
@@ -170,9 +170,13 @@ const Navbar = ({ cart, setCart, currencyChange }) => {
     }),
   };
 
+  const setVisibleNavBar = is => {
+    setVisible(is);
+  };
+
   return (
     <StyledNavTopWrapper>
-      <TopBar setVisible={setVisible} />
+      <TopBar setVisible={setVisibleNavBar} />
       <StyledWrapper hidden={!visible}>
         <IconsInnerWrapper>
           <div>

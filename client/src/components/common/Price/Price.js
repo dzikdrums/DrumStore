@@ -3,10 +3,11 @@ import styled, { css } from 'styled-components';
 import { media } from 'utils';
 
 const Price = styled.h5`
-  font-weight: 500;
+  font-weight: 300;
   text-align: center;
-  margin: 0 0 10px;
+  margin: 5px 0;
   font-size: 1.6rem;
+  color: #e2231a;
 
   ${media.tablet`
     font-size: 2rem;
