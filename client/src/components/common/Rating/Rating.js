@@ -36,14 +36,16 @@ const StyledStar = styled.img`
 `;
 
 const Rating = ({ rating }) => {
+  console.log(rating);
   const RenderStars = rating => {
     const ratingFloored = Math.floor(rating);
     const starsCompilation = [];
 
-    for (let i = 0; i < ratingFloored; i + 1) {
+    for (let i = 0; i < ratingFloored; i += 1) {
       starsCompilation.push(<StyledStar key={`fill${i}`} fillRed src={Star} />);
+      console.log(i);
     }
-    for (let i = 0; i < 5 - ratingFloored; i + 1) {
+    for (let i = 0; i < 5 - ratingFloored; i += 1) {
       starsCompilation.push(<StyledStar key={`nofill${i}`} src={Star} />);
     }
 
