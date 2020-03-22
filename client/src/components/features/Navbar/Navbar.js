@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { currencyChange, getCart, setCart } from 'redux/productsRedux';
+import styled, { css } from 'styled-components';
 
 import CartIcon from 'components/common/CartIcon/CartIcon';
 import Link from 'components/common/Link/Link';
@@ -8,10 +9,15 @@ import { NavLink } from 'react-router-dom';
 import PLNflag from 'assets/PLNflag.png';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import TopBar from 'components/features/TopBar/TopBar';
 import USDflag from 'assets/USDflag.png';
 import { connect } from 'react-redux';
 import { media } from 'utils';
-import styled from 'styled-components';
+
+const StyledNavTopWrapper = styled.div`
+  background-color: white;
+  z-index: 9999;
+`;
 
 const StyledWrapper = styled.nav`
   height: 120px;
@@ -20,17 +26,24 @@ const StyledWrapper = styled.nav`
   background-color: white;
   flex-direction: column;
   justify-content: center;
-  padding: 0px 30px;
+  padding: 0px 20px;
   position: fixed;
   width: 100%;
   top: 40px;
   z-index: 1;
   border-bottom: solid 1px #d1d1d1;
   max-width: 850px;
+  transition: transform 0.3s;
 
   ${media.desktop`
     max-width: 900px;
   `};
+
+  ${({ hidden }) =>
+    hidden &&
+    css`
+      transform: translateY(-50px);
+    `}
 `;
 
 const IconsInnerWrapper = styled.div`
@@ -103,9 +116,6 @@ const Navbar = ({ cart, setCart, currencyChange }) => {
     if (storage) {
       setCart(storage);
     }
-    if (currency) {
-      currencyChange(currency);
-    }
   }, []);
 
   const options = [
@@ -132,6 +142,7 @@ const Navbar = ({ cart, setCart, currencyChange }) => {
   const [selectedOption, setSelectedOption] = useState(
     currency === 'USD' ? options[0] : options[1],
   );
+  const [visible, setVisible] = useState(true);
 
   const handleChange = selectedOption => {
     setSelectedOption(selectedOption);
@@ -160,44 +171,47 @@ const Navbar = ({ cart, setCart, currencyChange }) => {
   };
 
   return (
-    <StyledWrapper>
-      <IconsInnerWrapper>
-        <div>
-          <Link logo="true" to="/">
-            DrumStore
+    <StyledNavTopWrapper>
+      <TopBar setVisible={setVisible} />
+      <StyledWrapper hidden={!visible}>
+        <IconsInnerWrapper>
+          <div>
+            <Link logo="true" to="/">
+              DrumStore
+            </Link>
+          </div>
+          <StyledIconWrapper>
+            <StyledSelect
+              styles={customStyles}
+              value={{ label: selectedOption.label }}
+              onChange={handleChange}
+              options={options}
+              isSearchable={false}
+            />
+            <Link to="/login">
+              <StyledIcon src={Login} />
+            </Link>
+            <NavLink to="/cart">
+              <CartIcon itemsQty={cart.length} />
+            </NavLink>
+          </StyledIconWrapper>
+        </IconsInnerWrapper>
+        <LinksInnerWrapper>
+          <Link exact to="/drums" activeclass="active">
+            drums
           </Link>
-        </div>
-        <StyledIconWrapper>
-          <StyledSelect
-            styles={customStyles}
-            value={{ label: selectedOption.label }}
-            onChange={handleChange}
-            options={options}
-            isSearchable={false}
-          />
-          <Link to="/login">
-            <StyledIcon src={Login} />
+          <Link exact to="/cymbals" activeclass="active">
+            cymbals
           </Link>
-          <NavLink to="/cart">
-            <CartIcon itemsQty={cart.length} />
-          </NavLink>
-        </StyledIconWrapper>
-      </IconsInnerWrapper>
-      <LinksInnerWrapper>
-        <Link exact to="/drums" activeclass="active">
-          drums
-        </Link>
-        <Link exact to="/cymbals" activeclass="active">
-          cymbals
-        </Link>
-        <Link exact to="/contact" activeclass="active">
-          contact
-        </Link>
-        <Link exact to="/about" activeclass="active">
-          about us
-        </Link>
-      </LinksInnerWrapper>
-    </StyledWrapper>
+          <Link exact to="/contact" activeclass="active">
+            contact
+          </Link>
+          <Link exact to="/about" activeclass="active">
+            about us
+          </Link>
+        </LinksInnerWrapper>
+      </StyledWrapper>
+    </StyledNavTopWrapper>
   );
 };
 

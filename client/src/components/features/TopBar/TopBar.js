@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
+
+import PropTypes from 'prop-types';
 import { media } from 'utils';
-import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
   background-color: #efeff0;
@@ -13,10 +15,17 @@ const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
   max-width: 850px;
+  transition: transform 0.3s;
 
   ${media.desktop`
     max-width: 900px;
   `}
+
+  ${({ hidden }) =>
+    hidden &&
+    css`
+      transform: translateY(-50px);
+    `}
 `;
 
 const StyledTitle = styled.span`
@@ -33,12 +42,48 @@ const StyledTitle = styled.span`
   `}
 `;
 
-const TopBar = () => (
-  <StyledWrapper>
-    <StyledTitle>Fast Shipping </StyledTitle>
-    <StyledTitle> • Lifetime Warranty </StyledTitle>
-    <StyledTitle>• 30-day returns</StyledTitle>
-  </StyledWrapper>
-);
+export default class TopBar extends Component {
+  constructor(props) {
+    super(props);
 
-export default TopBar;
+    this.state = {
+      visible: true,
+    };
+  }
+
+  // Adds an event listener when the component is mount.
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  // Remove the event listener when the component is unmount.
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  // Hide or show the menu.
+  handleScroll = () => {
+    const visible = window.pageYOffset === 0;
+    this.setState({
+      visible,
+    });
+  };
+
+  render() {
+    const { setVisible } = this.props;
+    const { visible } = this.state;
+    setVisible(visible);
+
+    return (
+      <StyledWrapper hidden={!visible}>
+        <StyledTitle>Fast Shipping </StyledTitle>
+        <StyledTitle> • Lifetime Warranty </StyledTitle>
+        <StyledTitle>• 30-day returns</StyledTitle>
+      </StyledWrapper>
+    );
+  }
+}
+
+TopBar.propTypes = {
+  setVisible: PropTypes.func.isRequired,
+};

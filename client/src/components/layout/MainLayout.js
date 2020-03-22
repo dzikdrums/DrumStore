@@ -3,7 +3,6 @@ import GlobalStyle from 'theme/GlobalStyle';
 import Navbar from 'components/features/Navbar/Navbar';
 import PropTypes from 'prop-types';
 import React from 'react';
-import TopBar from 'components/features/TopBar/TopBar';
 import { media } from 'utils';
 import styled from 'styled-components';
 
@@ -28,7 +27,6 @@ const MainLayout = ({ children }) => (
   <>
     <GlobalStyle />
     <StyledWrapper>
-      <TopBar />
       <Navbar />
       {children}
       <Footer />
