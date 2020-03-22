@@ -9,7 +9,7 @@ const Product = new Schema({
   price: { type: 'Number', required: true },
   category: { type: 'String', required: true },
   qty: { type: 'Number', required: true },
-  rating: { type: 'Double', required: true },
+  rating: { type: 'Number', required: true },
   desc: { type: 'String' }
 });
 
