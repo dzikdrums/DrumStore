@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { currencyChange, getCart, setCart } from 'redux/productsRedux';
+import styled, { css } from 'styled-components';
 
 import CartIcon from 'components/common/CartIcon/CartIcon';
 import Link from 'components/common/Link/Link';
@@ -8,32 +9,41 @@ import { NavLink } from 'react-router-dom';
 import PLNflag from 'assets/PLNflag.png';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import TopBar from 'components/features/TopBar/TopBar';
 import USDflag from 'assets/USDflag.png';
 import { connect } from 'react-redux';
 import { media } from 'utils';
-import styled from 'styled-components';
+
+const StyledNavTopWrapper = styled.div`
+  background-color: white;
+  z-index: 9999;
+`;
 
 const StyledWrapper = styled.nav`
-  height: 100px;
+  height: 120px;
   min-width: 330px;
   display: flex;
   background-color: white;
   flex-direction: column;
   justify-content: center;
-  padding: 10px 30px 2px;
+  padding: 0px 20px;
   position: fixed;
-  max-width: 900px;
   width: 100%;
-  top: 0;
+  top: 40px;
   z-index: 1;
-
-  ${media.tablet`
-    max-width: 850px;
-  `};
+  border-bottom: solid 1px #d1d1d1;
+  max-width: 850px;
+  transition: transform 0.3s;
 
   ${media.desktop`
     max-width: 900px;
   `};
+
+  ${({ hidden }) =>
+    hidden &&
+    css`
+      transform: translateY(-50px);
+    `}
 `;
 
 const IconsInnerWrapper = styled.div`
@@ -42,7 +52,7 @@ const IconsInnerWrapper = styled.div`
   align-items: center;
   height: 100%;
   justify-content: space-between;
-  padding-top: 10px;
+  padding: 10px 0;
   max-width: 1000px;
 `;
 
@@ -100,6 +110,7 @@ const StyledLabel = styled.div`
 
 const Navbar = ({ cart, setCart, currencyChange }) => {
   const storage = JSON.parse(localStorage.getItem('cart')) || [];
+  const currency = localStorage.getItem('currency');
 
   useEffect(() => {
     if (storage) {
@@ -128,11 +139,15 @@ const Navbar = ({ cart, setCart, currencyChange }) => {
     },
   ];
 
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [selectedOption, setSelectedOption] = useState(
+    currency === 'USD' ? options[0] : options[1],
+  );
+  const [visible, setVisible] = useState(true);
 
   const handleChange = selectedOption => {
     setSelectedOption(selectedOption);
     currencyChange(selectedOption.value);
+    window.localStorage.setItem('currency', selectedOption.value);
   };
 
   localStorage.setItem('cart', JSON.stringify(cart));
@@ -156,44 +171,47 @@ const Navbar = ({ cart, setCart, currencyChange }) => {
   };
 
   return (
-    <StyledWrapper>
-      <IconsInnerWrapper>
-        <div>
-          <Link logo="true" to="/">
-            DrumStore
+    <StyledNavTopWrapper>
+      <TopBar setVisible={setVisible} />
+      <StyledWrapper hidden={!visible}>
+        <IconsInnerWrapper>
+          <div>
+            <Link logo="true" to="/">
+              DrumStore
+            </Link>
+          </div>
+          <StyledIconWrapper>
+            <StyledSelect
+              styles={customStyles}
+              value={{ label: selectedOption.label }}
+              onChange={handleChange}
+              options={options}
+              isSearchable={false}
+            />
+            <Link to="/login">
+              <StyledIcon src={Login} />
+            </Link>
+            <NavLink to="/cart">
+              <CartIcon itemsQty={cart.length} />
+            </NavLink>
+          </StyledIconWrapper>
+        </IconsInnerWrapper>
+        <LinksInnerWrapper>
+          <Link exact to="/drums" activeclass="active">
+            drums
           </Link>
-        </div>
-        <StyledIconWrapper>
-          <StyledSelect
-            styles={customStyles}
-            value={{ label: selectedOption.label }}
-            onChange={handleChange}
-            options={options}
-            isSearchable={false}
-          />
-          <Link to="/login">
-            <StyledIcon src={Login} />
+          <Link exact to="/cymbals" activeclass="active">
+            cymbals
           </Link>
-          <NavLink to="/cart">
-            <CartIcon itemsQty={cart.length} />
-          </NavLink>
-        </StyledIconWrapper>
-      </IconsInnerWrapper>
-      <LinksInnerWrapper>
-        <Link exact to="/drums" activeclass="active">
-          drums
-        </Link>
-        <Link exact to="/cymbals" activeclass="active">
-          cymbals
-        </Link>
-        <Link exact to="/contact" activeclass="active">
-          contact
-        </Link>
-        <Link exact to="/about" activeclass="active">
-          about us
-        </Link>
-      </LinksInnerWrapper>
-    </StyledWrapper>
+          <Link exact to="/contact" activeclass="active">
+            contact
+          </Link>
+          <Link exact to="/about" activeclass="active">
+            about us
+          </Link>
+        </LinksInnerWrapper>
+      </StyledWrapper>
+    </StyledNavTopWrapper>
   );
 };
 

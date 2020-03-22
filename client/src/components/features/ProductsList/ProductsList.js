@@ -30,7 +30,7 @@ ProductsList.propTypes = {
     }),
   ),
   currency: PropTypes.string.isRequired,
-  rate: PropTypes.number.isRequired,
+  rate: PropTypes.string.isRequired,
 };
 
 export default ProductsList;

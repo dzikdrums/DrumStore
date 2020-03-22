@@ -6,7 +6,7 @@ import { exchangeCurrency } from 'utils';
 
 const priceOption = ({ price, getExchangeRate, getCurrency }) => {
   if (getCurrency === 'USD') {
-    return `${price}$`;
+    return `${price} $`;
   }
   return `${exchangeCurrency(price, getExchangeRate)}zł`;
 };
