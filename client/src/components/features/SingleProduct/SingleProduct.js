@@ -16,6 +16,7 @@ import Heading from 'components/common/Heading/Heading';
 import Price from 'components/common/Price/Price';
 import PriceOption from 'utils/PriceOption';
 import PropTypes from 'prop-types';
+import Rating from 'components/common/Rating/Rating';
 import Spinner from 'components/common/Spinner/Spinner';
 import { connect } from 'react-redux';
 import { media } from 'utils';
@@ -98,12 +99,13 @@ const SingleProduct = ({
         <StyledWrapper>
           <Heading>{product[0].name}</Heading>
           <StyledImage src={product[0].img} />
+          <Rating rating={product[0].rating} />
+          <StyledDescription>{product[0].desc}</StyledDescription>
           <Price big="true">
             <PriceOption price={product[0].price} />
           </Price>
           {IsItemInCart(product[0].id)}
           {modal && <AddToCartModal />}
-          <StyledDescription>{product[0].desc}</StyledDescription>
         </StyledWrapper>
       </Fade>
     );
@@ -128,6 +130,7 @@ SingleProduct.propTypes = {
       name: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       desc: PropTypes.string,
+      rating: PropTypes.number.isRequired,
     }),
   ),
   loadSingleProductRequest: PropTypes.func.isRequired,
