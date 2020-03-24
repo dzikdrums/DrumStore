@@ -1,17 +1,23 @@
+import styled, { css } from 'styled-components';
+
 import PropTypes from 'prop-types';
 import React from 'react';
 import { media } from 'utils';
-import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
   width: 100%;
+
+  ${({ mobile }) =>
+    mobile &&
+    css`
+      position: absolute;
+      bottom: 10px;
+      left: 130px;
+    `}
 `;
 
 const StyledInnerWrapper = styled.div`
-  width: 140px;
   margin-bottom: 10px;
-  align-items: center;
-  display: flex;
 `;
 
 const StyledButton = styled.button`
@@ -39,7 +45,7 @@ const StyledInput = styled.input`
 
 const StyledQtyWrapper = styled.div``;
 
-const QtyCounter = ({ product, increaseCounter, decreaseCounter, changeQty }) => {
+const QtyCounter = ({ product, increaseCounter, decreaseCounter, changeQty, mobile }) => {
   const minus = () => {
     decreaseCounter(product.id);
   };
@@ -56,7 +62,7 @@ const QtyCounter = ({ product, increaseCounter, decreaseCounter, changeQty }) =>
   };
 
   return (
-    <StyledWrapper>
+    <StyledWrapper mobile={mobile}>
       <StyledInnerWrapper>
         <StyledQtyWrapper>
           {product.qty > 0 ? (
@@ -87,6 +93,7 @@ QtyCounter.propTypes = {
   increaseCounter: PropTypes.func.isRequired,
   decreaseCounter: PropTypes.func.isRequired,
   changeQty: PropTypes.func.isRequired,
+  mobile: PropTypes.bool.isRequired,
 };
 
 export default QtyCounter;

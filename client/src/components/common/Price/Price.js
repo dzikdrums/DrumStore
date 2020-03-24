@@ -8,6 +8,7 @@ const Price = styled.h5`
   margin: 5px 0;
   font-size: 1.6rem;
   color: #e2231a;
+  white-space: nowrap;
 
   ${media.tablet`
     font-size: 2rem;

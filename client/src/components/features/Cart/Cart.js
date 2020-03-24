@@ -12,18 +12,17 @@ import {
 } from 'redux/productsRedux';
 
 import Button from 'components/common/Button/Button';
+import CartItemMobile from 'components/features/Cart/CartItemMobile';
+import CartItemTablet from 'components/features/Cart/CartItemTablet';
 import CartSummary from 'components/features/Cart/CartSummary';
 import Fade from 'react-reveal/Fade';
 import Heading from 'components/common/Heading/Heading';
 import Modal from 'components/features/Cart/OrderModal';
-import Price from 'components/common/Price/Price';
-import PriceOption from 'utils/PriceOption';
 import PropTypes from 'prop-types';
 import QtyCounter from 'components/features/Cart/QtyCounter';
 import { connect } from 'react-redux';
 import { media } from 'utils';
 import styled from 'styled-components';
-import trash from 'assets/trash.svg';
 
 const StyledWrapper = styled.div`
   min-height: 500px;
@@ -36,15 +35,6 @@ const StyledButtonWrapper = styled.div`
   ${media.desktop`
     width: 80%;
   `};
-`;
-
-const StyledButton = styled(Button)`
-  margin: 15px 0 20px auto;
-`;
-
-const RemoveButton = styled.img`
-  width: 20px;
-  height: 20px;
 `;
 
 const StyledTable = styled.table`
@@ -62,30 +52,13 @@ const StyledHeadings = styled.th`
   border-bottom: 1px solid #ddd;
 `;
 
-const StyledTableBody = styled.th`
-  text-align: left;
+const StyledButton = styled(Button)`
+  margin: 15px 0 20px auto;
+`;
+
+const StyledMobileCartItem = styled.div`
   color: black;
-  font-weight: 400;
-  border-bottom: 1px solid #ddd;
-  padding: 5px 10px;
-  text-transform: uppercase;
-
-  ${media.tablet`
-    max-width: 360px;
-    min-width: 110px;
-    `};
-`;
-
-const StyledImage = styled.img`
-  height: 150px;
-`;
-
-const StyledRemoveButton = styled.button`
-  margin: 0 auto;
-  display: inline-block;
-  width: 110px;
-  background-color: transparent;
-  border: none;
+  position: relative;
 `;
 
 const Cart = ({
@@ -99,9 +72,21 @@ const Cart = ({
   loadCurrencyRates,
   changeQty,
 }) => {
+  const [modal, setModal] = useState(false);
+  const [isMobile, setMobile] = useState(window.innerWidth < 480);
+
+  const handleWindowResize = () => {
+    setMobile(window.innerWidth < 480);
+  };
+
   useEffect(() => {
     loadCurrencyRates();
-  });
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, [isMobile]);
 
   const handleDeleteProduct = id => {
     deleteFromCart(id);
@@ -118,8 +103,6 @@ const Cart = ({
     calculatePrice();
   };
 
-  const [modal, setModal] = useState(false);
-
   const toggleModal = () => {
     setModal(!modal);
     resetCart();
@@ -134,6 +117,38 @@ const Cart = ({
 
   if (cart.length === 0) topFunction();
 
+  if (isMobile) {
+    return (
+      <Fade>
+        <StyledWrapper>
+          {cart.length !== 0 ? (
+            <>
+              <Heading>your cart</Heading>
+              {cart.map(item => (
+                <StyledMobileCartItem>
+                  <CartItemMobile {...item} handleDeleteProduct={handleDeleteProduct} />
+                  <QtyCounter
+                    product={item}
+                    changeQty={changeQty}
+                    decreaseCounter={minusCounter}
+                    increaseCounter={plusCounter}
+                    mobile="true"
+                  />
+                </StyledMobileCartItem>
+              ))}
+              <CartSummary price={price} />
+              <StyledButtonWrapper>
+                <StyledButton onClick={() => toggleModal()}>order</StyledButton>
+              </StyledButtonWrapper>
+            </>
+          ) : (
+            <Heading>Cart is empty</Heading>
+          )}
+          {modal && <Modal />}
+        </StyledWrapper>
+      </Fade>
+    );
+  }
   return (
     <Fade>
       <StyledWrapper>
@@ -141,58 +156,35 @@ const Cart = ({
           <>
             <Heading>your cart</Heading>
             <StyledTable>
-              <tr>
-                <StyledHeadings>product</StyledHeadings>
-                <StyledHeadings>price</StyledHeadings>
-                <StyledHeadings>quantity</StyledHeadings>
-                <StyledHeadings>total</StyledHeadings>
-              </tr>
-              {cart.map(item => (
-                <tr key={item.id}>
-                  <StyledTableBody>
-                    <td>
-                      <StyledImage src={item.img} />
-                    </td>
-                    <td>{item.name}</td>
-                  </StyledTableBody>
-                  <StyledTableBody>
-                    <Price noalign="true" black>
-                      <PriceOption price={item.price} />
-                    </Price>
-                  </StyledTableBody>
-                  <StyledTableBody>
-                    <QtyCounter
-                      product={item}
-                      changeQty={changeQty}
-                      decreaseCounter={minusCounter}
-                      increaseCounter={plusCounter}
-                    />
-                    <StyledRemoveButton>
-                      <RemoveButton src={trash} onClick={() => handleDeleteProduct(item.id)} />
-                    </StyledRemoveButton>
-                  </StyledTableBody>
-                  <StyledTableBody>
-                    <Price noalign="true" big="true">
-                      <PriceOption price={item.price * item.qty} />
-                    </Price>
-                  </StyledTableBody>
+              <thead>
+                <tr>
+                  <StyledHeadings>product</StyledHeadings>
+                  <StyledHeadings>price</StyledHeadings>
+                  <StyledHeadings>quantity</StyledHeadings>
+                  <StyledHeadings>total</StyledHeadings>
                 </tr>
-              ))}
+              </thead>
+              <tbody>
+                {cart.map(item => (
+                  <CartItemTablet
+                    {...item}
+                    plusCounter={plusCounter}
+                    minusCounter={minusCounter}
+                    changeQty={changeQty}
+                  />
+                ))}
+              </tbody>
             </StyledTable>
-          </>
-        ) : (
-          <Heading>Cart is empty</Heading>
-        )}
-        {cart.length !== 0 && (
-          <>
             <CartSummary price={price} />
             <StyledButtonWrapper>
               <StyledButton onClick={() => toggleModal()}>order</StyledButton>
             </StyledButtonWrapper>
           </>
+        ) : (
+          <Heading>Cart is empty</Heading>
         )}
         {modal && <Modal />}
-      </StyledWrapper>{' '}
+      </StyledWrapper>
     </Fade>
   );
 };
