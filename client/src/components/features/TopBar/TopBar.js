@@ -64,7 +64,7 @@ export default class TopBar extends Component {
     window.addEventListener('scroll', this.handleScroll);
     const tl = gsap.timeline();
 
-    tl.to(this.title1, 0.5, { scaleY: 1, ease: 'elastic.out(1, 0.3)' });
+    tl.to(this.title1, 0.5, { scaleY: 1, ease: 'elastic.out(1, 0.3)' }).delay(1);
     tl.to(this.title2, 0.5, { scaleY: 1, ease: 'elastic.out(1, 0.3)' });
     tl.to(this.title3, 0.5, { scaleY: 1, ease: 'elastic.out(1, 0.3)' });
   }
