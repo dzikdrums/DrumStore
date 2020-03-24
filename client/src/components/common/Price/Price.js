@@ -36,6 +36,12 @@ const Price = styled.h5`
     css`
       text-align: left;
     `}
+
+    ${({ black }) =>
+      black &&
+      css`
+        color: black;
+      `}
 `;
 
 export default Price;

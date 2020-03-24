@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   calculatePrice,
+  changeQty,
   deleteFromCart,
   getCart,
   getTotalPrice,
@@ -25,53 +26,7 @@ import styled from 'styled-components';
 import trash from 'assets/trash.svg';
 
 const StyledWrapper = styled.div`
-  margin: 0 auto;
   min-height: 500px;
-  width: 100%;
-  align-items: center;
-`;
-
-const StyledInnerWrapper = styled.div`
-  padding-top: 30px;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: 0 auto;
-  width: 100%;
-  box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
-
-  ${media.desktop`
-    width: 70%;
-  `};
-`;
-
-const StyledImageWrapper = styled.div`
-  width: 58%;
-`;
-
-const StyledImage = styled.img`
-  object-fit: contain;
-  width: 100%;
-`;
-
-const StyledDescWrapper = styled.div`
-  width: 40%;
-`;
-
-const StyledProductTitle = styled.h3`
-  font-size: 1.6rem;
-  padding: 0 0 5px;
-  margin: 0 0 10px;
-  font-weight: 400;
-
-  ${media.tablet`
-    font-size: 1.8rem;
-  `};
-
-  ${media.desktop`
-    font-size: 2.2rem;
-  `};
 `;
 
 const StyledButtonWrapper = styled.div`
@@ -88,18 +43,49 @@ const StyledButton = styled(Button)`
 `;
 
 const RemoveButton = styled.img`
-  position: absolute;
-  top: 3px;
-  right: 3px;
   width: 20px;
   height: 20px;
+`;
+
+const StyledTable = styled.table`
+  width: 95%;
+  margin: 60px auto 0;
+`;
+
+const StyledHeadings = styled.th`
+  text-align: left;
+  letter-spacing: 2px;
+  font-size: 1.6rem;
+  font-weight: 300;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #ddd;
+`;
+
+const StyledTableBody = styled.th`
+  text-align: left;
+  color: black;
+  font-weight: 400;
+  border-bottom: 1px solid #ddd;
+  padding: 5px 10px;
+  text-transform: uppercase;
 
   ${media.tablet`
-  top: 10px;
-  right: 10px;
-    width: 25px;
-    height: 25px;
-  `};
+    max-width: 360px;
+    min-width: 110px;
+    `};
+`;
+
+const StyledImage = styled.img`
+  height: 150px;
+`;
+
+const StyledRemoveButton = styled.button`
+  margin: 0 auto;
+  display: inline-block;
+  width: 110px;
+  background-color: transparent;
+  border: none;
 `;
 
 const Cart = ({
@@ -111,6 +97,7 @@ const Cart = ({
   deleteFromCart,
   calculatePrice,
   loadCurrencyRates,
+  changeQty,
 }) => {
   useEffect(() => {
     loadCurrencyRates();
@@ -150,27 +137,49 @@ const Cart = ({
   return (
     <Fade>
       <StyledWrapper>
-        {cart.length !== 0 && <Heading>your cart</Heading>}
         {cart.length !== 0 ? (
-          cart.map(item => (
-            <StyledInnerWrapper key={item.id}>
-              <RemoveButton src={trash} onClick={() => handleDeleteProduct(item.id)} />
-              <StyledImageWrapper>
-                <StyledImage src={item.img} />
-              </StyledImageWrapper>
-              <StyledDescWrapper>
-                <StyledProductTitle>{item.name}</StyledProductTitle>
-                <Price noalign="true" big="true">
-                  <PriceOption price={item.price} />
-                </Price>
-                <QtyCounter
-                  product={item}
-                  decreaseCounter={minusCounter}
-                  increaseCounter={plusCounter}
-                />
-              </StyledDescWrapper>
-            </StyledInnerWrapper>
-          ))
+          <>
+            <Heading>your cart</Heading>
+            <StyledTable>
+              <tr>
+                <StyledHeadings>product</StyledHeadings>
+                <StyledHeadings>price</StyledHeadings>
+                <StyledHeadings>quantity</StyledHeadings>
+                <StyledHeadings>total</StyledHeadings>
+              </tr>
+              {cart.map(item => (
+                <tr key={item.id}>
+                  <StyledTableBody>
+                    <td>
+                      <StyledImage src={item.img} />
+                    </td>
+                    <td>{item.name}</td>
+                  </StyledTableBody>
+                  <StyledTableBody>
+                    <Price noalign="true" black>
+                      <PriceOption price={item.price} />
+                    </Price>
+                  </StyledTableBody>
+                  <StyledTableBody>
+                    <QtyCounter
+                      product={item}
+                      changeQty={changeQty}
+                      decreaseCounter={minusCounter}
+                      increaseCounter={plusCounter}
+                    />
+                    <StyledRemoveButton>
+                      <RemoveButton src={trash} onClick={() => handleDeleteProduct(item.id)} />
+                    </StyledRemoveButton>
+                  </StyledTableBody>
+                  <StyledTableBody>
+                    <Price noalign="true" big="true">
+                      <PriceOption price={item.price * item.qty} />
+                    </Price>
+                  </StyledTableBody>
+                </tr>
+              ))}
+            </StyledTable>
+          </>
         ) : (
           <Heading>Cart is empty</Heading>
         )}
@@ -206,6 +215,7 @@ Cart.propTypes = {
   calculatePrice: PropTypes.func.isRequired,
   resetCart: PropTypes.func.isRequired,
   loadCurrencyRates: PropTypes.func.isRequired,
+  changeQty: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -220,6 +230,7 @@ const mapDispatchToProps = dispatch => ({
   calculatePrice: () => dispatch(calculatePrice()),
   resetCart: () => dispatch(resetCart()),
   loadCurrencyRates: () => dispatch(loadCurrencyRates()),
+  changeQty: (id, qty) => dispatch(changeQty(id, qty)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

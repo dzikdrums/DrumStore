@@ -6,9 +6,9 @@ import { exchangeCurrency } from 'utils';
 
 const priceOption = ({ price, getExchangeRate, getCurrency }) => {
   if (getCurrency === 'USD') {
-    return `${price} $`;
+    return `${price.toFixed(2)} $`;
   }
-  return `${exchangeCurrency(price, getExchangeRate)}zł`;
+  return `${exchangeCurrency(price, getExchangeRate).toFixed(2)}zł`;
 };
 
 const mapStateToProps = state => ({

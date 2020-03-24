@@ -10,6 +10,7 @@ const Heading = styled.h2`
   margin: 0 auto;
   padding: 20px 0;
   color: #403636;
+  letter-spacing: 1px;
 
   ${media.tablet`
     font-size: 2.2rem;

@@ -29,6 +29,7 @@ export const ADD_TO_CART = createActionName('ADD_TO_CART');
 export const DELETE_FROM_CART = createActionName('DELETE_FROM_CART');
 export const PLUS_QTY = createActionName('PLUS_QTY');
 export const MINUS_QTY = createActionName('MINUS_QTY');
+export const CHANGE_QTY = createActionName('CHANGE_QTY');
 export const RESET_CART = createActionName('RESET_CART');
 export const SET_CART = createActionName('SET_CART');
 export const CALCULATE_PRICE = createActionName('CALCULATE_PRICE');
@@ -48,6 +49,7 @@ export const addToCart = payload => ({ payload, type: ADD_TO_CART });
 export const deleteFromCart = payload => ({ payload, type: DELETE_FROM_CART });
 export const plusQty = id => ({ id, type: PLUS_QTY });
 export const minusQty = id => ({ id, type: MINUS_QTY });
+export const changeQty = (id, qty) => ({ id, qty, type: CHANGE_QTY });
 export const resetCart = () => ({ type: RESET_CART });
 export const setCart = payload => ({ payload, type: SET_CART });
 export const calculatePrice = () => ({ type: CALCULATE_PRICE });
@@ -78,7 +80,31 @@ const initialState = {
   exchangeRate: '',
   direction: '',
   amount: 0,
-  cart: [],
+  cart: [
+    {
+      id: '1234a',
+      tag: 'new',
+      img: '../../../images/prod07.jpg',
+      name: 'Gretsch Tamburina maple',
+      price: 2362.99,
+      category: 'drums',
+      desc:
+        'Great set for beginniners and more advanced players. Full sound with good slap on toms and meaty sounding bass drum. Made with love to drums in mind. Recommended for rock and metal music big times!',
+      qty: 0,
+      rating: 4,
+    },
+    {
+      id: '2234a',
+      tag: 'new',
+      img: '../../../images/prod10.jpg',
+      name: 'Pearl Export MLX series',
+      price: 589.99,
+      category: 'drums',
+      desc:
+        'True beauty in this price range. With great history, made firstly in early 80s in Japan, designed to fit most genres, from jazz, folk music, to metal and really extreme sounds. Great in tuning, and pretty lightweight so really easy to travel with!',
+      qty: 0,
+    },
+  ],
   discount: 1,
   discountCode: 'SDFV86F',
   discountActive: false,
@@ -160,6 +186,14 @@ export default function reducer(statePart = initialState, action = {}) {
       return {
         ...statePart,
         cart: minusCartUpdate,
+      };
+    case CHANGE_QTY:
+      const product = statePart.cart.find(el => el.id === action.id);
+      product.qty = action.qty;
+      const cartUpdate = statePart.cart.map(el => (el.id === action.id ? product : el));
+      return {
+        ...statePart,
+        cart: cartUpdate,
       };
     case RESET_CART:
       return {

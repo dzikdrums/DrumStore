@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import styled, { css } from 'styled-components';
 
 import PropTypes from 'prop-types';
+import { gsap } from 'gsap';
 import { media } from 'utils';
 
 const StyledWrapper = styled.div`
@@ -35,6 +36,8 @@ const StyledTitle = styled.span`
   font-weight: 300;
   white-space: nowrap;
   margin: 0 4px;
+  transform: scaleY(0);
+  transform-origin: bottom;
 
   ${media.tablet`
     font-size: 1.8rem;
@@ -43,6 +46,12 @@ const StyledTitle = styled.span`
 `;
 
 export default class TopBar extends Component {
+  title1 = createRef();
+
+  title2 = createRef();
+
+  title3 = createRef();
+
   constructor(props) {
     super(props);
 
@@ -51,17 +60,19 @@ export default class TopBar extends Component {
     };
   }
 
-  // Adds an event listener when the component is mount.
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
+    const tl = gsap.timeline();
+
+    tl.to(this.title1, 0.5, { scaleY: 1, ease: 'elastic.out(1, 0.3)' });
+    tl.to(this.title2, 0.5, { scaleY: 1, ease: 'elastic.out(1, 0.3)' });
+    tl.to(this.title3, 0.5, { scaleY: 1, ease: 'elastic.out(1, 0.3)' });
   }
 
-  // Remove the event listener when the component is unmount.
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   }
 
-  // Hide or show the menu.
   handleScroll = () => {
     const visible = window.pageYOffset === 0;
     this.setState({
@@ -75,10 +86,34 @@ export default class TopBar extends Component {
     setVisible(visible);
 
     return (
-      <StyledWrapper hidden={!visible}>
-        <StyledTitle>Fast Shipping </StyledTitle>
-        <StyledTitle> • Lifetime Warranty </StyledTitle>
-        <StyledTitle>• 30-day returns</StyledTitle>
+      <StyledWrapper
+        ref={el => {
+          this.bar = el;
+        }}
+        hidden={!visible}
+      >
+        <StyledTitle
+          ref={el => {
+            this.title1 = el;
+          }}
+        >
+          Fast Shipping{' '}
+        </StyledTitle>
+        <StyledTitle
+          ref={el => {
+            this.title2 = el;
+          }}
+        >
+          {' '}
+          • Lifetime Warranty{' '}
+        </StyledTitle>
+        <StyledTitle
+          ref={el => {
+            this.title3 = el;
+          }}
+        >
+          • 30-day returns
+        </StyledTitle>
       </StyledWrapper>
     );
   }

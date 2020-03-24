@@ -10,46 +10,49 @@ const StyledWrapper = styled.div`
 const StyledInnerWrapper = styled.div`
   width: 140px;
   margin-bottom: 10px;
+  align-items: center;
+  display: flex;
 `;
 
 const StyledButton = styled.button`
   background-color: transparent;
   outline: none;
-  border-radius: 5px;
   font-size: 1.6rem;
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   margin: 3px 0;
   cursor: pointer;
-  border: 1px solid black;
-
-  ${media.tablet`
-      width: 30px;
-      height: 30px;
-    `}
+  border: 1px solid #d2d2d4;
 `;
 
-const StyledSpan = styled.span`
-  font-weight: 400;
+const StyledInput = styled.input`
   font-size: 1.6rem;
-  display: inline-block;
   text-align: center;
-  width: 20px;
+  width: 50px;
+  height: 30px;
+  border: 1px solid #d2d2d4;
 
   ${media.tablet`
-    font-size: 2rem;
+    font-size: 1.6rem;
   `}
 `;
 
 const StyledQtyWrapper = styled.div``;
 
-const QtyCounter = ({ product, increaseCounter, decreaseCounter }) => {
+const QtyCounter = ({ product, increaseCounter, decreaseCounter, changeQty }) => {
   const minus = () => {
     decreaseCounter(product.id);
   };
 
   const plus = () => {
     increaseCounter(product.id);
+  };
+
+  const changeProductQty = e => {
+    if (e.target.value) {
+      return changeQty(product.id, parseInt(e.target.value, 10));
+    }
+    return changeQty(product.id, 0);
   };
 
   return (
@@ -63,7 +66,7 @@ const QtyCounter = ({ product, increaseCounter, decreaseCounter }) => {
               -
             </StyledButton>
           )}
-          <StyledSpan>{product.qty}</StyledSpan>
+          <StyledInput onChange={e => changeProductQty(e)} value={product.qty} />
           <StyledButton onClick={() => plus()}>+</StyledButton>
         </StyledQtyWrapper>
       </StyledInnerWrapper>
@@ -83,6 +86,7 @@ QtyCounter.propTypes = {
   }).isRequired,
   increaseCounter: PropTypes.func.isRequired,
   decreaseCounter: PropTypes.func.isRequired,
+  changeQty: PropTypes.func.isRequired,
 };
 
 export default QtyCounter;

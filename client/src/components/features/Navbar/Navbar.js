@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { currencyChange, getCart, setCart } from 'redux/productsRedux';
 import styled, { css } from 'styled-components';
 
@@ -108,15 +108,8 @@ const StyledLabel = styled.div`
   }
 `;
 
-const Navbar = ({ cart, setCart, currencyChange }) => {
-  const storage = JSON.parse(localStorage.getItem('cart')) || [];
+const Navbar = ({ cart, currencyChange }) => {
   const currency = localStorage.getItem('currency');
-
-  useEffect(() => {
-    if (storage) {
-      setCart(storage);
-    }
-  }, []);
 
   const options = [
     {
@@ -162,7 +155,6 @@ const Navbar = ({ cart, setCart, currencyChange }) => {
     control: (base, state) => ({
       ...base,
       border: state.isFocused ? 0 : 0,
-      // This line disable the blue border
       boxShadow: state.isFocused ? 0 : 0,
       '&:hover': {
         border: state.isFocused ? 0 : 0,
@@ -239,7 +231,6 @@ Navbar.propTypes = {
       desc: PropTypes.string.isRequired,
     }),
   ).isRequired,
-  setCart: PropTypes.func.isRequired,
   currencyChange: PropTypes.func.isRequired,
 };
 
