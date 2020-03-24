@@ -35,12 +35,12 @@ const AddToCartModal = () => {
   }
 
   return (
-    <div>
+    <>
       <StyledModal isOpen={isOpen} onBackgroundClick={toggleModal} onEscapeKeydown={toggleModal}>
         <span>Added to cart!</span>
         <Button onClick={toggleModal}>continue shopping</Button>
       </StyledModal>
-    </div>
+    </>
   );
 };
 
