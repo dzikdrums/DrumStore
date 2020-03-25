@@ -37,6 +37,7 @@ export const CALCULATE_PRICE = createActionName('CALCULATE_PRICE');
 export const SORT_OPTIONS = createActionName('SORT_OPTIONS');
 export const CURRENCY_CHANGE = createActionName('CURRENCY_CHANGE');
 export const CURRENCY_RATE_SET = createActionName('CURRENCY_RATE_SET');
+// export const ADD_COMMENT = createActionName('ADD_COMMENT');
 
 /* ACTION CREATORS */
 
@@ -54,6 +55,7 @@ export const changeQty = (id, qty) => ({ id, qty, type: CHANGE_QTY });
 export const resetCart = () => ({ type: RESET_CART });
 export const setCart = payload => ({ payload, type: SET_CART });
 export const calculatePrice = () => ({ type: CALCULATE_PRICE });
+// export const addComment = () => ({ payload, type: ADD_COMMENT })
 export const sortOptions = payload => ({ payload, type: SORT_OPTIONS });
 export const currencyChange = payload => ({ payload, type: CURRENCY_CHANGE });
 export const currencyRateSet = payload => ({ payload, type: CURRENCY_RATE_SET });
@@ -280,6 +282,19 @@ export const loadCurrencyRates = () => {
     dispatch(startRequest());
     try {
       const res = await axios.get(`https://api.exchangeratesapi.io/latest?base=USD`);
+      dispatch(currencyRateSet(res.data.rates.PLN));
+      dispatch(endRequest());
+    } catch (e) {
+      dispatch(errorRequest(e.message));
+    }
+  };
+};
+
+export const addComment = id => {
+  return async dispatch => {
+    dispatch(startRequest());
+    try {
+      const res = await axios.post(`${BASE_URL}${API_URL}/product/${id}`);
       dispatch(currencyRateSet(res.data.rates.PLN));
       dispatch(endRequest());
     } catch (e) {

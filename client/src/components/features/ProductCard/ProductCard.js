@@ -119,7 +119,7 @@ const ProductCard = ({ id, img, name, desc, price, history, comments }) => {
           <StyledDescriptionWrapper>
             <StyledDescription>{desc}</StyledDescription>
           </StyledDescriptionWrapper>
-          <Rating rating={comments} />
+          <Rating alignCenter="true" rating={comments} />
           <Price>
             <PriceOption price={price} />
           </Price>
