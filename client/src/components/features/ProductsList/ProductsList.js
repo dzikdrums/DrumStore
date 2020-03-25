@@ -12,10 +12,16 @@ const StyledWrapper = styled.div`
   margin-bottom: 50px;
 `;
 
-const ProductsList = ({ products, currency, rate }) => (
+const ProductsList = ({ products, currency, rate, comments }) => (
   <StyledWrapper>
     {products.map(product => (
-      <ProductCard currency={currency} rate={rate} key={product.id} {...product} />
+      <ProductCard
+        currency={currency}
+        comments={comments}
+        rate={rate}
+        key={product.id}
+        {...product}
+      />
     ))}
   </StyledWrapper>
 );
@@ -31,6 +37,7 @@ ProductsList.propTypes = {
   ),
   currency: PropTypes.string.isRequired,
   rate: PropTypes.string.isRequired,
+  comments: PropTypes.array.isRequired,
 };
 
 export default ProductsList;

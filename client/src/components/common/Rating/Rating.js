@@ -36,14 +36,21 @@ const StyledStar = styled.img`
 `;
 
 const Rating = ({ rating }) => {
-  const RenderStars = rating => {
-    const ratingFloored = Math.floor(rating);
+  const countRating = rating => {
+    let ratingsSum = 0;
+    for (let i = 0; i < rating.length; i += 1) {
+      ratingsSum += rating[i][0].rating;
+    }
+    return Math.floor(ratingsSum / rating.length);
+  };
+
+  const renderStars = rating => {
     const starsCompilation = [];
 
-    for (let i = 0; i < ratingFloored; i += 1) {
+    for (let i = 0; i < rating; i += 1) {
       starsCompilation.push(<StyledStar key={`fill${i}`} fillRed src={Star} />);
     }
-    for (let i = 0; i < 5 - ratingFloored; i += 1) {
+    for (let i = 0; i < 5 - rating; i += 1) {
       starsCompilation.push(<StyledStar key={`nofill${i}`} src={Star} />);
     }
 
@@ -52,8 +59,8 @@ const Rating = ({ rating }) => {
 
   return (
     <StyledWrapper>
-      <StyledNumber>{rating}</StyledNumber>
-      <StyledStars>{RenderStars(rating)}</StyledStars>
+      <StyledNumber>{countRating(rating)}</StyledNumber>
+      <StyledStars>{renderStars(countRating(rating))}</StyledStars>
     </StyledWrapper>
   );
 };

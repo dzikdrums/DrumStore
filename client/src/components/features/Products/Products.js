@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  getComments,
   getCurrency,
   getExchangeRate,
   getProductsSort,
@@ -46,6 +47,7 @@ const Products = ({
   currency,
   loadCurrencyRates,
   exchangeRate,
+  getComments,
 }) => {
   useEffect(() => {
     loadProductsByCategoryRequest(category);
@@ -88,7 +90,12 @@ const Products = ({
           options={options}
           isSearchable={false}
         />
-        <ProductsList rate={exchangeRate} currency={currency} products={products} />
+        <ProductsList
+          comments={getComments}
+          rate={exchangeRate}
+          currency={currency}
+          products={products}
+        />
       </div>
     );
   return (
@@ -103,6 +110,7 @@ const mapStateToProps = state => ({
   request: getRequest(state),
   currency: getCurrency(state),
   exchangeRate: getExchangeRate(state),
+  comments: getComments(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -132,6 +140,7 @@ Products.propTypes = {
   currency: PropTypes.string.isRequired,
   sortOptions: PropTypes.func.isRequired,
   exchangeRate: PropTypes.number.isRequired,
+  getComments: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

@@ -15,6 +15,7 @@ export const getCart = ({ products }) => products.cart;
 export const getTotalPrice = ({ products }) => products.totalPrice;
 export const getCurrency = ({ products }) => products.currency;
 export const getExchangeRate = ({ products }) => products.exchangeRate;
+export const getComments = ({ products }) => products.comments;
 
 /* ACTIONS */
 
