@@ -47,6 +47,10 @@ const StyledImage = styled.img`
   ${media.tablet`
     width: 60%;
   `};
+
+  ${media.desktop`
+    width: 50%;
+  `};
 `;
 
 const StyledDescription = styled.p`
@@ -109,7 +113,12 @@ const SingleProduct = ({
           </Price>
           {IsItemInCart(product[0].id)}
           {modal && <AddToCartModal />}
-          <Reviews id={product[0].id} img={product[0].img} comments={product[0].comments} />
+          <Reviews
+            id={product[0].id}
+            img={product[0].img}
+            name={product[0].name}
+            comments={product[0].comments}
+          />
         </StyledWrapper>
       </Fade>
     );
@@ -134,7 +143,7 @@ SingleProduct.propTypes = {
       name: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       desc: PropTypes.string,
-      rating: PropTypes.number.isRequired,
+      rating: PropTypes.number,
     }),
   ),
   loadSingleProductRequest: PropTypes.func.isRequired,

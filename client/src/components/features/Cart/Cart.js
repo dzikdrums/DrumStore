@@ -130,8 +130,8 @@ const Cart = ({
                   <QtyCounter
                     product={item}
                     changeQty={changeQty}
-                    decreaseCounter={minusCounter}
-                    increaseCounter={plusCounter}
+                    plusCounter={plusCounter}
+                    minusCounter={minusCounter}
                     mobile="true"
                   />
                 </StyledMobileCartItem>
@@ -167,7 +167,7 @@ const Cart = ({
               <tbody>
                 {cart.map(item => (
                   <CartItemTablet
-                    {...item}
+                    item={item}
                     plusCounter={plusCounter}
                     minusCounter={minusCounter}
                     changeQty={changeQty}

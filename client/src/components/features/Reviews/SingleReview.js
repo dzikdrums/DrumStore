@@ -1,17 +1,21 @@
 import PropTypes from 'prop-types';
 import Rating from 'components/common/Rating/Rating';
 import React from 'react';
+import { media } from 'utils';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
-  width: 100%;
+  width: 90%;
   display: flex;
-  margin: 10px 0;
+  margin: 10px auto;
   text-align: left;
 `;
 
 const StyledImage = styled.img`
   height: 80px;
+  ${media.tablet`
+    height: 100px;
+   `}
 `;
 
 const StyledInnerWrapper = styled.div`
@@ -19,20 +23,30 @@ const StyledInnerWrapper = styled.div`
 `;
 
 const StyledName = styled.h4`
-  color: black;
   margin: 3px 0;
-  font-size: 12px;
+  font-size: 1.2rem;
+
+  ${media.tablet`
+    font-size: 1.8rem;
+  `}
 `;
 
 const StyledReview = styled.p`
-  color: black;
-  font-size: 12px;
+  font-size: 1.2rem;
   margin: 0;
+
+  ${media.tablet`
+    font-size: 1.6rem;
+  `}
 `;
 
 const StyledDate = styled.p`
   color: grey;
-  font-size: 12px;
+  font-size: 1.2rem;
+
+  ${media.tablet`
+    font-size: 1.6rem;
+  `}
 `;
 
 const SingleReview = ({ img, comment }) => {
@@ -53,7 +67,7 @@ const SingleReview = ({ img, comment }) => {
   );
 };
 
-SingleReview.PropTypes = {
+SingleReview.propTypes = {
   img: PropTypes.string.isRequired,
   comment: PropTypes.array.isRequired,
 };

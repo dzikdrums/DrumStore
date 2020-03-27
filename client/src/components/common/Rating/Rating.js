@@ -83,8 +83,8 @@ const Rating = ({ rating, alignCenter }) => {
 };
 
 Rating.propTypes = {
-  rating: PropTypes.number.isRequired,
-  alignCenter: PropTypes.bool.isRequired,
+  rating: PropTypes.oneOfType([PropTypes.number, PropTypes.array]).isRequired,
+  alignCenter: PropTypes.string,
 };
 
 export default Rating;

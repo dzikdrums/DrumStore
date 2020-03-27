@@ -1,6 +1,5 @@
 import { getCurrency, getExchangeRate } from 'redux/productsRedux';
 
-import React from 'react';
 import { connect } from 'react-redux';
 import { exchangeCurrency } from 'utils';
 

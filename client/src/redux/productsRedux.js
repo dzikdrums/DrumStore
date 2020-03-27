@@ -80,7 +80,7 @@ const initialState = {
   singleProduct: [],
   key: '',
   currency: 'USD',
-  exchangeRate: '',
+  exchangeRate: 0,
   direction: '',
   amount: 0,
   cart: [
@@ -290,7 +290,7 @@ export const loadCurrencyRates = () => {
   };
 };
 
-export const addComment = id => {
+export const addComment = (id, newComment) => {
   return async dispatch => {
     dispatch(startRequest());
     try {

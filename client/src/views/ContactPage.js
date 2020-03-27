@@ -3,6 +3,11 @@ import Heading from 'components/common/Heading/Heading';
 import React from 'react';
 import styled from 'styled-components';
 
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const StyledMap = styled.iframe`
   width: 100%;
   max-width: 500px;
@@ -12,7 +17,7 @@ const StyledMap = styled.iframe`
 `;
 
 const ContactPage = () => (
-  <>
+  <StyledWrapper>
     <ContactForm />
     <Heading>Visit us</Heading>
     <StyledMap
@@ -21,7 +26,7 @@ const ContactPage = () => (
       aria-hidden="false"
       tabIndex="0"
     />
-  </>
+  </StyledWrapper>
 );
 
 export default ContactPage;
