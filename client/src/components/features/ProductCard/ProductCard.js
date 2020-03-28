@@ -108,7 +108,7 @@ const setRedirect = (id, history) => {
   history.push(`/product/${id}`);
 };
 
-const ProductCard = ({ id, img, name, desc, price, history, rating }) => {
+const ProductCard = ({ id, img, name, desc, price, history, comments }) => {
   return (
     <StyledWrapper onClick={() => setRedirect(id, history)}>
       <StyledNewSpan>new</StyledNewSpan>
@@ -119,7 +119,7 @@ const ProductCard = ({ id, img, name, desc, price, history, rating }) => {
           <StyledDescriptionWrapper>
             <StyledDescription>{desc}</StyledDescription>
           </StyledDescriptionWrapper>
-          <Rating rating={rating} />
+          <Rating rating={comments} />
           <Price>
             <PriceOption price={price} />
           </Price>
@@ -136,7 +136,7 @@ ProductCard.propTypes = {
   price: PropTypes.number,
   desc: PropTypes.string,
   history: PropTypes.shape(historyPropTypes),
-  rating: PropTypes.number,
+  comments: PropTypes.array,
 };
 
 export default withRouter(ProductCard);
