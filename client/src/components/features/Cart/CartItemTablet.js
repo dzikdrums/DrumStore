@@ -43,37 +43,39 @@ const StyledProductContainer = styled.div`
   align-items: center;
 `;
 
-const CartItemTablet = (item, changeQty, minusCounter, plusCounter, handleDeleteProduct) => (
-  <tr key={item.id}>
-    <StyledTableBody>
-      <StyledProductContainer>
-        <StyledImage src={item.img} />
-        {item.name}
-      </StyledProductContainer>
-    </StyledTableBody>
-    <StyledTableBody>
-      <Price noalign="true" black>
-        <PriceOption price={item.price} />
-      </Price>
-    </StyledTableBody>
-    <StyledTableBody>
-      <QtyCounter
-        product={item}
-        changeQty={changeQty}
-        decreaseCounter={minusCounter}
-        increaseCounter={plusCounter}
-      />
-      <StyledRemoveButton>
-        <RemoveButton src={trash} onClick={() => handleDeleteProduct(item.id)} />
-      </StyledRemoveButton>
-    </StyledTableBody>
-    <StyledTableBody>
-      <Price noalign="true" big="true">
-        <PriceOption price={item.price * item.qty} />
-      </Price>
-    </StyledTableBody>
-  </tr>
-);
+const CartItemTablet = ({ item, changeQty, minusCounter, plusCounter, handleDeleteProduct }) => {
+  return (
+    <tr key={item.id}>
+      <StyledTableBody>
+        <StyledProductContainer>
+          <StyledImage src={item.img} />
+          {item.name}
+        </StyledProductContainer>
+      </StyledTableBody>
+      <StyledTableBody>
+        <Price noalign="true" black>
+          <PriceOption price={item.price} />
+        </Price>
+      </StyledTableBody>
+      <StyledTableBody>
+        <QtyCounter
+          product={item}
+          changeQty={changeQty}
+          minusCounter={minusCounter}
+          plusCounter={plusCounter}
+        />
+        <StyledRemoveButton>
+          <RemoveButton src={trash} onClick={() => handleDeleteProduct(item.id)} />
+        </StyledRemoveButton>
+      </StyledTableBody>
+      <StyledTableBody>
+        <Price noalign="true" big="true">
+          <PriceOption price={item.price * item.qty} />
+        </Price>
+      </StyledTableBody>
+    </tr>
+  );
+};
 
 CartItemTablet.propTypes = {
   item: PropTypes.shape({

@@ -3,6 +3,7 @@ import {
   addToCart,
   calculatePrice,
   getCart,
+  getComments,
   getRequest,
   getSingleProduct,
   loadSingleProductRequest,
@@ -17,11 +18,13 @@ import Price from 'components/common/Price/Price';
 import PriceOption from 'utils/PriceOption';
 import PropTypes from 'prop-types';
 import Rating from 'components/common/Rating/Rating';
+import Reviews from 'components/features/Reviews/Reviews';
 import Spinner from 'components/common/Spinner/Spinner';
 import { connect } from 'react-redux';
 import { media } from 'utils';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
+import { loadCurrencyRates } from '../../../redux/productsRedux';
 
 const StyledWrapper = styled.div`
   padding: 20px;
@@ -45,13 +48,17 @@ const StyledImage = styled.img`
   ${media.tablet`
     width: 60%;
   `};
+
+  ${media.desktop`
+    width: 50%;
+  `};
 `;
 
 const StyledDescription = styled.p`
   font-weight: 300;
   text-align: center;
   margin: 20px auto;
-  width: 60%;
+  width: 80%;
 `;
 
 const SingleProduct = ({
@@ -63,11 +70,13 @@ const SingleProduct = ({
   request,
   product,
   loadSingleProductRequest,
+  loadCurrencyRates,
 }) => {
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
     loadSingleProductRequest(match.params.id);
+    loadCurrencyRates();
   }, []);
 
   const handleAddToCart = () => {
@@ -99,13 +108,19 @@ const SingleProduct = ({
         <StyledWrapper>
           <Heading>{product[0].name}</Heading>
           <StyledImage src={product[0].img} />
-          <Rating rating={product[0].rating} />
+          <Rating alignCenter="true" rating={product[0].comments} />
           <StyledDescription>{product[0].desc}</StyledDescription>
           <Price big="true">
             <PriceOption price={product[0].price} />
           </Price>
           {IsItemInCart(product[0].id)}
           {modal && <AddToCartModal />}
+          <Reviews
+            id={product[0].id}
+            img={product[0].img}
+            name={product[0].name}
+            comments={product[0].comments}
+          />
         </StyledWrapper>
       </Fade>
     );
@@ -130,7 +145,8 @@ SingleProduct.propTypes = {
       name: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       desc: PropTypes.string,
-      rating: PropTypes.number.isRequired,
+      rating: PropTypes.number,
+      comments: PropTypes.array,
     }),
   ),
   loadSingleProductRequest: PropTypes.func.isRequired,
@@ -152,12 +168,14 @@ SingleProduct.propTypes = {
   addToCart: PropTypes.func.isRequired,
   plusQty: PropTypes.func.isRequired,
   calculatePrice: PropTypes.func.isRequired,
+  loadCurrencyRates: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   product: getSingleProduct(state),
   request: getRequest(state),
   cart: getCart(state),
+  comments: getComments(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -165,6 +183,7 @@ const mapDispatchToProps = dispatch => ({
   plusQty: id => dispatch(plusQty(id)),
   calculatePrice: () => dispatch(calculatePrice()),
   loadSingleProductRequest: id => dispatch(loadSingleProductRequest(id)),
+  loadCurrencyRates: () => dispatch(loadCurrencyRates()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SingleProduct));

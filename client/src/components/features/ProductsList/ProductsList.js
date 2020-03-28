@@ -36,8 +36,8 @@ ProductsList.propTypes = {
     }),
   ),
   currency: PropTypes.string.isRequired,
-  rate: PropTypes.string.isRequired,
-  comments: PropTypes.array.isRequired,
+  rate: PropTypes.number.isRequired,
+  comments: PropTypes.array,
 };
 
 export default ProductsList;

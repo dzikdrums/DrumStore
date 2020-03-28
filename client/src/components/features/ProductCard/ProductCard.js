@@ -93,7 +93,7 @@ const StyledNewSpan = styled.span`
   top: 5px;
   right: 10px;
   padding: 0 8px;
-  z-index: 2;
+  z-index: 1;
   line-height: 20px;
   letter-spacing: 1px;
   font-weight: 300;
@@ -119,7 +119,7 @@ const ProductCard = ({ id, img, name, desc, price, history, comments }) => {
           <StyledDescriptionWrapper>
             <StyledDescription>{desc}</StyledDescription>
           </StyledDescriptionWrapper>
-          <Rating rating={comments} />
+          <Rating alignCenter="true" rating={comments} />
           <Price>
             <PriceOption price={price} />
           </Price>

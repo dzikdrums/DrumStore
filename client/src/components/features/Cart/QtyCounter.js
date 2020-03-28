@@ -45,13 +45,13 @@ const StyledInput = styled.input`
 
 const StyledQtyWrapper = styled.div``;
 
-const QtyCounter = ({ product, increaseCounter, decreaseCounter, changeQty, mobile }) => {
+const QtyCounter = ({ product, plusCounter, minusCounter, changeQty, mobile }) => {
   const minus = () => {
-    decreaseCounter(product.id);
+    minusCounter(product.id);
   };
 
   const plus = () => {
-    increaseCounter(product.id);
+    plusCounter(product.id);
   };
 
   const changeProductQty = e => {

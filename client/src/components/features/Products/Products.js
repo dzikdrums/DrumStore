@@ -140,7 +140,7 @@ Products.propTypes = {
   currency: PropTypes.string.isRequired,
   sortOptions: PropTypes.func.isRequired,
   exchangeRate: PropTypes.number.isRequired,
-  getComments: PropTypes.func.isRequired,
+  getComments: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

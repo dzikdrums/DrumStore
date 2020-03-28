@@ -17,7 +17,8 @@ import { media } from 'utils';
 
 const StyledNavTopWrapper = styled.div`
   background-color: white;
-  z-index: 3;
+  position: fixed;
+  z-index: 2;
 `;
 
 const StyledWrapper = styled.nav`
@@ -31,7 +32,6 @@ const StyledWrapper = styled.nav`
   position: fixed;
   width: 100%;
   top: 40px;
-  z-index: 1;
   border-bottom: solid 1px #d1d1d1;
   max-width: 850px;
   transition: transform 0.3s;
@@ -117,12 +117,6 @@ const StyledLabel = styled.div`
 const Navbar = ({ cart, currencyChange }) => {
   const currency = localStorage.getItem('currency');
 
-  let logo = createRef();
-
-  useEffect(() => {
-    gsap.to(logo, 1, { y: 200, ease: Back.easeOut.config(2) });
-  });
-
   const options = [
     {
       value: 'USD',
@@ -148,6 +142,13 @@ const Navbar = ({ cart, currencyChange }) => {
     currency === 'USD' ? options[0] : options[1],
   );
   const [visible, setVisible] = useState(true);
+
+  let logo = createRef();
+
+  useEffect(() => {
+    gsap.to(logo, 1, { y: 200, ease: Back.easeOut.config(2) });
+    currencyChange(selectedOption.value);
+  });
 
   const handleChange = selectedOption => {
     setSelectedOption(selectedOption);

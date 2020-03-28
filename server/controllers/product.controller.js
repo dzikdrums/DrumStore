@@ -19,3 +19,25 @@ exports.getSingleProduct = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
+//delete all products
+
+exports.deleteAllProducts = async (req, res) => {
+  try {
+    res.status(200).json(await Product.remove({}));
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+//add comment to product
+
+exports.addComment = async (req, res) => {
+  try {
+    const product = await Product.find({ id: req.params.id });
+    product[0].comments.push(req.body);
+    const productSaved = await product[0].save();
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};

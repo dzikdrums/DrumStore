@@ -9,8 +9,8 @@ const Product = new Schema({
   price: { type: 'Number', required: true },
   category: { type: 'String', required: true },
   qty: { type: 'Number', required: true },
-  rating: { type: 'Number', required: true },
-  desc: { type: 'String' }
+  desc: { type: 'String', required: true },
+  comments: { type: 'Array', default: [] }
 });
 
 module.exports = mongoose.model('Product', Product);

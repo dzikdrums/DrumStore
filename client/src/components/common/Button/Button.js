@@ -14,6 +14,7 @@ const Button = styled.button`
   text-align: center;
   padding: 15px 20px;
   max-width: 200px;
+  min-width: 150px;
   cursor: pointer;
   margin: 20px auto 15px;
 

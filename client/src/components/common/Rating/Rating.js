@@ -6,9 +6,14 @@ import Star from 'assets/star-solid.svg';
 
 const StyledWrapper = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   margin: 5px 0 3px;
+
+  ${({ alignCenter }) =>
+    alignCenter &&
+    css`
+      justify-content: center;
+    `}
 `;
 
 const StyledNumber = styled.span`
@@ -35,7 +40,7 @@ const StyledStar = styled.img`
     `}
 `;
 
-const Rating = ({ rating }) => {
+const Rating = ({ rating, alignCenter }) => {
   const countRating = rating => {
     let ratingsSum = 0;
     for (let i = 0; i < rating.length; i += 1) {
@@ -57,16 +62,29 @@ const Rating = ({ rating }) => {
     return <>{starsCompilation.map(star => star)}</>;
   };
 
-  return (
-    <StyledWrapper>
-      <StyledNumber>{countRating(rating)}</StyledNumber>
-      <StyledStars>{renderStars(countRating(rating))}</StyledStars>
-    </StyledWrapper>
-  );
+  const oneOrMultipleReviews = rating => {
+    if (rating.length > 1) {
+      return (
+        <>
+          <StyledNumber>{countRating(rating)}</StyledNumber>
+          <StyledStars>{renderStars(countRating(rating))}</StyledStars>
+        </>
+      );
+    }
+    return (
+      <>
+        <StyledNumber>{rating}</StyledNumber>
+        <StyledStars>{renderStars(rating)}</StyledStars>
+      </>
+    );
+  };
+
+  return <StyledWrapper alignCenter={alignCenter}>{oneOrMultipleReviews(rating)}</StyledWrapper>;
 };
 
 Rating.propTypes = {
-  rating: PropTypes.number.isRequired,
+  rating: PropTypes.oneOfType([PropTypes.number, PropTypes.array]).isRequired,
+  alignCenter: PropTypes.string,
 };
 
 export default Rating;
