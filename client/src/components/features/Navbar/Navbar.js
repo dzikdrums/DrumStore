@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { Back, gsap } from 'gsap';
+import React, { createRef, useEffect, useState } from 'react';
 import { currencyChange, getCart, setCart } from 'redux/productsRedux';
 import styled, { css } from 'styled-components';
 
@@ -44,6 +45,11 @@ const StyledWrapper = styled.nav`
     css`
       transform: translateY(-40px);
     `}
+`;
+
+const StyledLogo = styled(Link)`
+  transform: translateY(-200px);
+  display: inline-block;
 `;
 
 const IconsInnerWrapper = styled.div`
@@ -111,6 +117,12 @@ const StyledLabel = styled.div`
 const Navbar = ({ cart, currencyChange }) => {
   const currency = localStorage.getItem('currency');
 
+  let logo = createRef();
+
+  useEffect(() => {
+    gsap.to(logo, 1, { y: 200, ease: Back.easeOut.config(2) });
+  });
+
   const options = [
     {
       value: 'USD',
@@ -171,10 +183,14 @@ const Navbar = ({ cart, currencyChange }) => {
       <TopBar setVisible={setVisibleNavBar} />
       <StyledWrapper hidden={!visible}>
         <IconsInnerWrapper>
-          <div>
-            <Link logo="true" to="/">
+          <div
+            ref={el => {
+              logo = el;
+            }}
+          >
+            <StyledLogo logo="true" to="/">
               DrumStore
-            </Link>
+            </StyledLogo>
           </div>
           <StyledIconWrapper>
             <StyledSelect
