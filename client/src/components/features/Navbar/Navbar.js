@@ -18,7 +18,7 @@ import { media } from 'utils';
 const StyledNavTopWrapper = styled.div`
   background-color: white;
   position: fixed;
-  z-index: 2;
+  z-index: 1;
 `;
 
 const StyledWrapper = styled.nav`
@@ -117,13 +117,6 @@ const StyledLabel = styled.div`
 const Navbar = ({ cart, currencyChange }) => {
   const currency = localStorage.getItem('currency');
 
-  let logo = createRef();
-
-  useEffect(() => {
-    gsap.to(logo, 1, { y: 200, ease: Back.easeOut.config(2) });
-    currencyChange(selectedOption.value);
-  });
-
   const options = [
     {
       value: 'USD',
@@ -149,6 +142,13 @@ const Navbar = ({ cart, currencyChange }) => {
     currency === 'USD' ? options[0] : options[1],
   );
   const [visible, setVisible] = useState(true);
+
+  let logo = createRef();
+
+  useEffect(() => {
+    gsap.to(logo, 1, { y: 200, ease: Back.easeOut.config(2) });
+    currencyChange(selectedOption.value);
+  });
 
   const handleChange = selectedOption => {
     setSelectedOption(selectedOption);
@@ -248,7 +248,6 @@ Navbar.propTypes = {
       desc: PropTypes.string.isRequired,
     }),
   ).isRequired,
-  currency: PropTypes.string.isRequired,
   currencyChange: PropTypes.func.isRequired,
 };
 

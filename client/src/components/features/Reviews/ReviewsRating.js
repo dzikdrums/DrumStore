@@ -44,31 +44,31 @@ const StyledStar = styled.img`
 const ReviewsRating = ({ handleRating }) => {
   const [givenStars, setGivenStars] = useState(0);
 
-  useEffect(() => {}, [givenStars]);
-
   const handleGiveStars = amount => {
     setGivenStars(amount);
   };
 
   const renderStars = rating => {
     const starsCompilation = [];
-    let counter = 0;
+
+    if (rating > 0) rating += 1;
 
     for (let i = 0; i < rating; i += 1) {
       starsCompilation.push(
-        <StyledStar key={counter} onClick={() => handleGiveStars(i)} fillRed src={Star} />,
+        <StyledStar key={i} onClick={() => handleGiveStars(i)} fillRed src={Star} />,
       );
-      counter += 1;
     }
-    for (let i = 0; i < 5 - rating; i += 1) {
-      starsCompilation.push(
-        <StyledStar onClick={() => handleGiveStars(i)} key={counter} src={Star} />,
-      );
-      counter += 1;
+    for (let i = rating; i < 5; i += 1) {
+      starsCompilation.push(<StyledStar onClick={() => handleGiveStars(i)} key={i} src={Star} />);
     }
 
     return <>{starsCompilation.map(star => star)}</>;
   };
+
+  useEffect(() => {
+    renderStars();
+  }, [givenStars]);
+
   handleRating(givenStars);
 
   return (
@@ -81,8 +81,7 @@ const ReviewsRating = ({ handleRating }) => {
 };
 
 ReviewsRating.propTypes = {
-  rating: PropTypes.number,
-  alignCenter: PropTypes.bool,
+  handleRating: PropTypes.func.isRequired,
 };
 
 export default ReviewsRating;

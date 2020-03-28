@@ -13,6 +13,7 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 160px;
+  position: relative;
 
   ${media.tablet`
     max-width: 850px;
@@ -24,7 +25,7 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledDiv = styled.div`
-  z-index: 1;
+  /* z-index: -1; */
 `;
 
 const MainLayout = ({ children }) => (

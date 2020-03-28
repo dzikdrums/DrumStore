@@ -1,41 +1,51 @@
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
 
 import Button from 'components/common/Button/Button';
+import Modal from 'styled-react-modal';
 import PropTypes from 'prop-types';
 import ReviewsRating from 'components/features/Reviews/ReviewsRating';
 import { addComment } from 'redux/productsRedux';
 import arrowLeft from 'assets/arrowLeft.png';
 import { connect } from 'react-redux';
+import { history as historyPropTypes } from 'history-prop-types';
 import { media } from 'utils';
+import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
+
+const StyledModal = Modal.styled`
+  z-index: 9999;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  transition: 600ms cubic-bezier(0.4, 0, 0.2, 1),
+`;
 
 const StyledWrapper = styled.div`
-  visibility: hidden;
-  opacity: 0;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: white;
   padding: 30px 10px;
   border-top: 48px solid #f3f3f3;
-  z-index: 3;
 
-  transition: visibility 600ms cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  ${media.tablet`
+    width: 60%;
+    height: 75%;
+    left: auto;
+    top: auto;
+  `}
 
-  ${({ active }) =>
-    active &&
-    css`
-      opacity: 1;
-      visibility: visible;
-
-      ${media.tablet`
-        visibility: hidden;
-        opacity: 0;
-      `}
-    `}
+  ${media.desktop`
+    width: 40%;
+    height: 75%;
+    left: auto;
+    top: auto;
+  `}
 `;
 
 const StyledQuestion = styled.p`
@@ -43,10 +53,13 @@ const StyledQuestion = styled.p`
   text-align: left;
   font-size: 16px;
   margin: 25px 0;
+
+  ${media.tablet`
+    margin: 0 0 15px;
+  `}
 `;
 
 const StyledInnerWrapper = styled.div`
-  color: black;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -87,15 +100,6 @@ const StyledTextArea = styled.textarea`
   }
 `;
 
-const StyledBackButton = styled.a`
-  height: 20px;
-  color: black;
-  font-size: 1.4rem;
-  position: absolute;
-  top: -30px;
-  left: 25px;
-`;
-
 const StyledInput = styled.input`
   border: 2px solid #d1d1d1;
   margin: 5px 0;
@@ -114,9 +118,10 @@ const StyledArrow = styled.img`
   position: absolute;
   top: -35px;
   left: 12px;
+  z-index: 9999;
 `;
 
-const AddReviewModal = ({ id, img, name, active, addComment }) => {
+const AddReviewModal = ({ id, img, name, addComment, setModal, modal, history }) => {
   const [textArea, setTextArea] = useState('');
   const [nameInput, setNameInput] = useState('');
   const [starsAmount, setStarsAmount] = useState('');
@@ -138,55 +143,67 @@ const AddReviewModal = ({ id, img, name, active, addComment }) => {
   const handleSubmit = event => {
     event.preventDefault();
     const time = new Date().getTime();
-    const date = new Date(time);
+    const date = new Date(time).toISOString();
 
-    const newComment = {
+    const comment = {
       rating: starsAmount,
       comment: textArea,
       name: nameInput,
-      date: date.toISOString,
+      date,
     };
 
-    addComment(id, newComment);
+    addComment({ comment, id });
 
-    console.log(newComment);
+    history.goBack();
   };
 
+  function toggleModal() {
+    setModal(!modal);
+  }
+
   return (
-    <StyledWrapper active={active}>
-      <StyledArrow src={arrowLeft} />
-      <StyledQuestion>What do You think about product?</StyledQuestion>
-      <StyledOuterWrapper>
-        <StyledImage src={img} />
-        <StyledInnerWrapper>
-          <StyledName>{name}</StyledName>
-          <ReviewsRating handleRating={handleRating} />
-        </StyledInnerWrapper>
-      </StyledOuterWrapper>
-      <StyledFewWords>Say a few words about the product.</StyledFewWords>
-      <form onSubmit={handleSubmit}>
-        <StyledTextArea
-          placeholder={placeholder}
-          value={textArea}
-          onChange={e => handleChange('area', e)}
-        />
-        <StyledInput
-          placeholder="enter your name"
-          value={nameInput}
-          onChange={e => handleChange('name', e)}
-        />
-        <Button type="submit">Send</Button>
-      </form>
-    </StyledWrapper>
+    <StyledModal isOpen={modal} onBackgroundClick={toggleModal} onEscapeKeydown={toggleModal}>
+      <StyledWrapper>
+        <StyledArrow src={arrowLeft} onClick={toggleModal} />
+        <StyledQuestion>What do You think about product?</StyledQuestion>
+        <StyledOuterWrapper>
+          <StyledImage src={img} />
+          <StyledInnerWrapper>
+            <StyledName>{name}</StyledName>
+            <ReviewsRating handleRating={handleRating} />
+          </StyledInnerWrapper>
+        </StyledOuterWrapper>
+        <StyledFewWords>Say a few words about the product.</StyledFewWords>
+        <form onSubmit={handleSubmit}>
+          <StyledTextArea
+            placeholder={placeholder}
+            value={textArea}
+            onChange={e => handleChange('area', e)}
+          />
+          <StyledInput
+            placeholder="enter your name"
+            value={nameInput}
+            onChange={e => handleChange('name', e)}
+          />
+          <Button type="submit">Send</Button>
+        </form>
+      </StyledWrapper>
+    </StyledModal>
   );
 };
 
 const mapDispatchToProps = dispatch => ({
-  addComment: payload => dispatch(addComment(payload)),
+  addComment: (id, comment) => dispatch(addComment(id, comment)),
 });
 
 AddReviewModal.propTypes = {
   id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  img: PropTypes.string,
+  addComment: PropTypes.func,
+  setModal: PropTypes.func,
+  modal: PropTypes.bool,
+  history: PropTypes.shape(historyPropTypes),
 };
 
-export default connect(null, mapDispatchToProps)(AddReviewModal);
+export default connect(null, mapDispatchToProps)(withRouter(AddReviewModal));

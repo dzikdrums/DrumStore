@@ -290,12 +290,13 @@ export const loadCurrencyRates = () => {
   };
 };
 
-export const addComment = (id, newComment) => {
+export const addComment = commentId => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      const res = await axios.post(`${BASE_URL}${API_URL}/product/${id}`);
-      dispatch(currencyRateSet(res.data.rates.PLN));
+      const { id } = commentId;
+      const { comment } = commentId;
+      await axios.post(`${BASE_URL}${API_URL}/product/${id}`, comment);
       dispatch(endRequest());
     } catch (e) {
       dispatch(errorRequest(e.message));

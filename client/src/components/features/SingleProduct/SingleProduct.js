@@ -24,6 +24,7 @@ import { connect } from 'react-redux';
 import { media } from 'utils';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
+import { loadCurrencyRates } from '../../../redux/productsRedux';
 
 const StyledWrapper = styled.div`
   padding: 20px;
@@ -69,12 +70,13 @@ const SingleProduct = ({
   request,
   product,
   loadSingleProductRequest,
-  comments,
+  loadCurrencyRates,
 }) => {
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
     loadSingleProductRequest(match.params.id);
+    loadCurrencyRates();
   }, []);
 
   const handleAddToCart = () => {
@@ -144,6 +146,7 @@ SingleProduct.propTypes = {
       price: PropTypes.number.isRequired,
       desc: PropTypes.string,
       rating: PropTypes.number,
+      comments: PropTypes.array,
     }),
   ),
   loadSingleProductRequest: PropTypes.func.isRequired,
@@ -165,6 +168,7 @@ SingleProduct.propTypes = {
   addToCart: PropTypes.func.isRequired,
   plusQty: PropTypes.func.isRequired,
   calculatePrice: PropTypes.func.isRequired,
+  loadCurrencyRates: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -179,6 +183,7 @@ const mapDispatchToProps = dispatch => ({
   plusQty: id => dispatch(plusQty(id)),
   calculatePrice: () => dispatch(calculatePrice()),
   loadSingleProductRequest: id => dispatch(loadSingleProductRequest(id)),
+  loadCurrencyRates: () => dispatch(loadCurrencyRates()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SingleProduct));
