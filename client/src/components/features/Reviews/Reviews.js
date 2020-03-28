@@ -1,10 +1,10 @@
+import { ID, media } from 'utils';
 import React, { useState } from 'react';
 
 import AddReviewModal from 'components/features/Reviews/AddReviewModal';
 import Button from 'components/common/Button/Button';
 import PropTypes from 'prop-types';
 import SingleReview from 'components/features/Reviews/SingleReview';
-import { media } from 'utils';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
@@ -35,7 +35,7 @@ const StyledTitle = styled.h3`
 `;
 
 const Reviews = ({ comments, img, id, name }) => {
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -45,7 +45,7 @@ const Reviews = ({ comments, img, id, name }) => {
     <StyledWrapper>
       <StyledTitle>reviews</StyledTitle>
       {comments.map(comment => (
-        <SingleReview key={name} name={name} img={img} comment={comment} />
+        <SingleReview key={ID} name={name} img={img} comment={comment} />
       ))}
       <Button onClick={() => toggleModal()}>Add Review</Button>
       {modal && <AddReviewModal name={name} modal={modal} setModal={setModal} img={img} id={id} />}

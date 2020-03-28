@@ -18,7 +18,7 @@ import { media } from 'utils';
 const StyledNavTopWrapper = styled.div`
   background-color: white;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
 `;
 
 const StyledWrapper = styled.nav`
