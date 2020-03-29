@@ -67,9 +67,8 @@ const ReviewsRating = ({ handleRating }) => {
 
   useEffect(() => {
     renderStars();
-  }, [givenStars]);
-
-  handleRating(givenStars);
+    handleRating(givenStars);
+  });
 
   return (
     <StyledWrapper alignCenter="true">

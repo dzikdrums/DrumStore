@@ -90,10 +90,10 @@ QtyCounter.propTypes = {
     desc: PropTypes.string.isRequired,
     qty: PropTypes.number.isRequired,
   }).isRequired,
-  increaseCounter: PropTypes.func.isRequired,
-  decreaseCounter: PropTypes.func.isRequired,
+  plusCounter: PropTypes.func,
+  minusCounter: PropTypes.func,
   changeQty: PropTypes.func.isRequired,
-  mobile: PropTypes.bool.isRequired,
+  mobile: PropTypes.string,
 };
 
 export default QtyCounter;

@@ -52,7 +52,7 @@ const Products = ({
   useEffect(() => {
     loadProductsByCategoryRequest(category);
     loadCurrencyRates();
-  }, []);
+  }, [loadProductsByCategoryRequest, category, loadCurrencyRates]);
 
   const options = [
     { value: { key: '', direction: '' }, label: 'Newest' },
