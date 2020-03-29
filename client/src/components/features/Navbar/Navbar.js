@@ -74,7 +74,7 @@ const LinksInnerWrapper = styled.div`
   align-items: center;
   height: 100%;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 0 20px;
   max-width: 1000px;
 `;
 
