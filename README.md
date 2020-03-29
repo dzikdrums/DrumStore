@@ -39,12 +39,14 @@ Products data are in MongoDB Altas Cluster, but you can also see it in `server/t
 Clone project and use command:
 
 ```bash
+cd client
 npm install
 ```
 
 To run app type command and use `port:8000`
 
 ```bash
+cd client
 npm start
 ```
 
