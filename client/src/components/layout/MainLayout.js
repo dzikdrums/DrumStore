@@ -24,16 +24,12 @@ const StyledWrapper = styled.div`
   `};
 `;
 
-const StyledDiv = styled.div`
-  /* z-index: -1; */
-`;
-
 const MainLayout = ({ children }) => (
   <>
     <GlobalStyle />
     <StyledWrapper>
       <Navbar />
-      <StyledDiv>{children}</StyledDiv>
+      {children}
       <Footer />
     </StyledWrapper>
   </>

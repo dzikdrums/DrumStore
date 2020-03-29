@@ -23,6 +23,7 @@ import QtyCounter from 'components/features/Cart/QtyCounter';
 import { connect } from 'react-redux';
 import { media } from 'utils';
 import styled from 'styled-components';
+import uniqid from 'uniqid';
 
 const StyledWrapper = styled.div`
   min-height: 500px;
@@ -86,7 +87,7 @@ const Cart = ({
     return () => {
       window.removeEventListener('resize', handleWindowResize);
     };
-  }, [isMobile]);
+  });
 
   const handleDeleteProduct = id => {
     deleteFromCart(id);
@@ -125,7 +126,7 @@ const Cart = ({
             <>
               <Heading>your cart</Heading>
               {cart.map(item => (
-                <StyledMobileCartItem>
+                <StyledMobileCartItem key={uniqid()}>
                   <CartItemMobile {...item} handleDeleteProduct={handleDeleteProduct} />
                   <QtyCounter
                     product={item}

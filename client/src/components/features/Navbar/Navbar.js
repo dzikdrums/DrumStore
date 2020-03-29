@@ -21,17 +21,22 @@ const StyledNavTopWrapper = styled.div`
   z-index: 2;
 `;
 
+const StyledTopBar = styled(TopBar)`
+  transition: transform 0.3s;
+  position: fixed;
+  top: 0;
+`;
+
 const StyledWrapper = styled.nav`
-  height: 120px;
+  height: 160px;
   min-width: 330px;
   display: flex;
   background-color: white;
   flex-direction: column;
   justify-content: center;
-  padding: 0px 20px;
   position: fixed;
   width: 100%;
-  top: 40px;
+  top: 0;
   border-bottom: solid 1px #d1d1d1;
   max-width: 850px;
   transition: transform 0.3s;
@@ -58,7 +63,7 @@ const IconsInnerWrapper = styled.div`
   align-items: center;
   height: 100%;
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 10px 20px;
   max-width: 1000px;
 `;
 
@@ -116,6 +121,7 @@ const StyledLabel = styled.div`
 
 const Navbar = ({ cart, currencyChange }) => {
   const currency = localStorage.getItem('currency');
+  localStorage.setItem('cart', JSON.stringify(cart));
 
   const options = [
     {
@@ -141,13 +147,25 @@ const Navbar = ({ cart, currencyChange }) => {
   const [selectedOption, setSelectedOption] = useState(
     currency === 'USD' ? options[0] : options[1],
   );
+
   const [visible, setVisible] = useState(true);
 
   let logo = createRef();
 
+  const handleScroll = () => {
+    const pageOffset = window.pageYOffset === 0;
+    setVisible(pageOffset);
+  };
+
   useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
     gsap.to(logo, 1, { y: 200, ease: Back.easeOut.config(2) });
     currencyChange(selectedOption.value);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   });
 
   const handleChange = selectedOption => {
@@ -155,8 +173,6 @@ const Navbar = ({ cart, currencyChange }) => {
     currencyChange(selectedOption.value);
     window.localStorage.setItem('currency', selectedOption.value);
   };
-
-  localStorage.setItem('cart', JSON.stringify(cart));
 
   const customStyles = {
     option: provided => ({
@@ -175,14 +191,10 @@ const Navbar = ({ cart, currencyChange }) => {
     }),
   };
 
-  const setVisibleNavBar = is => {
-    setVisible(is);
-  };
-
   return (
     <StyledNavTopWrapper>
-      <TopBar setVisible={setVisibleNavBar} />
       <StyledWrapper hidden={!visible}>
+        <StyledTopBar hidden={!visible} />
         <IconsInnerWrapper>
           <div
             ref={el => {

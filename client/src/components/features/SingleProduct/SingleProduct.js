@@ -77,7 +77,7 @@ const SingleProduct = ({
   useEffect(() => {
     loadSingleProductRequest(match.params.id);
     loadCurrencyRates();
-  }, []);
+  }, [loadSingleProductRequest, match.params.id, loadCurrencyRates]);
 
   const handleAddToCart = () => {
     const itemID = match.params.id;

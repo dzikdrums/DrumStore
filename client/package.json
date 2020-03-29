@@ -31,6 +31,7 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.0.1",
     "styled-react-modal": "^2.0.0",
+    "uniqid": "^5.2.0",
     "yup": "^0.28.1"
   },
   "eslintConfig": {
