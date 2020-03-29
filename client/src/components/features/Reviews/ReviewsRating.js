@@ -65,7 +65,10 @@ const ReviewsRating = ({ handleRating }) => {
     return <>{starsCompilation.map(star => star)}</>;
   };
 
-  useEffect(renderStars, handleRating(givenStars), [renderStars]);
+  useEffect(() => {
+    renderStars();
+    handleRating(givenStars);
+  });
 
   return (
     <StyledWrapper alignCenter="true">
