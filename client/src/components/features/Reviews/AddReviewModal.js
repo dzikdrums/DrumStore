@@ -5,7 +5,6 @@ import Modal from 'styled-react-modal';
 import PropTypes from 'prop-types';
 import ReviewsRating from 'components/features/Reviews/ReviewsRating';
 import arrowLeft from 'assets/arrowLeft.png';
-import { history as historyPropTypes } from 'history-prop-types';
 import { media } from 'utils';
 import styled from 'styled-components';
 
@@ -93,7 +92,7 @@ const StyledArrow = styled.img`
   z-index: 9999;
 `;
 
-const AddReviewModal = ({ id, img, name, setModal, modal, history }) => {
+const AddReviewModal = ({ id, img, name, setModal, modal }) => {
   const [starsAmount, setStarsAmount] = useState('');
 
   const handleRating = stars => {
@@ -127,10 +126,8 @@ AddReviewModal.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   img: PropTypes.string,
-  addComment: PropTypes.func,
   setModal: PropTypes.func,
   modal: PropTypes.bool,
-  history: PropTypes.shape(historyPropTypes),
 };
 
 export default AddReviewModal;

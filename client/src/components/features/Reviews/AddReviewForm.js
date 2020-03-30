@@ -1,14 +1,14 @@
 import * as Yup from 'yup';
 
 import { Form, Formik } from 'formik';
-import React, { useState } from 'react';
 
 import Button from 'components/common/Button/Button';
-// import OrderModal from 'components/features/Cart/OrderModal';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { addComment } from 'redux/productsRedux';
 import { connect } from 'react-redux';
+import { history as historyPropTypes } from 'history-prop-types';
 import styled from 'styled-components';
-// import { history as historyPropTypes } from 'history-prop-types';
 import { withRouter } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
@@ -67,8 +67,6 @@ const StyledInputWrapper = styled.div`
 `;
 
 const AddReviewForm = ({ id, stars, addComment, history }) => {
-  // const [modal, setModal] = useState(false);
-
   const ReviewSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, 'Too Short!')
@@ -90,8 +88,7 @@ const AddReviewForm = ({ id, stars, addComment, history }) => {
       date,
     };
     addComment({ comment, id });
-    // setModal(!modal);
-    history.goBack();
+    history.go('/');
   };
 
   return (
@@ -134,7 +131,6 @@ const AddReviewForm = ({ id, stars, addComment, history }) => {
           </StyledForm>
         )}
       </Formik>
-      {/* {modal && <OrderModal />} */}
     </StyledWrapper>
   );
 };
@@ -142,5 +138,12 @@ const AddReviewForm = ({ id, stars, addComment, history }) => {
 const mapDispatchToProps = dispatch => ({
   addComment: (id, comment) => dispatch(addComment(id, comment)),
 });
+
+AddReviewForm.propTypes = {
+  id: PropTypes.string,
+  stars: PropTypes.number,
+  addComment: PropTypes.func,
+  history: PropTypes.shape(historyPropTypes),
+};
 
 export default connect(null, mapDispatchToProps)(withRouter(AddReviewForm));
