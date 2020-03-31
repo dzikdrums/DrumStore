@@ -24,8 +24,7 @@ app.use(passport.session());
 
 /* IMPORT ROUTES */
 const productRoutes = require('./routes/product.routes');
-const authRoutes = require('./routes/auth.routes');
-const profileRoutes = require('./routes/profile.routes');
+const orderRoutes = require('./routes/order.routes');
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
@@ -38,8 +37,7 @@ app.use((req, res, next) => {
 
 /* API ENDPOINTS */
 app.use('/api', productRoutes);
-app.use('/auth', authRoutes);
-app.use('/profile', profileRoutes);
+app.use('/panel', orderRoutes);
 
 /* API ERROR PAGES */
 app.use((req, res) => {
