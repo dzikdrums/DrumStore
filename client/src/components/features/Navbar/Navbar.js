@@ -19,6 +19,7 @@ const StyledNavTopWrapper = styled.div`
   background-color: white;
   position: fixed;
   z-index: 2;
+  width: 100%;
 `;
 
 const StyledTopBar = styled(TopBar)`
@@ -35,11 +36,14 @@ const StyledWrapper = styled.nav`
   flex-direction: column;
   justify-content: center;
   position: fixed;
-  width: 100%;
   top: 0;
   border-bottom: solid 1px #d1d1d1;
   max-width: 850px;
   transition: transform 0.3s;
+
+  ${media.tablet`
+    width: 100%;
+  `}
 
   ${media.desktop`
     max-width: 900px;

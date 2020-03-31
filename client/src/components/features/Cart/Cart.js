@@ -8,7 +8,6 @@ import {
   loadCurrencyRates,
   minusQty,
   plusQty,
-  resetCart,
 } from 'redux/productsRedux';
 
 import Button from 'components/common/Button/Button';
@@ -17,7 +16,7 @@ import CartItemTablet from 'components/features/Cart/CartItemTablet';
 import CartSummary from 'components/features/Cart/CartSummary';
 import Fade from 'react-reveal/Fade';
 import Heading from 'components/common/Heading/Heading';
-import Modal from 'components/features/Cart/OrderModal';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import QtyCounter from 'components/features/Cart/QtyCounter';
 import { connect } from 'react-redux';
@@ -73,7 +72,6 @@ const Cart = ({
   loadCurrencyRates,
   changeQty,
 }) => {
-  const [modal, setModal] = useState(false);
   const [isMobile, setMobile] = useState(window.innerWidth < 480);
 
   const handleWindowResize = () => {
@@ -104,10 +102,7 @@ const Cart = ({
     calculatePrice();
   };
 
-  const toggleModal = () => {
-    setModal(!modal);
-    resetCart();
-    localStorage.clear();
+  const handleCheckout = () => {
     calculatePrice();
   };
 
@@ -139,13 +134,14 @@ const Cart = ({
               ))}
               <CartSummary price={price} />
               <StyledButtonWrapper>
-                <StyledButton onClick={() => toggleModal()}>order</StyledButton>
+                <StyledButton as={NavLink} to="/checkout">
+                  order
+                </StyledButton>
               </StyledButtonWrapper>
             </>
           ) : (
             <Heading>Cart is empty</Heading>
           )}
-          {modal && <Modal />}
         </StyledWrapper>
       </Fade>
     );
@@ -168,6 +164,7 @@ const Cart = ({
               <tbody>
                 {cart.map(item => (
                   <CartItemTablet
+                    key={uniqid()}
                     item={item}
                     plusCounter={plusCounter}
                     minusCounter={minusCounter}
@@ -177,14 +174,15 @@ const Cart = ({
               </tbody>
             </StyledTable>
             <CartSummary price={price} />
-            <StyledButtonWrapper>
-              <StyledButton onClick={() => toggleModal()}>order</StyledButton>
+            <StyledButtonWrapper onClick={handleCheckout}>
+              <StyledButton as={NavLink} to="/checkout">
+                order
+              </StyledButton>
             </StyledButtonWrapper>
           </>
         ) : (
           <Heading>Cart is empty</Heading>
         )}
-        {modal && <Modal />}
       </StyledWrapper>
     </Fade>
   );
@@ -221,7 +219,6 @@ const mapDispatchToProps = dispatch => ({
   minusFromCounter: id => dispatch(minusQty(id)),
   deleteFromCart: id => dispatch(deleteFromCart(id)),
   calculatePrice: () => dispatch(calculatePrice()),
-  resetCart: () => dispatch(resetCart()),
   loadCurrencyRates: () => dispatch(loadCurrencyRates()),
   changeQty: (id, qty) => dispatch(changeQty(id, qty)),
 });
