@@ -6,9 +6,9 @@ import { getCart, getTotalPrice, resetCart, sendOrder } from 'redux/productsRedu
 import styled, { css } from 'styled-components';
 
 import Button from 'components/common/Button/Button';
+import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { connect } from 'react-redux';
-import { media } from 'utils';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -30,29 +30,48 @@ const StyledDetailsWrapper = styled.div`
   border-top: none;
   border-bottom: none;
   padding: 10px 30px;
+  overflow: hidden;
+  transition: max-height 1s cubic-bezier(0.4, 0, 0.2, 1), padding 300ms 800ms;
+  max-height: 3000px;
 
   ${({ detailsFiled }) =>
     detailsFiled &&
     css`
-      display: none;
-      visibility: hidden;
-    `}
+      max-height: 0px;
+      padding: 0 30px;
+    `};
 `;
 
 const StyledPaymentMethodsWrapper = styled.div`
   border: 1px solid #ebebeb;
   border-top: none;
-  padding: 10px 30px;
+  padding: 0 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: max-height 1s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 600ms 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 0;
+  visibility: hidden;
+  overflow: hidden;
 
   ${({ detailsFiled }) =>
     detailsFiled &&
     css`
-      display: none;
-      visibility: hidden;
-    `}
+      max-height: 3000px;
+      padding: 10px 30px;
+      visibility: visible;
+      overflow: visible;
+    `};
+
+  ${({ methodsFiled }) =>
+    methodsFiled &&
+    css`
+      max-height: 0;
+      padding: 0;
+      visibility: visible;
+      overflow: hidden;
+    `};
 `;
 
 const StyledNumber = styled.div`
@@ -137,15 +156,11 @@ const StyledTextArea = styled(StyledInput)`
 `;
 
 const StyledSelect = styled(Select)`
-  padding: 5px 5px 0;
-  width: 115px;
+  padding: 10px 10px 0;
+  width: 200px;
   outline: none;
-  margin: 0 auto;
+  margin: 20px auto;
   font-size: 2rem;
-
-  ${media.tablet`
-    margin: 0;
-  `}
 `;
 
 const StyledButtonLinkWrapper = styled.div`
@@ -238,30 +253,39 @@ const CheckoutForm = ({ sendOrder, cart, price, resetCart }) => {
       .required('Required'),
   });
 
-  const handlePaymendMethod = props => {
-    setSelectedOption(props);
+  const handlePaymendMethod = option => {
+    setSelectedOption(option);
     orderDetails.paymentMethod = selectedOption.value;
     setMethodsFiled(!methodsFiled);
     setHasOrdered(!hasOrdered);
     sendOrder(orderDetails);
   };
 
-  const handleSubmit = ({ postalCode, telephone, paymentMethod }) => {
+  const handleSubmit = ({
+    email,
+    name,
+    surname,
+    company,
+    postalAddress,
+    city,
+    country,
+    postalCode,
+    telephone,
+  }) => {
     const newOrder = {
-      // email,
-      // name,
-      // surname,
-      // company,
-      // postalAddress,
-      // postalCode,
-      // city,
-      // country,
+      email,
+      name,
+      surname,
+      company,
+      postalAddress,
+      postalCode,
+      city,
+      country,
       telephone,
       cart,
       price,
       paymentMethod: selectedOption,
     };
-    console.log(newOrder);
     setOrderDetails(newOrder);
     resetCart();
     localStorage.clear();
@@ -309,11 +333,11 @@ const CheckoutForm = ({ sendOrder, cart, price, resetCart }) => {
             handleSubmit(values);
             setDetailsFiled(!detailsFiled);
           }}
-          // validationSchema={CheckoutSchema}
+          validationSchema={CheckoutSchema}
         >
           {({ errors, touched, values, handleChange, handleBlur }) => (
             <StyledForm>
-              {/* <StyledInputWrapper>
+              <StyledInputWrapper>
                 <StyledInput
                   placeholder="email*"
                   type="text"
@@ -385,7 +409,7 @@ const CheckoutForm = ({ sendOrder, cart, price, resetCart }) => {
                   value={values.city}
                 />
                 {errors.city && touched.city ? <StyledError>{errors.city}</StyledError> : null}
-              </StyledInputWrapper> 
+              </StyledInputWrapper>
               <StyledInputWrapper>
                 <StyledInput
                   placeholder="country*"
@@ -398,7 +422,7 @@ const CheckoutForm = ({ sendOrder, cart, price, resetCart }) => {
                 {errors.country && touched.country ? (
                   <StyledError>{errors.country}</StyledError>
                 ) : null}
-              </StyledInputWrapper> */}
+              </StyledInputWrapper>
               <StyledInputWrapper>
                 <StyledInput
                   placeholder="postal code*"
@@ -438,7 +462,7 @@ const CheckoutForm = ({ sendOrder, cart, price, resetCart }) => {
         </StyledNumber>
         <StyledHeading detailsFiled={methodsFiled}>Payment methods</StyledHeading>
       </StyledHeaderWrapper>
-      <StyledPaymentMethodsWrapper detailsFiled={!detailsFiled || methodsFiled}>
+      <StyledPaymentMethodsWrapper detailsFiled={detailsFiled} methodsFiled={methodsFiled}>
         <StyledSelect
           styles={customStyles}
           value={{ label: selectedOption.label }}
@@ -462,5 +486,12 @@ const mapDispatchToProps = dispatch => ({
   sendOrder: payload => dispatch(sendOrder(payload)),
   resetCart: () => dispatch(resetCart()),
 });
+
+CheckoutForm.propTypes = {
+  cart: PropTypes.array,
+  price: PropTypes.string,
+  resetCart: PropTypes.func,
+  sendOrder: PropTypes.func,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutForm);
