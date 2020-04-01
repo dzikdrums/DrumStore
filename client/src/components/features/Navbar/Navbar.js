@@ -40,10 +40,7 @@ const StyledWrapper = styled.nav`
   border-bottom: solid 1px #d1d1d1;
   max-width: 850px;
   transition: transform 0.3s;
-
-  ${media.tablet`
-    width: 100%;
-  `}
+  width: 100%;
 
   ${media.desktop`
     max-width: 900px;
