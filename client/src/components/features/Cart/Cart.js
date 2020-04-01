@@ -26,6 +26,7 @@ import uniqid from 'uniqid';
 
 const StyledWrapper = styled.div`
   min-height: 500px;
+  width: 100%;
 `;
 
 const StyledButtonWrapper = styled.div`
@@ -38,7 +39,6 @@ const StyledButtonWrapper = styled.div`
 `;
 
 const StyledTable = styled.table`
-  width: 95%;
   margin: 60px auto 0;
 `;
 
@@ -62,7 +62,6 @@ const StyledMobileCartItem = styled.div`
 `;
 
 const Cart = ({
-  resetCart,
   cart,
   price,
   addToCounter,
@@ -85,7 +84,7 @@ const Cart = ({
     return () => {
       window.removeEventListener('resize', handleWindowResize);
     };
-  });
+  }, [isMobile, loadCurrencyRates]);
 
   const handleDeleteProduct = id => {
     deleteFromCart(id);
@@ -169,6 +168,7 @@ const Cart = ({
                     plusCounter={plusCounter}
                     minusCounter={minusCounter}
                     changeQty={changeQty}
+                    handleDeleteProduct={handleDeleteProduct}
                   />
                 ))}
               </tbody>
@@ -204,7 +204,6 @@ Cart.propTypes = {
   ).isRequired,
   price: PropTypes.number.isRequired,
   calculatePrice: PropTypes.func.isRequired,
-  resetCart: PropTypes.func.isRequired,
   loadCurrencyRates: PropTypes.func.isRequired,
   changeQty: PropTypes.func.isRequired,
 };

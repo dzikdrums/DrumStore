@@ -11,7 +11,7 @@ const Price = styled.h5`
   white-space: nowrap;
 
   ${media.tablet`
-    font-size: 2rem;
+    font-size: 1.8rem;
   `};
 
   ${media.desktop`

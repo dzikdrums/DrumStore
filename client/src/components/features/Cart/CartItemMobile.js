@@ -32,6 +32,8 @@ const StyledRemove = styled.button`
   margin-top: 4px;
   font-size: 1rem;
   color: rgba(34, 34, 34, 0.8);
+  border: none;
+  background-color: transparent;
 `;
 
 const CartItemMobile = ({ id, img, name, price, handleDeleteProduct }) => (

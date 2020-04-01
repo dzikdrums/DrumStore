@@ -18,8 +18,7 @@ import { media } from 'utils';
 const StyledNavTopWrapper = styled.div`
   background-color: white;
   position: fixed;
-  z-index: 2;
-  width: 100%;
+  z-index: 3;
 `;
 
 const StyledTopBar = styled(TopBar)`
@@ -40,7 +39,7 @@ const StyledWrapper = styled.nav`
   border-bottom: solid 1px #d1d1d1;
   max-width: 850px;
   transition: transform 0.3s;
-  width: 100%;
+  width: 100vw;
 
   ${media.desktop`
     max-width: 900px;

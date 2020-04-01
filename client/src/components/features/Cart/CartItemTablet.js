@@ -10,6 +10,7 @@ import trash from 'assets/trash.svg';
 const RemoveButton = styled.img`
   width: 20px;
   height: 20px;
+  outline: none;
 `;
 
 const StyledTableBody = styled.td`
@@ -19,6 +20,7 @@ const StyledTableBody = styled.td`
   border-bottom: 1px solid #ddd;
   padding: 5px 10px;
   text-transform: uppercase;
+  width: 100%;
 
   ${media.tablet`
     max-width: 360px;
@@ -27,7 +29,11 @@ const StyledTableBody = styled.td`
 `;
 
 const StyledImage = styled.img`
-  height: 150px;
+  height: 80px;
+
+  ${media.tablet`
+    height: 150px;
+  `}
 `;
 
 const StyledRemoveButton = styled.button`
@@ -41,6 +47,11 @@ const StyledRemoveButton = styled.button`
 const StyledProductContainer = styled.div`
   display: flex;
   align-items: center;
+  font-size: 1.2rem;
+
+  ${media.tablet`
+    font-size: 1.8rem;
+  `}
 `;
 
 const CartItemTablet = ({ item, changeQty, minusCounter, plusCounter, handleDeleteProduct }) => {
@@ -87,6 +98,10 @@ CartItemTablet.propTypes = {
     desc: PropTypes.string.isRequired,
     qty: PropTypes.number.isRequired,
   }).isRequired,
+  changeQty: PropTypes.func.isRequired,
+  minusCounter: PropTypes.func.isRequired,
+  plusCounter: PropTypes.func.isRequired,
+  handleDeleteProduct: PropTypes.func.isRequired,
 };
 
 export default CartItemTablet;

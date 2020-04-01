@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { media } from 'utils';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -37,13 +36,16 @@ const StyledInput = styled.input`
   width: 50px;
   height: 30px;
   border: 1px solid #d2d2d4;
-
-  ${media.tablet`
-    font-size: 1.6rem;
-  `}
+  border-radius: 0;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 `;
 
-const StyledQtyWrapper = styled.div``;
+const StyledQtyWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const QtyCounter = ({ product, plusCounter, minusCounter, changeQty, mobile }) => {
   const minus = () => {

@@ -31,7 +31,7 @@ const StyledSelect = styled(Select)`
   max-width: 300px;
   outline: none;
   margin: 0 auto;
-  z-index: 3;
+  z-index: 2;
 
   ${media.tablet`
     margin: 0;
