@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-
-import AddReviewModal from 'components/features/Reviews/AddReviewModal';
 import Button from 'components/common/Button/Button';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import React from 'react';
 import SingleReview from 'components/features/Reviews/SingleReview';
 import { media } from 'utils';
 import styled from 'styled-components';
@@ -36,20 +35,15 @@ const StyledTitle = styled.h3`
 `;
 
 const Reviews = ({ comments, img, id, name }) => {
-  const [modal, setModal] = useState(false);
-
-  const toggleModal = () => {
-    setModal(!modal);
-  };
-
   return (
     <StyledWrapper>
       <StyledTitle>reviews</StyledTitle>
       {comments.map(comment => (
         <SingleReview key={uniqid()} name={name} img={img} comment={comment} />
       ))}
-      <Button onClick={() => toggleModal()}>Add Review</Button>
-      {modal && <AddReviewModal name={name} modal={modal} setModal={setModal} img={img} id={id} />}
+      <Button as={NavLink} to={`addReview/${id}`}>
+        Add Review
+      </Button>
     </StyledWrapper>
   );
 };

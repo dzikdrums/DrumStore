@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import * as Yup from 'yup';
 
-import AddReviewForm from 'components/features/Reviews/AddReviewForm';
+import { Form, Formik } from 'formik';
+import { NavLink, Redirect, withRouter } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import {
+  addComment,
+  getRequest,
+  getSingleProduct,
+  loadSingleProductRequest,
+} from 'redux/productsRedux';
+
+import Button from 'components/common/Button/Button';
 import Modal from 'styled-react-modal';
 import PropTypes from 'prop-types';
 import ReviewsRating from 'components/features/Reviews/ReviewsRating';
+import Spinner from 'components/common/Spinner/Spinner';
 import arrowLeft from 'assets/arrowLeft.png';
+import { connect } from 'react-redux';
 import { media } from 'utils';
 import styled from 'styled-components';
 
@@ -16,7 +28,28 @@ const StyledModal = Modal.styled`
   justify-content: center;
   flex-direction: column;
   background-color: white;
-  transition: 600ms cubic-bezier(0.4, 0, 0.2, 1),
+`;
+
+const StyledThankYouModal = styled(StyledModal)`
+  height: 60vh;
+  max-width: 600px;
+  padding: 20px;
+`;
+
+const StyledThankYou = styled.h2`
+  font-size: 3rem;
+  margin: 0;
+  text-align: center;
+`;
+
+const CommentAdded = styled.p`
+  font-size: 1.8rem;
+`;
+
+const StyledSpinnerWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 const StyledWrapper = styled.div`
@@ -92,42 +125,216 @@ const StyledArrow = styled.img`
   z-index: 9999;
 `;
 
-const AddReviewModal = ({ id, img, name, setModal, modal }) => {
+const StyledFormikWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 100%;
+`;
+
+const StyledForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledInput = styled.input`
+  border: 2px solid #d1d1d1;
+  margin: 5px 0;
+  padding: 5px;
+  display: block;
+
+  ::placeholder {
+    font-size: 1.4rem;
+    padding: 0;
+  }
+`;
+
+const StyledTextArea = styled(StyledInput)`
+  width: 100%;
+  max-width: 400px;
+  height: 100px;
+  border: 2px solid #d1d1d1;
+  resize: none;
+
+  ::placeholder {
+    font-size: 1.4rem;
+    padding: 5px 0px;
+  }
+`;
+
+const StyledButtonLinkWrapper = styled.div`
+  width: 100%;
+  padding-top: 2vw;
+`;
+
+const StyledError = styled.span`
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: red;
+  margin: 0;
+  padding: 0;
+  position: relative;
+`;
+
+const StyledInputWrapper = styled.div`
+  width: 100%;
+`;
+
+const AddReviewModal = ({ match, addComment, product, loadSingleProductRequest, request }) => {
   const [starsAmount, setStarsAmount] = useState('');
+  const [commentSent, setCommentSent] = useState(false);
+  const [thankForOrder, setThankForOrder] = useState(false);
+  const { id } = match.params;
+
+  useEffect(() => {
+    loadSingleProductRequest(id);
+  }, []);
+
+  const ReviewSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(2, 'Too Short!')
+      .max(80, 'Too Long!')
+      .required('Required'),
+    text: Yup.string()
+      .min(2, 'Too Short!')
+      .max(1000, 'Too Long, only 1000 characters are allowed!')
+      .required('Required'),
+  });
+
+  const handleSubmit = ({ name, text }) => {
+    const time = new Date().getTime();
+    const date = new Date(time).toISOString();
+    const comment = {
+      rating: starsAmount,
+      comment: text,
+      name,
+      date,
+    };
+    addComment({ comment, id });
+    setThankForOrder(!thankForOrder);
+    setTimeout(function() {
+      setCommentSent(!commentSent);
+    }, 3000);
+  };
 
   const handleRating = stars => {
     setStarsAmount(stars);
   };
 
-  function toggleModal() {
-    setModal(!modal);
-  }
-
+  if (request.pending === false && request.success === true && product.length > 0)
+    return (
+      <>
+        <StyledThankYouModal isOpen={thankForOrder}>
+          <StyledThankYou>Thank You for Your opinion!</StyledThankYou>
+          <CommentAdded>Your review has been added!</CommentAdded>
+          {commentSent && <Redirect to="/" />}
+        </StyledThankYouModal>
+        <StyledModal isOpen={!thankForOrder}>
+          <StyledWrapper>
+            <NavLink to={`/product/${match.params.id}`}>
+              <StyledArrow src={arrowLeft} />
+            </NavLink>
+            <StyledQuestion>What do You think about product?</StyledQuestion>
+            <StyledOuterWrapper>
+              <StyledImage src={product[0].img} />
+              <StyledInnerWrapper>
+                <StyledName>{product[0].name}</StyledName>
+                <ReviewsRating handleRating={handleRating} />
+              </StyledInnerWrapper>
+            </StyledOuterWrapper>
+            <StyledFewWords>Say a few words about the product.</StyledFewWords>
+            <StyledFormikWrapper>
+              <Formik
+                initialValues={{ name: '', text: '' }}
+                onSubmit={(values, { resetForm }) => {
+                  handleSubmit(values);
+                  resetForm();
+                }}
+                validationSchema={ReviewSchema}
+              >
+                {({ errors, touched, values, handleChange, handleBlur }) => (
+                  <StyledForm>
+                    <StyledInputWrapper>
+                      <StyledInput
+                        placeholder="enter your name"
+                        type="text"
+                        name="name"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.name}
+                      />
+                      {errors.name && touched.name ? (
+                        <StyledError>{errors.name}</StyledError>
+                      ) : null}
+                    </StyledInputWrapper>
+                    <StyledInputWrapper textarea="true">
+                      <StyledTextArea
+                        placeholder="Please share your thoughts about the product. Was it as You expected?"
+                        name="text"
+                        as="textarea"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.text}
+                      />
+                      {errors.text && touched.text ? (
+                        <StyledError>{errors.text}</StyledError>
+                      ) : null}
+                    </StyledInputWrapper>
+                    <StyledButtonLinkWrapper>
+                      <Button type="submit">submit review</Button>
+                    </StyledButtonLinkWrapper>
+                  </StyledForm>
+                )}
+              </Formik>
+            </StyledFormikWrapper>
+          </StyledWrapper>
+        </StyledModal>
+      </>
+    );
   return (
-    <StyledModal isOpen={modal} onBackgroundClick={toggleModal} onEscapeKeydown={toggleModal}>
-      <StyledWrapper>
-        <StyledArrow src={arrowLeft} onClick={toggleModal} />
-        <StyledQuestion>What do You think about product?</StyledQuestion>
-        <StyledOuterWrapper>
-          <StyledImage src={img} />
-          <StyledInnerWrapper>
-            <StyledName>{name}</StyledName>
-            <ReviewsRating handleRating={handleRating} />
-          </StyledInnerWrapper>
-        </StyledOuterWrapper>
-        <StyledFewWords>Say a few words about the product.</StyledFewWords>
-        <AddReviewForm id={id} stars={starsAmount} />
-      </StyledWrapper>
-    </StyledModal>
+    <StyledSpinnerWrapper>
+      <Spinner />
+    </StyledSpinnerWrapper>
   );
 };
 
+const mapStateToProps = state => ({
+  product: getSingleProduct(state),
+  request: getRequest(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  addComment: (id, comment) => dispatch(addComment(id, comment)),
+  loadSingleProductRequest: id => dispatch(loadSingleProductRequest(id)),
+});
+
 AddReviewModal.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   img: PropTypes.string,
-  setModal: PropTypes.func,
-  modal: PropTypes.bool,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+  addComment: PropTypes.func,
+  product: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      tag: PropTypes.string,
+      img: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      desc: PropTypes.string,
+      rating: PropTypes.number,
+      comments: PropTypes.array,
+    }),
+  ),
+  loadSingleProductRequest: PropTypes.func,
+  request: PropTypes.shape({
+    pending: PropTypes.bool.isRequired,
+    error: PropTypes.bool,
+    success: PropTypes.bool,
+  }),
 };
 
-export default AddReviewModal;
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddReviewModal));

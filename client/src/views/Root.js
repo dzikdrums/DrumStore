@@ -3,6 +3,7 @@ import 'normalize.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import About from 'views/AboutPage';
+import AddReview from 'components/features/Reviews/AddReviewModal';
 import Cart from 'views/CartPage';
 import Checkout from 'views/CheckoutPage';
 import Contact from 'views/ContactPage';
@@ -37,6 +38,7 @@ const Root = () => (
               <Route exact path={routes.about} component={About} />
               <Route exact path={routes.login} component={Login} />
               <Route exact path={routes.checkout} component={Checkout} />
+              <Route exact path={routes.addReview} component={AddReview} />
               <Route exact path={routes.policy} component={Policy} />
               <Route component={NotFound} />
             </Switch>
