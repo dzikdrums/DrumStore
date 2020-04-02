@@ -7,9 +7,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { addComment } from 'redux/productsRedux';
 import { connect } from 'react-redux';
-import { history as historyPropTypes } from 'history-prop-types';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -66,7 +64,7 @@ const StyledInputWrapper = styled.div`
   width: 100%;
 `;
 
-const AddReviewForm = ({ id, stars, addComment, history }) => {
+const AddReviewForm = ({ id, stars, addComment }) => {
   const ReviewSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, 'Too Short!')
@@ -88,7 +86,6 @@ const AddReviewForm = ({ id, stars, addComment, history }) => {
       date,
     };
     addComment({ comment, id });
-    history.go('/');
   };
 
   return (
@@ -143,7 +140,6 @@ AddReviewForm.propTypes = {
   id: PropTypes.string,
   stars: PropTypes.number,
   addComment: PropTypes.func,
-  history: PropTypes.shape(historyPropTypes),
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(AddReviewForm));
+export default connect(null, mapDispatchToProps)(AddReviewForm);

@@ -79,7 +79,9 @@ const Rating = ({ rating, alignCenter }) => {
     );
   };
 
-  return <StyledWrapper alignCenter={alignCenter}>{oneOrMultipleReviews(rating)}</StyledWrapper>;
+  return (
+    <StyledWrapper alignCenter={alignCenter}>{oneOrMultipleReviews(rating || 0)}</StyledWrapper>
+  );
 };
 
 Rating.propTypes = {
