@@ -51,7 +51,7 @@ const ReviewsRating = ({ handleRating }) => {
   const renderStars = rating => {
     const starsCompilation = [];
 
-    if (rating > 0) rating += 1;
+    rating += 1;
 
     for (let i = 0; i < rating; i += 1) {
       starsCompilation.push(
@@ -66,8 +66,7 @@ const ReviewsRating = ({ handleRating }) => {
   };
 
   useEffect(() => {
-    renderStars();
-    handleRating(givenStars);
+    handleRating(givenStars + 1);
   });
 
   return (
