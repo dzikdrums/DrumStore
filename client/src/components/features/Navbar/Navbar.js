@@ -210,7 +210,7 @@ const Navbar = ({ cart, currencyChange }) => {
               styles={customStyles}
               value={{ label: selectedOption.label }}
               onChange={handleChange}
-              options={options}
+              options={selectedOption.value === 'USD' ? options.reverse() : options}
               isSearchable={false}
             />
             <Link to="/login">

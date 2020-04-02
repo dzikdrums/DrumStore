@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
   justify-content: center;
-  padding: 4vw 0 25vw;
+  padding: 4vw 0 60px;
 `;
 
 const YoutubeVideoWrapper = styled.div`
