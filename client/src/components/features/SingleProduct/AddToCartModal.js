@@ -27,6 +27,10 @@ const StyledModal = Modal.styled`
 `}
 `;
 
+const StyledSpan = styled.span`
+  padding: 20px 20px 0;
+`;
+
 const AddToCartModal = () => {
   const [isOpen, setIsOpen] = useState(true);
 
@@ -37,7 +41,7 @@ const AddToCartModal = () => {
   return (
     <>
       <StyledModal isOpen={isOpen} onBackgroundClick={toggleModal} onEscapeKeydown={toggleModal}>
-        <span>Added to cart!</span>
+        <StyledSpan>Added to cart!</StyledSpan>
         <Button onClick={toggleModal}>continue shopping</Button>
       </StyledModal>
     </>
