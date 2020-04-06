@@ -5,6 +5,7 @@ import {
   getExchangeRate,
   getProductsSort,
   getRequest,
+  getSearchValue,
   loadCurrencyRates,
   loadProductsByCategoryRequest,
   sortOptions,
@@ -12,6 +13,7 @@ import {
 
 import ProductsList from 'components/features/ProductsList/ProductsList';
 import PropTypes from 'prop-types';
+import Search from 'components/features/Search/Search';
 import Select from 'react-select';
 import Spinner from 'components/common/Spinner/Spinner';
 import { connect } from 'react-redux';
@@ -26,16 +28,21 @@ const StyledSpinnerWrapper = styled.div`
   min-height: 280px;
 `;
 
-const StyledSelect = styled(Select)`
-  padding: 10px 35px 0;
-  max-width: 300px;
-  outline: none;
-  margin: 0 auto;
-  z-index: 2;
+const StyledInnerWrapper = styled.div`
+  display: flex;
+  align-items: center;
 
   ${media.tablet`
-    margin: 0;
+    justify-content: center;
   `}
+`;
+
+const StyledSelect = styled(Select)`
+  padding: 10px 0 0;
+  width: 200px;
+  outline: none;
+  margin: 0 10px 0 20px;
+  z-index: 2;
 `;
 
 const Products = ({
@@ -48,6 +55,7 @@ const Products = ({
   loadCurrencyRates,
   exchangeRate,
   getComments,
+  searchValue,
 }) => {
   useEffect(() => {
     loadProductsByCategoryRequest(category);
@@ -81,22 +89,26 @@ const Products = ({
 
   if (request.pending === false && request.success === true && products.length > 0)
     return (
-      <div>
-        <StyledSelect
-          placeholder="Sort"
-          value={{ label: selectedOption.label }}
-          onChange={handleChange}
-          styles={customStyles}
-          options={options}
-          isSearchable={false}
-        />
+      <>
+        <StyledInnerWrapper>
+          <Search />
+          <StyledSelect
+            placeholder="Sort"
+            value={{ label: selectedOption.label }}
+            onChange={handleChange}
+            styles={customStyles}
+            options={options}
+            isSearchable={false}
+          />
+        </StyledInnerWrapper>
         <ProductsList
           comments={getComments}
           rate={exchangeRate}
           currency={currency}
           products={products}
+          searchValue={searchValue}
         />
-      </div>
+      </>
     );
   return (
     <StyledSpinnerWrapper>
@@ -111,6 +123,7 @@ const mapStateToProps = state => ({
   currency: getCurrency(state),
   exchangeRate: getExchangeRate(state),
   comments: getComments(state),
+  searchValue: getSearchValue(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -141,6 +154,7 @@ Products.propTypes = {
   sortOptions: PropTypes.func.isRequired,
   exchangeRate: PropTypes.number.isRequired,
   getComments: PropTypes.func,
+  searchValue: PropTypes.string,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
