@@ -12,19 +12,32 @@ const StyledWrapper = styled.div`
   margin-bottom: 50px;
 `;
 
-const ProductsList = ({ products, currency, rate, comments }) => (
-  <StyledWrapper>
-    {products.map(product => (
-      <ProductCard
-        currency={currency}
-        comments={comments}
-        rate={rate}
-        key={product.id}
-        {...product}
-      />
-    ))}
-  </StyledWrapper>
-);
+const ProductsList = ({ products, currency, rate, comments, searchValue }) => {
+  let filteredProducts = [];
+
+  if (searchValue) {
+    filteredProducts = products.filter(product => {
+      const productName = product.name.toLowerCase();
+      return productName.indexOf(searchValue.toLowerCase()) !== -1;
+    });
+  }
+
+  const productList = filteredProducts.length > 0 ? filteredProducts : products;
+
+  return (
+    <StyledWrapper>
+      {productList.map(product => (
+        <ProductCard
+          currency={currency}
+          comments={comments}
+          rate={rate}
+          key={product.id}
+          {...product}
+        />
+      ))}
+    </StyledWrapper>
+  );
+};
 
 ProductsList.propTypes = {
   products: PropTypes.arrayOf(
@@ -38,6 +51,7 @@ ProductsList.propTypes = {
   currency: PropTypes.string.isRequired,
   rate: PropTypes.number.isRequired,
   comments: PropTypes.array,
+  searchValue: PropTypes.string,
 };
 
 export default ProductsList;

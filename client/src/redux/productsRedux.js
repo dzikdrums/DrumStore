@@ -16,6 +16,7 @@ export const getTotalPrice = ({ products }) => products.totalPrice;
 export const getCurrency = ({ products }) => products.currency;
 export const getExchangeRate = ({ products }) => products.exchangeRate;
 export const getComments = ({ products }) => products.comments;
+export const getSearchValue = ({ products }) => products.searchValue;
 
 /* ACTIONS */
 
@@ -37,7 +38,7 @@ export const CALCULATE_PRICE = createActionName('CALCULATE_PRICE');
 export const SORT_OPTIONS = createActionName('SORT_OPTIONS');
 export const CURRENCY_CHANGE = createActionName('CURRENCY_CHANGE');
 export const CURRENCY_RATE_SET = createActionName('CURRENCY_RATE_SET');
-// export const ADD_COMMENT = createActionName('ADD_COMMENT');
+export const SET_SEARCH_VALUE = createActionName('SET_SEARCH_VALUE');
 
 /* ACTION CREATORS */
 
@@ -54,8 +55,8 @@ export const minusQty = id => ({ id, type: MINUS_QTY });
 export const changeQty = (id, qty) => ({ id, qty, type: CHANGE_QTY });
 export const resetCart = () => ({ type: RESET_CART });
 export const setCart = payload => ({ payload, type: SET_CART });
+export const setSearchValue = payload => ({ payload, type: SET_SEARCH_VALUE });
 export const calculatePrice = () => ({ type: CALCULATE_PRICE });
-// export const addComment = () => ({ payload, type: ADD_COMMENT })
 export const sortOptions = payload => ({ payload, type: SORT_OPTIONS });
 export const currencyChange = payload => ({ payload, type: CURRENCY_CHANGE });
 export const currencyRateSet = payload => ({ payload, type: CURRENCY_RATE_SET });
@@ -67,6 +68,15 @@ export const getProductsSort = ({ products }) => {
   });
   return sortProducts;
 };
+// export const getsearchProducts = ({ products }) => {
+//   console.log(products);
+//   const items = [...products.data].filter(data => {
+//     if (products.searchValue === '') return data;
+//     if (data.name.toLowerCase().includes(products.searchValue.toLowerCase())) {
+//       return data;
+//     }
+//   });
+// };
 
 /* INITIAL STATE */
 
@@ -83,6 +93,7 @@ const initialState = {
   exchangeRate: 0,
   direction: '',
   amount: 0,
+  searchValue: '',
   cart: [
     // {
     //   id: '1234a',
@@ -282,6 +293,12 @@ export default function reducer(statePart = initialState, action = {}) {
       return {
         ...statePart,
         cart: action.payload,
+      };
+    case SET_SEARCH_VALUE:
+      console.log(action.payload);
+      return {
+        ...statePart,
+        searchValue: action.payload,
       };
     case CALCULATE_PRICE:
       let roundPrice;

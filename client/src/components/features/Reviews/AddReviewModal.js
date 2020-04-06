@@ -180,7 +180,7 @@ const StyledInputWrapper = styled.div`
   width: 100%;
 `;
 
-const AddReviewModal = ({ match, addComment, product, loadSingleProductRequest, request }) => {
+const AddReviewModal = ({ match, addComment, request, product, loadSingleProductRequest }) => {
   const [starsAmount, setStarsAmount] = useState('');
   const [commentSent, setCommentSent] = useState(false);
   const [thankForOrder, setThankForOrder] = useState(false);
