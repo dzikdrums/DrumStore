@@ -10,6 +10,7 @@ const createActionName = name => `app/${reducerName}/${name}`;
 
 export const getProducts = ({ products }) => products.data;
 export const getSingleProduct = ({ products }) => products.singleProduct;
+export const getSingleProductNameAndImg = ({ products }) => products.singleProductNameImg;
 export const getRequest = ({ products }) => products.request;
 export const getCart = ({ products }) => products.cart;
 export const getTotalPrice = ({ products }) => products.totalPrice;
@@ -22,6 +23,7 @@ export const getSearchValue = ({ products }) => products.searchValue;
 
 export const LOAD_PRODUCTS = createActionName('LOAD_PRODUCTS');
 export const LOAD_SINGLE_PRODUCT = createActionName('LOAD_SINGLE_PRODUCT');
+export const LOAD_SINGLE_PRODUCT_NAME_IMG = createActionName('LOAD_SINGLE_PRODUCT_NAME_IMG');
 export const CHANGE_LOGED = createActionName('CHANGE_LOGED');
 export const START_REQUEST = createActionName('START_REQUEST');
 export const END_REQUEST = createActionName('END_REQUEST');
@@ -44,6 +46,10 @@ export const SET_SEARCH_VALUE = createActionName('SET_SEARCH_VALUE');
 
 export const loadProducts = payload => ({ payload, type: LOAD_PRODUCTS });
 export const loadSingleProduct = payload => ({ payload, type: LOAD_SINGLE_PRODUCT });
+export const loadSingleProductNameImg = payload => ({
+  payload,
+  type: LOAD_SINGLE_PRODUCT_NAME_IMG,
+});
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
 export const errorRequest = error => ({ error, type: ERROR_REQUEST });
@@ -68,15 +74,6 @@ export const getProductsSort = ({ products }) => {
   });
   return sortProducts;
 };
-// export const getsearchProducts = ({ products }) => {
-//   console.log(products);
-//   const items = [...products.data].filter(data => {
-//     if (products.searchValue === '') return data;
-//     if (data.name.toLowerCase().includes(products.searchValue.toLowerCase())) {
-//       return data;
-//     }
-//   });
-// };
 
 /* INITIAL STATE */
 
@@ -88,6 +85,7 @@ const initialState = {
     success: null,
   },
   singleProduct: [],
+  singleProductNameImg: [],
   key: '',
   currency: 'USD',
   exchangeRate: 0,
@@ -214,6 +212,12 @@ export default function reducer(statePart = initialState, action = {}) {
       return {
         ...statePart,
         singleProduct: action.payload,
+      };
+    }
+    case LOAD_SINGLE_PRODUCT_NAME_IMG: {
+      return {
+        ...statePart,
+        singleProductNameImg: action.payload,
       };
     }
     case START_REQUEST: {
@@ -348,6 +352,19 @@ export const loadSingleProductRequest = id => {
     try {
       const res = await axios.get(`${BASE_URL}${API_URL}/product/${id}`);
       dispatch(loadSingleProduct(res.data));
+      dispatch(endRequest());
+    } catch (e) {
+      dispatch(errorRequest(e.message));
+    }
+  };
+};
+
+export const loadSingleProductNameAndImgRequest = id => {
+  return async dispatch => {
+    dispatch(startRequest());
+    try {
+      const res = await axios.get(`${BASE_URL}${API_URL}/product/name&img/${id}`);
+      dispatch(loadSingleProductNameImg(res.data));
       dispatch(endRequest());
     } catch (e) {
       dispatch(errorRequest(e.message));

@@ -6,8 +6,8 @@ import React, { useEffect, useState } from 'react';
 import {
   addComment,
   getRequest,
-  getSingleProduct,
-  loadSingleProductRequest,
+  getSingleProductNameAndImg,
+  loadSingleProductNameAndImgRequest,
 } from 'redux/productsRedux';
 
 import Button from 'components/common/Button/Button';
@@ -180,15 +180,21 @@ const StyledInputWrapper = styled.div`
   width: 100%;
 `;
 
-const AddReviewModal = ({ match, addComment, request, product, loadSingleProductRequest }) => {
+const AddReviewModal = ({
+  match,
+  addComment,
+  request,
+  product,
+  loadSingleProductNameAndImgRequest,
+}) => {
   const [starsAmount, setStarsAmount] = useState('');
   const [commentSent, setCommentSent] = useState(false);
   const [thankForOrder, setThankForOrder] = useState(false);
   const { id } = match.params;
 
   useEffect(() => {
-    loadSingleProductRequest(id);
-  }, [id, loadSingleProductRequest]);
+    loadSingleProductNameAndImgRequest(id);
+  }, [id, loadSingleProductNameAndImgRequest]);
 
   const ReviewSchema = Yup.object().shape({
     name: Yup.string()
@@ -299,13 +305,13 @@ const AddReviewModal = ({ match, addComment, request, product, loadSingleProduct
 };
 
 const mapStateToProps = state => ({
-  product: getSingleProduct(state),
+  product: getSingleProductNameAndImg(state),
   request: getRequest(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   addComment: (id, comment) => dispatch(addComment(id, comment)),
-  loadSingleProductRequest: id => dispatch(loadSingleProductRequest(id)),
+  loadSingleProductNameAndImgRequest: id => dispatch(loadSingleProductNameAndImgRequest(id)),
 });
 
 AddReviewModal.propTypes = {
@@ -329,7 +335,7 @@ AddReviewModal.propTypes = {
       comments: PropTypes.array,
     }),
   ),
-  loadSingleProductRequest: PropTypes.func,
+  loadSingleProductNameAndImgRequest: PropTypes.func,
   request: PropTypes.shape({
     pending: PropTypes.bool.isRequired,
     error: PropTypes.bool,
