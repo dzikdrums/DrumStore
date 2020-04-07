@@ -20,10 +20,10 @@ const StyledIcon = styled.img`
 
 const StyledSpan = styled.span`
   position: absolute;
-  color: black;
   bottom: -5px;
   right: 0;
   font-size: 1.2rem;
+  color: #00c189;
 `;
 
 const CartIcon = ({ itemsQty }) => (

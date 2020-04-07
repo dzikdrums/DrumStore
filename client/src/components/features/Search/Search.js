@@ -33,8 +33,8 @@ const StyledSvg = styled.svg`
 const ICON =
   'M7.4 2.5c-2.7 0-4.9 2.2-4.9 4.9s2.2 4.9 4.9 4.9c1 0 1.8-.2 2.5-.8l3.7 3.7c.2.2.4.3.8.3.7 0 1.1-.4 1.1-1.1 0-.3-.1-.5-.3-.8L11.4 10c.4-.8.8-1.6.8-2.5.1-2.8-2.1-5-4.8-5zm0 1.6c1.8 0 3.2 1.4 3.2 3.2s-1.4 3.2-3.2 3.2-3.3-1.3-3.3-3.1 1.4-3.3 3.3-3.3z';
 
-const Search = ({ setSearchValue }) => {
-  const [value, setValue] = useState('');
+const Search = ({ setSearchValue, id }) => {
+  const [value, setValue] = useState(id || '');
 
   useEffect(() => {
     setSearchValue(value);
@@ -60,6 +60,7 @@ const mapDispatchToProps = dispatch => ({
 
 Search.propTypes = {
   setSearchValue: PropTypes.func,
+  id: PropTypes.string,
 };
 
 export default connect(null, mapDispatchToProps)(Search);

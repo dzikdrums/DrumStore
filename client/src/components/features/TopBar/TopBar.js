@@ -21,10 +21,10 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledTitle = styled.span`
-  color: #e2231a;
+  color: #00c189;
   text-transform: uppercase;
   font-size: 1.2rem;
-  font-weight: 300;
+  font-weight: 400;
   white-space: nowrap;
   margin: 0 4px;
   transform: scaleY(0);

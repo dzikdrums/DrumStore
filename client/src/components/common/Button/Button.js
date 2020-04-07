@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { media } from 'utils';
 
 const Button = styled.button`
-  border: 2px solid black;
+  border: 2px solid #00c189;
   text-decoration: none;
   text-transform: uppercase;
   background-color: white;
@@ -19,7 +19,7 @@ const Button = styled.button`
   margin: 20px auto 15px;
 
   :hover {
-    background-color: black;
+    background-color: #00c189;
     color: white;
   }
 
@@ -29,6 +29,12 @@ const Button = styled.button`
       background-color: black;
       color: white;
       cursor: auto;
+    `};
+
+  ${({ smallLetters }) =>
+    smallLetters &&
+    css`
+      text-transform: none;
     `};
 
   ${media.tablet`
