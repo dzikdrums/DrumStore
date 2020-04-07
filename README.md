@@ -1,6 +1,6 @@
 # OnlineShop-FinalProject
 
-### See [DEMO]##@#\$@)
+### See [DEMO](https://drumstore.netlify.com/)
 
 ### DrumStore App
 

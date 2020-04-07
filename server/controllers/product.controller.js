@@ -37,6 +37,7 @@ exports.addComment = async (req, res) => {
     const product = await Product.find({ id: req.params.id });
     product[0].comments.push(req.body);
     const productSaved = await product[0].save();
+    res.send(productSaved);
   } catch (err) {
     res.status(500).json(err);
   }
