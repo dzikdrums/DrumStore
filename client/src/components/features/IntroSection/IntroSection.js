@@ -25,11 +25,11 @@ const IntroSection = () => (
         based in Buffalo, New York and make everyday efforts to help deliver the best products and
         service to peers just like us, drummers.
       </Paragraph>
-      <StyledButtonWrapper>
-        <Button as={NavLink} to="/about">
-          more about us
-        </Button>
-      </StyledButtonWrapper>
+      <NavLink to="/about">
+        <StyledButtonWrapper>
+          <Button>more about us</Button>
+        </StyledButtonWrapper>
+      </NavLink>
     </Fade>
   </StyledWrapper>
 );

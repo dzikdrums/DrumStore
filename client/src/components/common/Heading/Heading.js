@@ -3,8 +3,7 @@ import styled, { css } from 'styled-components';
 import { media } from 'utils';
 
 const Heading = styled.h2`
-  font-size: 2rem;
-  text-transform: uppercase;
+  font-size: 2.8rem;
   font-weight: 400;
   text-align: center;
   margin: 0 auto;

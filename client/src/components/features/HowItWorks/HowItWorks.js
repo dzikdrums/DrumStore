@@ -1,3 +1,4 @@
+import Fade from 'react-reveal/Fade';
 import React from 'react';
 import { media } from 'utils';
 import step1 from 'assets/step-1.png';
@@ -26,10 +27,10 @@ const StyledSubtitle = styled.h4`
   font-weight: 500;
   margin: 0;
   line-height: 40px;
+  color: #403636;
 `;
 
 const StyledPeriodWrapper = styled.div`
-  color: black;
   display: flex;
   margin-top: 40px;
 
@@ -79,9 +80,6 @@ const StyledSectionName = styled.p`
     border-radius: 2rem;
     transition: all 0.3s ease;
   }
-
-  ::after {
-  }
 `;
 
 const HowItWorks = () => (
@@ -98,36 +96,48 @@ const HowItWorks = () => (
     <div>
       <StyledPeriodWrapper>
         <StyledImageWrapper>
-          <StyledImage src={step1} />
+          <Fade left>
+            <StyledImage src={step1} />
+          </Fade>
         </StyledImageWrapper>
         <StyledStepDescription>
-          <StyledTitle>You order</StyledTitle>
-          <StyledDescription>
-            You build a unique product list suited to Your needs.
-          </StyledDescription>
+          <Fade right>
+            <StyledTitle>You order</StyledTitle>
+            <StyledDescription>
+              You build a unique product list suited to Your needs.
+            </StyledDescription>
+          </Fade>
         </StyledStepDescription>
       </StyledPeriodWrapper>
       <StyledPeriodWrapper>
         <StyledImageWrapper>
-          <StyledImage src={step2} />
+          <Fade left>
+            <StyledImage src={step2} />
+          </Fade>
         </StyledImageWrapper>
         <StyledStepDescription>
-          <StyledTitle>We prepare</StyledTitle>
-          <StyledDescription>
-            Our employees gather products for You, and we inform You on every step of the way.{' '}
-          </StyledDescription>
+          <Fade right>
+            <StyledTitle>We prepare</StyledTitle>
+            <StyledDescription>
+              Our employees gather products for You, and we inform You on every step of the way.{' '}
+            </StyledDescription>
+          </Fade>
         </StyledStepDescription>
       </StyledPeriodWrapper>
       <StyledPeriodWrapper>
         <StyledImageWrapper>
-          <StyledImage src={step3} />
+          <Fade left>
+            <StyledImage src={step3} />
+          </Fade>
         </StyledImageWrapper>
         <StyledStepDescription>
-          <StyledTitle>You receive</StyledTitle>
-          <StyledDescription>
-            You receive Your package almost instantly to given address. Its protected and sealed for
-            safety.{' '}
-          </StyledDescription>
+          <Fade right>
+            <StyledTitle>You receive</StyledTitle>
+            <StyledDescription>
+              You receive Your package almost instantly to given address. Its protected and sealed
+              for safety.{' '}
+            </StyledDescription>
+          </Fade>
         </StyledStepDescription>
       </StyledPeriodWrapper>
     </div>

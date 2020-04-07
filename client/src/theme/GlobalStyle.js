@@ -16,7 +16,11 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-size: 1.6rem;
     font-family: itc-avant-garde-gothic-pro, sans-serif;
-  }
+    }
+
+    a {
+      text-decoration: none;
+    }
 `;
 
 export default GlobalStyle;
