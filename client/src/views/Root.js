@@ -33,7 +33,9 @@ const Root = () => (
               <Route exact path={routes.product} component={SingleProduct} />
               <Route exact path={routes.cart} component={Cart} />
               <Route exact path={routes.contact} component={Contact} />
-              <Route exact path={routes.drums} component={Drums} />
+              <Route path={routes.drumsId} component={Drums} />
+              <Route path={routes.drums} component={Drums} />
+              <Route path={routes.cymbalsId} component={Cymbals} />
               <Route exact path={routes.cymbals} component={Cymbals} />
               <Route exact path={routes.about} component={About} />
               <Route exact path={routes.login} component={Login} />

@@ -102,6 +102,7 @@ const StyledSelect = styled(Select)`
   width: 115px;
   outline: none;
   margin: 0 auto;
+  color: #00c189;
 
   ${media.tablet`
     margin: 0;
@@ -109,11 +110,10 @@ const StyledSelect = styled(Select)`
 `;
 
 const StyledLabel = styled.div`
-  color: black;
   display: flex;
   align-items: center;
   font-size: 1rem;
-
+  color: #00c189;
   span {
     margin-left: 10px;
   }

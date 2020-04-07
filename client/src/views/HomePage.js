@@ -1,13 +1,15 @@
+import Carousel from 'components/features/Carousel/Carousel';
+import HowItWorks from 'components/features/HowItWorks/HowItWorks';
 import IntroSection from 'components/features/IntroSection/IntroSection';
-import ParallaxImage from 'components/features/ParallaxImage/ParallaxImage';
 import React from 'react';
 import YoutubeSection from 'components/features/YoutubeSection/YoutubeSection';
 
 const HomePage = () => {
   return (
     <>
-      <ParallaxImage jon="true" />
+      <Carousel />
       <IntroSection />
+      <HowItWorks />
       <YoutubeSection />
     </>
   );

@@ -295,7 +295,6 @@ export default function reducer(statePart = initialState, action = {}) {
         cart: action.payload,
       };
     case SET_SEARCH_VALUE:
-      console.log(action.payload);
       return {
         ...statePart,
         searchValue: action.payload,

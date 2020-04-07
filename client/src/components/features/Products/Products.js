@@ -19,6 +19,7 @@ import Spinner from 'components/common/Spinner/Spinner';
 import { connect } from 'react-redux';
 import { media } from 'utils';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 const StyledSpinnerWrapper = styled.div`
   width: 100%;
@@ -56,6 +57,7 @@ const Products = ({
   exchangeRate,
   getComments,
   searchValue,
+  match,
 }) => {
   useEffect(() => {
     loadProductsByCategoryRequest(category);
@@ -91,7 +93,7 @@ const Products = ({
     return (
       <>
         <StyledInnerWrapper>
-          <Search />
+          <Search id={match.params.id} />
           <StyledSelect
             placeholder="Sort"
             value={{ label: selectedOption.label }}
@@ -155,6 +157,11 @@ Products.propTypes = {
   exchangeRate: PropTypes.number.isRequired,
   getComments: PropTypes.func,
   searchValue: PropTypes.string,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Products));

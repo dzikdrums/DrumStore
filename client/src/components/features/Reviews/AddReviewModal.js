@@ -188,7 +188,7 @@ const AddReviewModal = ({ match, addComment, request, product, loadSingleProduct
 
   useEffect(() => {
     loadSingleProductRequest(id);
-  }, []);
+  }, [id, loadSingleProductRequest]);
 
   const ReviewSchema = Yup.object().shape({
     name: Yup.string()
