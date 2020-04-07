@@ -6,6 +6,8 @@ export const routes = {
   contact: '/contact',
   about: '/about',
   drums: '/drums',
+  drumsId: '/drums/:id',
+  cymbalsId: '/cymbals/:id',
   cymbals: '/cymbals',
   login: '/login',
   checkout: '/checkout',

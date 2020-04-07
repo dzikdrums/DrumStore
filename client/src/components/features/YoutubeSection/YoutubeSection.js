@@ -13,7 +13,7 @@ const StyledWrapper = styled.div`
 const YoutubeVideoWrapper = styled.div`
   width: 90%;
   height: 100%;
-  margin: 0 auto 30px;
+  margin: 20px auto 30px;
 `;
 
 const StyledButtonWrapper = styled.div`
@@ -25,7 +25,7 @@ const StyledButtonWrapper = styled.div`
 const YoutubeSection = () => (
   <StyledWrapper>
     <Fade bottom>
-      <Heading small>our youtube channel</Heading>
+      <Heading green>our youtube channel</Heading>
       <YoutubeVideoWrapper>
         <YoutubeVideo youtubeId="sV6yoDOXYSg" />
       </YoutubeVideoWrapper>

@@ -35,6 +35,12 @@ const Heading = styled.h2`
         font-size: 2rem;
       `};
     `}
+
+  ${({ green }) =>
+    green &&
+    css`
+      color: #00c189;
+    `}
 `;
 
 export default Heading;
