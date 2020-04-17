@@ -1,0 +1,15 @@
+{
+  "name": "app-name",
+  "short_name": "PWA",
+  "icons": [
+    {
+      "src": "images/splash/launch-640x1136.jpg",
+      "sizes": "640x1136",
+      "type": "image/jpg"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#FFF",
+  "theme_color": "#FFF"
+}

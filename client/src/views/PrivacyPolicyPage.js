@@ -8,7 +8,6 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 10px;
 `;
 
 const StyledDescription = styled.p`
@@ -19,7 +18,7 @@ const StyledDescription = styled.p`
 
 const PrivacyPolicyPage = () => (
   <StyledWrapper>
-    <ParallaxImage police="true" />
+    <ParallaxImage />
     <Heading>Privacy Policy</Heading>
     <StyledDescription>
       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has

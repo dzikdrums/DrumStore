@@ -41,7 +41,7 @@ const Root = () => (
               <Route exact path={routes.login} component={Login} />
               <Route exact path={routes.checkout} component={Checkout} />
               <Route exact path={routes.addReview} component={AddReview} />
-              <Route exact path={routes.policy} component={Policy} />
+              <Route path={routes.policy} component={Policy} />
               <Route component={NotFound} />
             </Switch>
           </MainLayout>

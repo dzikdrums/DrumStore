@@ -4,15 +4,13 @@ import IntroSection from 'components/features/IntroSection/IntroSection';
 import React from 'react';
 import YoutubeSection from 'components/features/YoutubeSection/YoutubeSection';
 
-const HomePage = () => {
-  return (
-    <>
-      <Carousel />
-      <IntroSection />
-      <HowItWorks />
-      <YoutubeSection />
-    </>
-  );
-};
+const HomePage = () => (
+  <>
+    <Carousel />
+    <IntroSection />
+    <HowItWorks />
+    <YoutubeSection />
+  </>
+);
 
 export default HomePage;

@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 
-// eslint-disable-next-line
 const ScrollToTop = props => {
   useEffect(
     props => {
