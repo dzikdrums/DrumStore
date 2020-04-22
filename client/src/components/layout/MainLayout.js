@@ -7,13 +7,18 @@ import { media } from 'utils';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+`;
+
+const StyledInnerWrapper = styled.div`
   width: 100%;
   min-width: 330px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   padding-top: 160px;
-  position: relative;
 
   ${media.tablet`
     max-width: 850px;
@@ -25,14 +30,14 @@ const StyledWrapper = styled.div`
 `;
 
 const MainLayout = ({ children }) => (
-  <>
+  <StyledWrapper>
     <GlobalStyle />
-    <StyledWrapper>
+    <StyledInnerWrapper>
       <Navbar />
       {children}
       <Footer />
-    </StyledWrapper>
-  </>
+    </StyledInnerWrapper>
+  </StyledWrapper>
 );
 
 MainLayout.propTypes = {

@@ -7,7 +7,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
-  padding: 2vw 15px 40px;
+  padding: 0 15px 40px;
 `;
 
 const StyledButtonWrapper = styled.div`
